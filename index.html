@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LMS Fisika XI — Portal Pembelajaran Mendalam</title>
+  
+  <!-- Font Futuristik Modern -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Ornamen Kosmik & Partikel Fisika -->
+  <div class="physics-bg-grid"></div>
+  <div class="physics-glow-orb orb-1"></div>
+  <div class="physics-glow-orb orb-2"></div>
+
+  <!-- Formula Fisika Terapung Ambient (Dekoratif) -->
+  <div class="floating-formula f-1">Δp · Δx ≥ ℏ/2</div>
+  <div class="floating-formula f-2">E = m · c²</div>
+  <div class="floating-formula f-3">λ = h / p</div>
+  <div class="floating-formula f-4">F = -k · Δx</div>
+
+  <!-- ==================== CONTAINER LOGIN FUTURISTIK ==================== -->
+  <main id="login-container" class="auth-wrapper">
+    <div class="auth-glass-card">
+      
+      <!-- Lencana Atas & Logo Atom Interaktif -->
+      <div class="auth-header">
+        <div class="atom-loader">
+          <div class="electron-orbit orbit-1"></div>
+          <div class="electron-orbit orbit-2"></div>
+          <div class="electron-orbit orbit-3"></div>
+          <div class="nucleus"></div>
+        </div>
+
+        <div class="quantum-badge">
+          <span class="pulse-dot"></span>
+          KURIKULUM MERDEKA • FISIKA FASE F (KELAS XI)
+        </div>
+
+        <h1 class="glow-title">QUANTUM LMS</h1>
+        <p class="subtitle">Media Pembelajaran Interaktif Berbasis Pembelajaran Mendalam</p>
+      </div>
+
+      <!-- Tab Pemilihan Peran (Gaya Cyber Tab) -->
+      <div class="role-selector">
+        <button type="button" class="role-btn active" id="btn-tab-murid" onclick="setRole('murid')">
+          <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+          </svg>
+          Portal Murid
+        </button>
+        <button type="button" class="role-btn" id="btn-tab-guru" onclick="setRole('guru')">
+          <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="7" r="4"></circle>
+            <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          Guru / Admin
+        </button>
+      </div>
+
+      <!-- Form Input Futuristik -->
+      <form id="login-form" onsubmit="handleLogin(event)">
+        <!-- Notifikasi Eror -->
+        <div id="error-banner" class="error-banner" style="display: none;"></div>
+
+        <div class="form-group">
+          <label for="username" id="label-username">
+            <span class="label-bullet">▸</span> IDENTIFIKASI PENGGUNA
+          </label>
+          <div class="input-wrapper">
+            <span class="input-icon">
+              <!-- Icon Kunci Fisika / Partikel -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M3 12h3m12 0h3M12 3v3m0 12v3"></path>
+              </svg>
+            </span>
+            <input 
+              type="text" 
+              id="username" 
+              placeholder="Ketik username..." 
+              required 
+              autocomplete="username"
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">
+            <span class="label-bullet">▸</span> ENKRIPSI KATA SANDI
+          </label>
+          <div class="input-wrapper">
+            <span class="input-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </span>
+            <input 
+              type="password" 
+              id="password" 
+              placeholder="Masukkan password..." 
+              required 
+              autocomplete="current-password"
+            >
+            <button type="button" class="toggle-pwd" onclick="togglePasswordVisibility()" title="Lihat Kata Sandi">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" id="btn-submit" class="btn-primary-futuristic">
+          <span class="btn-text">MASUK KE RUANG BELAJAR</span>
+          <span class="btn-arrow">→</span>
+        </button>
+      </form>
+
+      <!-- Footer Info -->
+      <div class="auth-footer">
+        <div class="physics-chips">
+          <span>Kinematika</span> • <span>Termodinamika</span> • <span>Gelombang</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== CONTAINER DASBOR (SETELAH LOGIN) ==================== -->
+  <div id="dashboard-container" class="dashboard-wrapper" style="display: none;">
+    <!-- Navigasi Futuristik -->
+    <header class="dash-navbar">
+      <div class="brand">
+        <div class="brand-atom">
+          <div class="mini-nucleus"></div>
+        </div>
+        <div>
+          <h2>QUANTUM FISIKA XI</h2>
+          <small id="user-role-label">Fase F • Kurikulum Merdeka</small>
+        </div>
+      </div>
+      <div class="user-menu">
+        <div class="user-status">
+          <span class="online-indicator"></span>
+          <span id="welcome-text">Memuat sesi...</span>
+        </div>
+        <button class="btn-logout" onclick="handleLogout()">Keluar Sesi</button>
+      </div>
+    </header>
+
+    <!-- Konten Utama Dasbor -->
+    <main class="dash-content">
+      <!-- Area Khusus Murid -->
+      <section id="view-murid" class="view-panel" style="display: none;">
+        <div class="hero-banner student-hero">
+          <div class="hero-text">
+            <h3>Selamat Datang di Laboratorium Digital! ⚡</h3>
+            <p>Eksplorasi konsep fisika melalui investigasi mendalam (*deep learning*), analisis data fenomena alam, dan simulasi interaktif.</p>
+          </div>
+          <div class="hero-badge-corner">Fisika XI</div>
+        </div>
+        
+        <div class="cards-grid">
+          <div class="dash-card">
+            <div class="card-icon-wrap icon-wave">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 12c.6 0 1.2-.4 1.6-.9 1.6-2.3 4.3-2.3 5.9 0 .8 1.1 2 1.8 3.5 1.8 1.5 0 2.7-.7 3.5-1.8 1.6-2.3 4.3-2.3 5.9 0 .4.5 1 .9 1.6.9"></path>
+              </svg>
+            </div>
+            <h4>Eksplorasi & Modul Konsep</h4>
+            <p>Konstruksi pemahaman mendalam: Kinematika, Vektor, Fluida, Kalor, dan Gelombang Mekanik.</p>
+            <span class="card-status ready">Siap Dipelajari</span>
+          </div>
+
+          <div class="dash-card">
+            <div class="card-icon-wrap icon-lab">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10 2v7.31M14 2v7.31M8.5 2h7M14 9.3a6.5 6.5 0 1 1-4 0"></path>
+                <path d="M5.52 16h12.96"></path>
+              </svg>
+            </div>
+            <h4>Simulasi Interaktif & PhET</h4>
+            <p>Uji variabel bebas dan terikat secara langsung dalam lingkungan simulasi komputasional.</p>
+            <span class="card-status ready">Eksperimen Virtual</span>
+          </div>
+
+          <div class="dash-card">
+            <div class="card-icon-wrap icon-quiz">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </div>
+            <h4>Tantangan & Evaluasi HOTS</h4>
+            <p>Uji pemahaman bernalar kritis tingkat tinggi dengan umpan balik pemodelan langsung.</p>
+            <span class="card-status highlight">Tantangan Baru</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Area Khusus Guru / Admin -->
+      <section id="view-guru" class="view-panel" style="display: none;">
+        <div class="hero-banner admin-hero">
+          <div class="hero-text">
+            <h3>Pusat Kendali Instruksional Guru 🔭</h3>
+            <p>Kelola alur tujuan pembelajaran (ATP), instrumen asesmen mendalam, serta pantau rekaman kemajuan kognitif murid.</p>
+          </div>
+          <div class="hero-badge-corner">Mode Pendidik</div>
+        </div>
+
+        <div class="cards-grid">
+          <div class="dash-card admin-card">
+            <div class="card-icon-wrap icon-analytics">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+            </div>
+            <h4>Rekap Capaian Siswa</h4>
+            <p>Analisis ketercapaian kompetensi fisika per materi secara individu maupun agregat kelas.</p>
+            <span class="card-status admin-badge">Pantau Data</span>
+          </div>
+
+          <div class="dash-card admin-card">
+            <div class="card-icon-wrap icon-cms">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="12" y1="18" x2="12" y2="12"></line>
+                <line x1="9" y1="15" x2="15" y2="15"></line>
+              </svg>
+            </div>
+            <h4>Bank Soal & Asesmen</h4>
+            <p>Rancang skenario studi kasus, soal numerasi kontekstual, dan rubrik asesmen autentik.</p>
+            <span class="card-status admin-badge">Editor Soal</span>
+          </div>
+
+          <div class="dash-card admin-card">
+            <div class="card-icon-wrap icon-resources">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              </svg>
+            </div>
+            <h4>Modul & LKPD Digital</h4>
+            <p>Unggah lembar kerja penyelidikan terbimbing dan tautan laboratorium simulasi PhET.</p>
+            <span class="card-status admin-badge">Kelola Modul</span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
