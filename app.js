@@ -1,5 +1,6 @@
 // =========================================================
 // BASIS DATA PEMBELAJARAN FISIKA FASE F KELAS XI (DEEP LEARNING)
+// DENGAN INDIKATOR KETERCAPAIAN TUJUAN PEMBELAJARAN (IKTP)
 // =========================================================
 const DATABASE_TP = [
   {
@@ -8,14 +9,82 @@ const DATABASE_TP = [
     nama: "Gerak dan Gaya",
     judul: "TP 1.1: Hubungan Gerak dan Gaya serta Rekayasa Struktur",
     cp: "Menganalisis hubungan gerak dan gaya serta pemanfaatannya untuk menjelaskan fenomena alam, desain, atau rekayasa struktur.",
+    iktp: [
+      "Mengidentifikasi pengaruh resultan gaya terhadap karakteristik gerak benda berdasarkan Hukum I, II, dan III Newton.",
+      "Menganalisis diagram gaya bebas (Free Body Diagram) pada struktur jembatan gantung dan gedung bertingkat tahan beban dinamis.",
+      "Mengevaluasi pemanfaatan gaya normal, gaya sentripetal, dan gaya gesek pada rekayasa jalan menikung miring (banked turn) serta sistem keselamatan transportasi.",
+      "Merumuskan rekomendasi pemecahan masalah rekayasa struktur untuk mencegah kegagalan konstruksi akibat osilasi resonansi dan beban kritis."
+    ],
     materi: `
-      <h4>1. Eksplorasi Fenomena: Ketahanan Struktur terhadap Dinamika Beban</h4>
-      <p>Pernahkah kamu melihat jembatan gantung yang kokoh saat dilalui ratusan kendaraan bermuatan berat, atau gedung pencakar langit yang tetap berdiri tegak saat diguncang gempa? Semua karya rekayasa struktur tersebut dibangun di atas pemahaman mendalam tentang perpaduan <strong>Hukum Gerak Newton</strong> dan <strong>keseimbangan gaya statis/dinamis</strong>.</p>
+      <h3>1. Orientasi Fenomena: Ketahanan Struktur terhadap Dinamika Beban Riil</h3>
+      <p>Pernahkah kamu memperhatikan bagaimana sebuah jembatan gantung raksasa seperti Jembatan Suramadu atau Jembatan Golden Gate mampu menahan ribuan ton beban kendaraan yang melaju serentak di atasnya, sekaligus menahan tiupan angin badai horizontal dari arah samping? Di sisi lain, pada tanggal 7 November 1940, Jembatan Tacoma Narrows di Amerika Serikat runtuh terpelintir hanya karena hembusan angin berkecepatan 68 km/jam. Mengapa satu struktur dapat berdiri kokoh selama berabad-abad sementara struktur lain roboh dalam hitungan jam?</p>
+      
       <div class="context-box">
-        <strong>Prinsip Inti Mendalam:</strong> Agar struktur berada dalam keseimbangan statis diam, resultan gaya harus nol ($\\Sigma F = 0$) dan resultan torsi nol ($\\Sigma \\tau = 0$). Ketika struktur menerima beban dinamis percepatan ($a$), berlaku Hukum II Newton ($\\Sigma F = m \\cdot a$). Struktur dirancang mendisipasi energi tersebut tanpa patah.
+        <strong>Intisari Nalar Fisis:</strong> Perbedaan fundamentalnya terletak pada bagaimana para insinyur memperhitungkan interaksi antara <strong>gaya statis</strong> (berat sendiri struktur dan muatan diam) dengan <strong>gaya dinamis</strong> (angin, percepatan kendaraan, dan gempa bumi). Kehancuran jembatan terjadi bukan semata karena tiupan angin yang kuat, melainkan karena frekuensi pusaran angin cocok dengan frekuensi alami jembatan, memicu fenomena <em>flutter aeroelastis</em> (osilasi resonansi) yang melipatgandakan gaya internal melampaui batas elastisitas baja penyangga.
       </div>
-      <h4>2. Analisis Gaya Normal, Gesek, dan Inersia pada Desain Transportasi</h4>
-      <p>Pada tikungan sirkuit balap atau jalan tol layang, kemiringan sudut $\\theta$ (<em>banked turn</em>) memanfaatkan komponen gaya normal ($N \\sin \\theta$) untuk menyediakan gaya sentripetal pembelok tanpa bergantung pada gaya gesekan ban semata.</p>
+
+      <h3>2. Konstruksi Konsep Mendalam: Hukum Newton pada Rekayasa Struktur</h3>
+      <p>Dalam mekanika teknik bangunan, seluruh prinsip bertumpu pada perpaduan ketiga Hukum Newton yang ditransformasikan ke dalam diagram gaya bebas (<em>Free Body Diagram</em>):</p>
+      
+      <h4>A. Keseimbangan Statis (Aplikasi Hukum I Newton: $\\Sigma F = 0$ dan $\\Sigma \\tau = 0$)</h4>
+      <p>Agar jembatan atau gedung pencakar langit tidak bergeser maupun roboh berputar, resultan gaya translasi dan resultan momen gaya (torsi) di setiap titik simpul sambungan harus tepat bernilai nol:</p>
+      <ul>
+        <li><strong>Keseimbangan Horizontal:</strong> $\\Sigma F_x = 0$ (Gaya dorong angin harus dinetralisir oleh gaya tumpuan pondasi tanah).</li>
+        <li><strong>Keseimbangan Vertikal:</strong> $\\Sigma F_y = 0$ (Total gaya berat jembatan dan muatan $W$ diimbangi oleh komponen vertikal tegangan kabel baja $T_y$).</li>
+        <li><strong>Keseimbangan Rotasi:</strong> $\\Sigma \\tau = 0$ (Momen putar beban tidak boleh memicu puntiran pada gelagar lantai).</li>
+      </ul>
+
+      <h4>B. Respons Struktur terhadap Beban Dinamis (Hukum II Newton: $\\Sigma F = m \\cdot a$)</h4>
+      <p>Ketika gempa bumi mengguncang tanah dengan percepatan $a$, tanah bergerak mendadak, namun puncak gedung cenderung mempertahankan posisi diamnya karena sifat kelembaman massa inersia ($m$). Hal ini menciptakan gaya geser inersia horizontal sebesar $F_{inersia} = m \\cdot a$ yang bekerja pada kolom-kolom penyangga lantai bawah. Semakin besar massa bangunan di lantai atas, semakin masif gaya geser penghancur yang diterimanya.</p>
+
+      <h4>C. Aksi-Reaksi Penopang (Hukum III Newton: $F_{aksi} = -F_{reaksi}$)</h4>
+      <p>Kabel baja penopang jembatan menarik tiang pilon ke arah bawah dan dalam, sementara tiang pilon memberikan gaya dorong penahan yang sama besar ke kabel. Gaya angkur tanah menahan gaya tarik kabel utama melalui blok beton pondasi berbobot ratusan ton.</p>
+
+      <table class="article-table">
+        <thead>
+          <tr>
+            <th>Besaran Fisis Rekayasa</th>
+            <th>Simbol & Satuan SI</th>
+            <th>Makna Fisis pada Struktur</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tegangan Tarik Kabel ($T$)</td>
+            <td>Newton (N)</td>
+            <td>Gaya regang internal yang ditanggung serat kawat baja penopang.</td>
+          </tr>
+          <tr>
+            <td>Gaya Normal Tumpuan ($N$)</td>
+            <td>Newton (N)</td>
+            <td>Gaya reaksi tegak lurus pondasi tanah menahan bobot bangunan.</td>
+          </tr>
+          <tr>
+            <td>Percepatan Dinamis ($a$)</td>
+            <td>m/s²</td>
+            <td>Laju perubahan kecepatan tanah akibat getaran gelombang gempa.</td>
+          </tr>
+          <tr>
+            <td>Momen Torsi ($\tau$)</td>
+            <td>N·m</td>
+            <td>Kecenderungan gaya beban untuk memuntir atau membengkokkan balok.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>3. Studi Rekayasa Kontekstual: Desain Tikungan Jalan Miring (Banked Road)</h3>
+      <p>Mengapa tikungan sirkuit balap atau jalan tol layang selalu dibangun miring dengan sudut $\\theta$ ke arah dalam? Jika jalan dibuat datar, mobil yang berbelok dengan radius lintasan $R$ pada kecepatan tinggi $v$ hanya mengandalkan gaya gesek ban ($f_s = \\mu_s \\cdot N$) untuk menyediakan gaya sentripetal ($F_s = \\frac{m v^2}{R}$). Saat hujan dan jalan licin ($\mu_s$ anjlok), mobil rentan slip dan terpental keluar jalur.</p>
+      <p>Dengan memiringkan jalan sebesar sudut $\\theta$, gaya normal ($N$) tidak lagi tegak lurus ke atas, melainkan terurai menjadi dua komponen:</p>
+      <ul>
+        <li>Komponen Vertikal: $N \\cos \\theta = m \\cdot g$ (mengimbangi berat mobil).</li>
+        <li>Komponen Horizontal: $N \\sin \\theta = \\frac{m v^2}{R}$ (menyediakan gaya sentripetal pembelok tanpa butuh gesekan ban).</li>
+      </ul>
+      <p>Kecepatan aman ideal pada tikungan miring tanpa gesekan dirumuskan: <strong>$v = \\sqrt{R \\cdot g \\cdot \\tan \\theta}$</strong>. Prinsip ini membuktikan bagaimana pemahaman vektor gaya mampu menyelamatkan jutaan nyawa pengendara di jalan raya.</p>
+
+      <div class="misconception-box">
+        <strong>⚠️ Miskonsepsi yang Sering Terjadi:</strong><br>
+        Banyak siswa mengira bahwa benda yang berada dalam keadaan diam tidak memiliki gaya yang bekerja padanya. <em>Fakta Ilmiah:</em> Benda diam di atas meja tetap menerima gaya berat gravitasi bumi ke bawah dan gaya normal ke atas. Benda diam bukan karena "tidak ada gaya", melainkan karena <strong>resultan seluruh gaya yang bekerja bernilai nol ($\\Sigma F = 0$)</strong>.
+      </div>
     `,
     videoEmbed: "https://www.youtube-nocookie.com/embed/j-zczJXSxnw",
     game: {
@@ -43,13 +112,56 @@ const DATABASE_TP = [
     nama: "Hukum Fluida",
     judul: "TP 2.1: Penerapan Hukum Fluida dalam Karya Kehidupan Sehari-hari",
     cp: "Membuat karya yang menunjukkan penerapan hukum fluida dalam kehidupan sehari-hari.",
+    iktp: [
+      "Menganalisis hubungan kedalaman dan massa jenis zat cair terhadap besaran tekanan hidrostatik pada bejana dan bendungan.",
+      "Menerapkan prinsip Hukum Pascal dalam melipatgandakan gaya keluaran mekanis pada sistem dongkrak, rem hidrolik, dan alat berat.",
+      "Menginvestigasi kondisi benda terapung, melayang, dan tenggelam berdasarkan Hukum Archimedes dan rasio massa jenis rata-rata.",
+      "Menganalisis hubungan luas penampang aliran dan kelajuan fluida melalui Asas Kontinuitas serta efek gaya angkat aerodinamika berdasarkan Asas Bernoulli."
+    ],
     materi: `
-      <h4>1. Eksplorasi Fenomena: Dongkrak Hidrolik hingga Aerodinamika</h4>
-      <p>Mengapa montir mobil dapat mengangkat beban seberat 2 ton hanya dengan menginjak tuas kecil dongkrak hidrolik? Mengapa sayap pesawat terbang mampu menghasilkan gaya angkat masif?</p>
+      <h3>1. Orientasi Fenomena: Dari Dongkrak Hidrolik hingga Aerodinamika Sayap</h3>
+      <p>Bagaimana mungkin seorang anak remaja dengan berat badan 50 kg mampu mengangkat mobil sedan bermassa 2.000 kg hanya dengan menginjak tuas kecil dongkrak hidrolik? Mengapa sebutir paku besi seberat 5 gram langsung tenggelam ke dasar laut, sedangkan kapal pesiar berbobot 100.000 ton yang dibangun dari pelat baja tebal dapat terapung stabil di permukaan samudera? Dan bagaimana fluida tak kasat mata seperti udara mampu mengangkat pesawat Boeing berpenumpang ratusan orang ke ketinggian 30.000 kaki?</p>
+      
       <div class="context-box">
-        <strong>Prinsip Inti Mendalam:</strong><br>
-        • <strong>Hukum Pascal:</strong> Tekanan fluida tertutup diteruskan sama besar ($P_1 = P_2 \\rightarrow F_1/A_1 = F_2/A_2$). Luas penampang yang besar melipatgandakan gaya keluaran.<br>
-        • <strong>Asas Kontinuitas & Bernoulli:</strong> $A_1 v_1 = A_2 v_2$. Di bagian aliran fluida yang lebih cepat, tekanannya justru menurun, menciptakan gaya angkat aerodinamika.
+        <strong>Intisari Nalar Fisis:</strong> Fluida (zat yang dapat mengalir, mencakup cairan dan gas) memiliki dua karakter fundamental: saat diam (fluida statis), molekulnya meneruskan tekanan tanpa kompresi signifikan ke seluruh arah. Saat bergerak (fluida dinamis), energi kinetik aliran saling bertukar dengan energi tekanan potensial, menciptakan penurunan tekanan lokal yang menghasilkan daya dorong atau gaya angkat.
+      </div>
+
+      <h3>2. Konstruksi Konsep Mendalam: Hukum Fluida Statis</h3>
+      
+      <h4>A. Tekanan Hidrostatik ($P_h = \\rho \\cdot g \\cdot h$)</h4>
+      <p>Setiap lapisan fluida menanggung beban berat lapisan fluida di atasnya. Oleh karena itu, tekanan cairan murni hanya bergantung pada:</p>
+      <ul>
+        <li>Massa jenis cairan ($\\rho$ dalam kg/m³): Semakin rapat partikel cairan, semakin berat kolom fluida di atas bidang tekan.</li>
+        <li>Kedalaman dari permukaan bebas ($h$ dalam meter): Tekanan berbanding lurus linier dengan kedalaman.</li>
+      </ul>
+      <p><em>Penerapan Rekayasa Bendungan:</em> Inilah alasan dinding dasar bendungan Waduk Jatiluhur atau Cirata selalu dirancang menebal berbentuk trapesium ke bawah, karena tekanan hidrostatik di dasar danau berkali-kali lipat lebih dahsyat dibanding di permukaan.</p>
+
+      <h4>B. Hukum Pascal: Pelipatgandaan Gaya Mekanis ($P_1 = P_2$)</h4>
+      <p>Tekanan yang diberikan pada fluida dalam ruang tertutup akan diteruskan secara merata tanpa berkurang ke segala arah dan ke dinding bejana:</p>
+      <div style="text-align:center; padding: 12px; background:rgba(6,11,20,0.6); border-radius:6px; margin: 10px 0;">
+        <strong>$\\frac{F_1}{A_1} = \\frac{F_2}{A_2} \\implies F_2 = F_1 \\cdot \\left(\\frac{A_2}{A_1}\\right)$</strong>
+      </div>
+      <p>Jika luas piston kedua ($A_2$) dibuat 100 kali lebih besar dibanding piston injak ($A_1$), maka gaya dorong keluaran ($F_2$) otomatis terlipatgandakan 100 kali lipat. Energi kekal karena usaha mekanik tetap sama ($W_1 = W_2$), artinya piston kecil harus ditekan melangkah lebih panjang agar piston besar terangkat beberapa sentimeter.</p>
+
+      <h4>C. Hukum Archimedes & Kondisi Keseimbangan Apung</h4>
+      <p>Benda yang dicelupkan sebagian atau seluruhnya ke dalam fluida akan mengalami gaya ke atas (Gaya Apung, $F_A$) yang besarnya tepat sama dengan berat fluida yang dipindahkan oleh volume tercelup benda tersebut: <strong>$F_A = \\rho_f \\cdot V_{tercelup} \\cdot g$</strong>.</p>
+      <ul>
+        <li><strong>Terapung:</strong> $\\rho_{rata-rata} < \\rho_{fluida} \\implies F_A = W_{total}$. Kapal baja terapung karena memiliki rongga udara lambung yang sangat besar, membuat massa jenis total rata-rata kapal lebih kecil dari air laut.</li>
+        <li><strong>Melayang:</strong> $\\rho_{rata-rata} = \\rho_{fluida} \\implies F_A = W_{total}$ di kedalaman berapa pun (prinsip operasional kapal selam saat tangki ballast terisi separuh).</li>
+        <li><strong>Tenggelam:</strong> $\\rho_{rata-rata} > \\rho_{fluida} \\implies F_A < W_{total}$ (batu atau paku padat).</li>
+      </ul>
+
+      <h3>3. Konstruksi Konsep Mendalam: Fluida Dinamis & Asas Bernoulli</h3>
+      <p>Pada aliran fluida ideal (tidak termampatkan dan tanpa viskositas gesekan), berlaku dua hukum kekekalan:</p>
+      <ol>
+        <li><strong>Persamaan Kontinuitas:</strong> $A_1 \\cdot v_1 = A_2 \\cdot v_2$. Debit aliran air ($Q = A \\cdot v$) selalu konstan. Saat kamu mempersempit ujung selang air dengan jari ($A$ mengecil), laju semprotan air ($v$) otomatis melonjak drastis.</li>
+        <li><strong>Asas Bernoulli:</strong> $P + \\frac{1}{2}\\rho v^2 + \\rho g h = \\text{Konstan}$. Di mana kelajuan fluida bertambah tinggi, tekanan fisis zat cair/gas tersebut justru menurun.</li>
+      </ol>
+      <p><em>Mekanisme Gaya Angkat Sayap Pesawat (Aerofoil):</em> Penampang sayap dirancang melengkung cembung di bagian atas dan mendatar di bagian bawah. Udara yang melintasi bagian atas sayap mengalir lebih cepat ($v_{atas} > v_{bawah}$), akibatnya tekanan udara di atas sayap turun drastis ($P_{atas} < P_{bawah}$). Selisih tekanan inilah yang menciptakan gaya angkat ke atas: <strong>$F_{angkat} = \\frac{1}{2}\\rho (v_{atas}^2 - v_{bawah}^2) \\cdot A_{sayap}$</strong>.</p>
+
+      <div class="misconception-box">
+        <strong>⚠️ Miskonsepsi yang Sering Terjadi:</strong><br>
+        Banyak yang beranggapan bahwa benda yang lebih berat pasti tenggelam dibanding benda yang lebih ringan. <em>Fakta Ilmiah:</em> Gaya apung tidak ditentukan oleh massa mutlak benda, melainkan oleh <strong>rasio massa jenis (kerapatan massa per satuan volume)</strong>. Batang kayu seberat 500 kg tetap terapung, sementara kelereng 10 gram tenggelam.
       </div>
     `,
     videoEmbed: "https://www.youtube-nocookie.com/embed/UJ3-Zm1wbIQ",
@@ -78,13 +190,83 @@ const DATABASE_TP = [
     nama: "Kalor & Termodinamika",
     judul: "TP 3.1: Kalor, Termodinamika, dan Analisis Perubahan Iklim Global",
     cp: "Menganalisis konsep kalor dan termodinamika serta penerapannya untuk mengidentifikasi fenomena perubahan iklim.",
+    iktp: [
+      "Membedakan mekanisme perpindahan kalor (konduksi, konveksi, dan radiasi) pada atmosfer, daratan, dan perairan laut.",
+      "Menganalisis perubahan energi dalam sistem gas ideal melalui Hukum I Termodinamika pada proses isotermal, isobarik, isokhorik, dan adiabatik.",
+      "Mengevaluasi batasan efisiensi mesin termal dan arah aliran kalor spontan berdasarkan Hukum II Termodinamika (Siklus Carnot dan Entropi).",
+      "Menghubungkan ketidakseimbangan neraca radiasi termal bumi dan akumulasi emisi gas rumah kaca terhadap dinamika perubahan iklim dan cuaca ekstrem."
+    ],
     materi: `
-      <h4>1. Eksplorasi Fenomena: Ketidakseimbangan Neraca Termal Bumi</h4>
-      <p>Bumi adalah sistem termodinamika raksasa. Radiasi surya diserap dan dilepaskan kembali sebagai inframerah. Emisi gas rumah kaca berlebih memerangkap panas ini di atmosfer.</p>
+      <h3>1. Orientasi Fenomena: Ketidakseimbangan Neraca Termal Planet Bumi</h3>
+      <p>Mengapa saat kamu memompa ban sepeda dengan cepat, ujung laras pompa terasa panas menyengat padahal tidak ada api atau sumber panas di dekatnya? Dan pada skala planet, mengapa kenaikan rata-rata suhu bumi sebesar 1,5°C saja dapat mencairkan miliaran ton gletser kutub, memicu siklon tropis dahsyat, dan menenggelamkan pesisir pantai? Apakah panas bumi bertambah karena energi matahari yang membesar, ataukah karena energi yang masuk terperangkap dan tidak bisa keluar?</p>
+      
       <div class="context-box">
-        <strong>Analisis Termodinamika Perubahan Iklim:</strong><br>
-        • <strong>Hukum I Termodinamika ($\\Delta U = Q - W$):</strong> Kelebihan kalor radiasi matahari meningkatkan energi dalam atmosfer dan samudra secara eksponensial.<br>
-        • <strong>Efisiensi Mesin Termal (Hukum II):</strong> Mesin industri melepaskan kalor sisa ($Q_L$) yang mempercepat kenaikan suhu global.
+        <strong>Intisari Nalar Fisis:</strong> Bumi dan atmosfernya bekerja persis seperti sebuah sistem termodinamika tertutup. Radiasi surya berfrekuensi tinggi (sinar tampak dan ultraviolet) menembus atmosfer tanpa halangan untuk menghangatkan daratan dan lautan. Namun, saat bumi melepaskan kembali energi tersebut sebagai radiasi inframerah gelombang panjang, molekul gas rumah kaca (CO₂, CH₄, N₂O) menyerap dan memancarkannya kembali ke permukaan bumi, mengunci neraca termal dalam perangkap panas permanen.
+      </div>
+
+      <h3>2. Konstruksi Konsep Mendalam: Hukum I Termodinamika</h3>
+      <p>Hukum Pertama Termodinamika adalah hukum kekekalan energi yang diterapkan pada sistem gas dan fluida termal:</p>
+      <div style="text-align:center; padding: 12px; background:rgba(6,11,20,0.6); border-radius:6px; margin: 10px 0;">
+        <strong>$\\Delta U = Q - W$</strong>
+      </div>
+      <ul>
+        <li><strong>$\\Delta U$ (Perubahan Energi Dalam):</strong> Mencerminkan perubahan energi kinetik getaran mikroskopis molekul gas (berbanding lurus dengan perubahan suhu mutlak $\\Delta T$).</li>
+        <li><strong>$Q$ (Kalor):</strong> Energi termal yang mengalir melintasi batas sistem karena perbedaan suhu (bernilai positif jika kalor masuk ke sistem).</li>
+        <li><strong>$W$ (Usaha Mekanik Luar):</strong> Kerja pemuaian/pemampatan gas ($W = P \\cdot \\Delta V$, bernilai positif jika sistem memuai mendorong lingkungan).</li>
+      </ul>
+
+      <h4>Empat Proses Termodinamika Khusus:</h4>
+      <table class="article-table">
+        <thead>
+          <tr>
+            <th>Jenis Proses</th>
+            <th>Karakteristik Fisis</th>
+            <th>Bentuk Hukum I Termodinamika</th>
+            <th>Aplikasi Nyata</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Isobarik</strong></td>
+            <td>Tekanan Tetap ($P = C$)</td>
+            <td>$Q = \\Delta U + P \\Delta V$</td>
+            <td>Pemanasan air dalam panci terbuka</td>
+          </tr>
+          <tr>
+            <td><strong>Isokhorik</strong></td>
+            <td>Volume Tetap ($V = C \\implies W = 0$)</td>
+            <td>$Q = \\Delta U$</td>
+            <td>Panci presto tertutup rapat</td>
+          </tr>
+          <tr>
+            <td><strong>Isotermal</strong></td>
+            <td>Suhu Tetap ($T = C \\implies \\Delta U = 0$)</td>
+            <td>$Q = W$</td>
+            <td>Ekspansi gas perlahan dalam silinder konduktif</td>
+          </tr>
+          <tr>
+            <td><strong>Adiabatik</strong></td>
+            <td>Tanpa Aliran Kalor ($Q = 0$)</td>
+            <td>$\\Delta U = -W$</td>
+            <td>Kompresi pompa ban mendadak & semprotan aerosol</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>3. Hukum II Termodinamika & Efisiensi Mesin Termal (Siklus Carnot)</h3>
+      <p>Hukum Kedua Termodinamika menyatakan bahwa kalor secara spontan hanya mengalir dari benda bersuhu tinggi ke benda bersuhu rendah, dan tidak mungkin ada mesin kalor yang mengubah 100% kalor yang diserap menjadi kerja mekanis tanpa membuang kalor sisa ke lingkungan (Hukum Kelvin-Planck). Efisiensi maksimum teoritis dinyatakan oleh Siklus Carnot:</p>
+      <div style="text-align:center; padding: 12px; background:rgba(6,11,20,0.6); border-radius:6px; margin: 10px 0;">
+        <strong>$\\eta = 1 - \\frac{T_L}{T_H} = \\frac{T_H - T_L}{T_H} \\times 100\\%$</strong>
+      </div>
+      <p>Di mana $T_H$ adalah suhu reservoir panas dan $T_L$ adalah suhu lingkungan pembuangan (dalam Kelvin). Artinya, semua kendaraan bermotor dan pembangkit listrik berbahan bakar batubara pasti membuang kalor dalam jumlah masif ($Q_L$) ke udara dan perairan sekitar, meningkatkan entropi (ketidakteraturan) lingkungan secara global.</p>
+
+      <h3>4. Analisis Termodinamika pada Perubahan Iklim Global</h3>
+      <p>Ketika konsentrasi gas rumah kaca melonjak melampaui ambang normal, terjadi ketidakseimbangan radiasi termal bumi: laju kalor yang masuk ($Q_{in}$) jauh melampaui laju pelepasan kalor ke antariksa ($Q_{out}$). Akibatnya, energi dalam atmosfer dan samudra ($\Delta U$) terus menanjak tajam.</p>
+      <p>Dampaknya adalah pelelehan tudung es kutub yang menurunkan efek <em>albedo</em> (daya pantul sinar matahari oleh salju putih), sehingga daratan gelap menyerap lebih banyak radiasi surya, memicu <em>lingkaran setan umpan balik positif</em> pemanasan global.</p>
+
+      <div class="misconception-box">
+        <strong>⚠️ Miskonsepsi yang Sering Terjadi:</strong><br>
+        Banyak yang mengira bahwa efek rumah kaca sepenuhnya adalah hal yang buruk. <em>Fakta Ilmiah:</em> Efek rumah kaca alami justru mutlak diperlukan agar bumi layak huni (menjaga suhu rata-rata bumi sekitar 15°C; tanpa efek rumah kaca alami, bumi membeku pada suhu -18°C). Yang membahayakan peradaban adalah <strong>efek rumah kaca berlebih (akselerasi antropogenik)</strong> akibat pembakaran bahan bakar fosil dan deforestasi.
       </div>
     `,
     videoEmbed: "https://www.youtube-nocookie.com/embed/oJAbATJCugs",
@@ -113,14 +295,85 @@ const DATABASE_TP = [
     nama: "Gejala Gelombang",
     judul: "TP 4.1: Menganalisis Gejala Gelombang dalam Teknologi dan Kehidupan",
     cp: "Menganalisis gejala gelombang dan penerapannya dalam kehidupan sehari-hari.",
+    iktp: [
+      "Menganalisis besaran-besaran fisis gelombang (amplitudo, frekuensi, periode, panjang gelombang, cepat rambat) serta persamaannya $v = \\lambda \\cdot f$.",
+      "Menginvestigasi gejala pemantulan (refleksi), pembiasan (refraksi), difraksi, dan interferensi pada gelombang mekanik dan gelombang bunyi.",
+      "Menganalisis pergeseran frekuensi bunyi akibat efek Doppler dan resonansi akustik dalam kehidupan sehari-hari.",
+      "Mengevaluasi pemanfaatan prinsip gelombang pada teknologi sonografi (USG medis), radar kelautan, serat optik komunikasi, dan teknologi peredam bising aktif."
+    ],
     materi: `
-      <h4>1. Eksplorasi Fenomena: Gelombang sebagai Pembawa Informasi</h4>
-      <p>Bagaimana jaringan Wi-Fi mengirimkan sinyal video tanpa kabel? Bagaimana dokter memantau detak jantung janin menggunakan USG?</p>
+      <h3>1. Orientasi Fenomena: Gelombang sebagai Pengirim Energi Tanpa Memindahkan Materi</h3>
+      <p>Ketika kamu melempar sebutir kerikil ke permukaan kolam air yang tenang, kamu melihat lingkaran riak gelombang merambat menjauh dari titik jatuhnya kerikil. Menariknya, sehelai daun kering yang terapung di atas air hanya bergerak naik-turun di tempatnya dan tidak ikut tersapu hanyut ke tepi kolam. Mengapa demikian? Dan bagaimana mungkin suara sirine ambulans yang melaju mendekat terdengar bernada lebih tinggi dibanding saat mobil itu menjauh melintas di depan kita?</p>
+      
       <div class="context-box">
-        <strong>Gejala Karakteristik Gelombang:</strong><br>
-        • <strong>Refleksi & Refraksi:</strong> Gelombang memantul pada bidang batas dan berbelok saat melintasi medium berkecepatan berbeda ($n_1 \\sin \\theta_1 = n_2 \\sin \\theta_2$).<br>
-        • <strong>Interferensi:</strong> Perpaduan dua gelombang yang saling menguatkan atau meniadakan.<br>
-        • <strong>Efek Doppler:</strong> Pergeseran frekuensi bunyi akibat gerak relatif sumber dan pendengar.
+        <strong>Intisari Nalar Fisis:</strong> Gelombang pada hakikatnya adalah getaran yang merambat melalui medium (atau ruang hampa untuk gelombang elektromagnetik) yang mentransfer <strong>energi dan momentum</strong> tanpa memindahkan partikel medium secara permanen. Partikel air atau molekul udara hanya berosilasi di sekitar titik setimbangnya.
+      </div>
+
+      <h3>2. Konstruksi Konsep Mendalam: Besaran & Karakteristik Gelombang</h3>
+      <p>Setiap gelombang periodik diatur oleh hubungan fundamental cepat rambat:</p>
+      <div style="text-align:center; padding: 12px; background:rgba(6,11,20,0.6); border-radius:6px; margin: 10px 0;">
+        <strong>$v = \\lambda \\cdot f = \\frac{\\lambda}{T}$</strong>
+      </div>
+      <ul>
+        <li><strong>Panjang Gelombang ($\\lambda$ dalam meter):</strong> Jarak antara dua puncak bukit gelombang berurutan atau jarak satu siklus gelombang utuh.</li>
+        <li><strong>Frekuensi ($f$ dalam Hertz):</strong> Banyaknya gelombang penuh yang terbentuk dalam satu detik ($f = 1/T$).</li>
+        <li><strong>Cepat Rambat ($v$ dalam m/s):</strong> Kelajuan perambatan muka gelombang melintasi ruang, yang nilainya murni ditentukan oleh sifat elastisitas dan inersia medium perantaranya.</li>
+      </ul>
+
+      <h4>Perbedaan Gelombang Transversal vs Longitudinal:</h4>
+      <table class="article-table">
+        <thead>
+          <tr>
+            <th>Parameter Komparasi</th>
+            <th>Gelombang Transversal</th>
+            <th>Gelombang Longitudinal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Arah Getar vs Rambat</strong></td>
+            <td>Tegak lurus (90°) terhadap arah rambat</td>
+            <td>Sejajar (0° / 180°) searah rambatan getaran</td>
+          </tr>
+          <tr>
+            <td><strong>Bentuk Anatomi</strong></td>
+            <td>Terdiri dari Bukit dan Lembah</td>
+            <td>Terdiri dari Rapatan dan Renggangan</td>
+          </tr>
+          <tr>
+            <td><strong>Contoh Nyata</strong></td>
+            <td>Gelombang tali, gelombang permukaan air, cahaya</td>
+            <td>Gelombang bunyi di udara, gelombang pegas (slinki), gelombang seismik P</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>3. Gejala-Gejala Karakteristik Gelombang (Sifat Fisis)</h3>
+      
+      <h4>A. Refleksi (Pemantulan) & Hukum Pemantulan</h4>
+      <p>Gelombang memantul saat menabrak bidang batas medium keras dengan sudut datang sama dengan sudut pantul ($\\theta_i = \\theta_r$). Pada ujung terikat, gelombang mengalami pembalikan fase 180°, sedangkan pada ujung bebas terpantul sefase tanpa pembalikan.</p>
+
+      <h4>B. Refraksi (Pembiasan) & Hukum Snellius</h4>
+      <p>Ketika gelombang merambat memasuki medium lain yang berbeda kerapatannya, cepat rambatnya berubah ($v_1 \\neq v_2$) sehingga arah rambatannya berbelok: $\\frac{\\sin \\theta_1}{\\sin \\theta_2} = \\frac{v_1}{v_2} = \\frac{\\lambda_1}{\\lambda_2}$. Frekuensi gelombang selalu tetap konstan karena ditentukan oleh sumber getarannya.</p>
+
+      <h4>C. Interferensi: Penguatan & Peniadaan Gelombang</h4>
+      <p>Bila dua gelombang koheren (frekuensi dan beda fase konstan) bertemu pada satu titik:</p>
+      <ul>
+        <li><strong>Interferensi Konstruktif (Saling Menguatkan):</strong> Terjadi saat puncak bertemu puncak, menghasilkan amplitudo gabungan dua kali lipat (bunyi terdengar jauh lebih keras).</li>
+        <li><strong>Interferensi Destruktif (Saling Menghilangkan):</strong> Terjadi saat puncak bertemu lembah, menghasilkan amplitudo nol.</li>
+      </ul>
+      <p><em>Penerapan Teknologi Headphone ANC (Active Noise Cancelling):</em> Mikrofon kecil menangkap gelombang kebisingan mesin pesawat dari luar, lalu sirkuit memproses dan memancarkan gelombang tandingan yang berlawanan fase 180° ke telinga pendengar, sehingga suara dengung mesin hilang seketika karena interferensi destruktif.</p>
+
+      <h4>D. Efek Doppler Bunyi</h4>
+      <p>Efek Doppler adalah fenomena pergeseran frekuensi yang didengar oleh pengamat ($f_p$) akibat gerak relatif antara sumber bunyi dan pengamat:</p>
+      <div style="text-align:center; padding: 12px; background:rgba(6,11,20,0.6); border-radius:6px; margin: 10px 0;">
+        <strong>$f_p = \\left(\\frac{v \\pm v_p}{v \\mp v_s}\\right) f_s$</strong>
+      </div>
+      <p>Saat ambulans melaju mendekat ($v_s$ bernilai minus), muka gelombang di depan mobil terdesak memadat (panjang gelombang efektif mengecil), sehingga telinga kita menangkap lebih banyak siklus getaran per detik (frekuensi terasa melengking tinggi).</p>
+
+      <div class="misconception-box">
+        <strong>⚠️ Miskonsepsi yang Sering Terjadi:</strong><br>
+        Banyak siswa mengira bahwa saat volume suara diperkeras (teriakan kencang), bunyi akan merambat lebih cepat sampai ke telinga kawan. <em>Fakta Ilmiah:</em> Cepat rambat bunyi di udara murni ditentukan oleh suhu dan kerapatan medium udara ($v = \\sqrt{\\gamma R T / M}$), bukan oleh amplitudo getaran. Suara bisikan halus dan teriakan kencang merambat dengan kecepatan yang persis sama.
       </div>
     `,
     videoEmbed: "https://www.youtube-nocookie.com/embed/edeb3pZ-mhk",
@@ -145,7 +398,47 @@ const DATABASE_TP = [
   }
 ];
 
-// DATA 35 PESERTA DIDIK LENGKAP
+// ARSIP MODUL AJAR / RPP
+const DATABASE_MODUL_AJAR = [
+  {
+    tp: "TP 1.1",
+    nama: "Modul Ajar: Gerak, Gaya & Rekayasa Struktur",
+    alokasi: "5 JP (5 x 45 Menit)",
+    profil: "Bernalar Kritis, Gotong Royong, Kreatif",
+    deskripsi: "Pembelajaran mendalam untuk mengidentifikasi distribusi beban statis/dinamis, inersia, dan desain keamanan struktur jembatan/gedung.",
+    sintaks: "1. Orientasi fenomena runtuhnya jembatan Tacoma Narrows • 2. Investigasi PhET Forces & Motion • 3. Misi rekayasa pemecahan beban kritis • 4. Refleksi metakognitif.",
+    driveLink: "https://drive.google.com/"
+  },
+  {
+    tp: "TP 2.1",
+    nama: "Modul Ajar: Mekanika Fluida & Karya Teknologi",
+    alokasi: "5 JP (5 x 45 Menit)",
+    profil: "Kreatif, Mandiri, Bernalar Kritis",
+    deskripsi: "Pembuatan proyek miniatur hidrolik dan investigasi hukum Archimedes serta Bernoulli pada perancangan kapal selam & pesawat terbang.",
+    sintaks: "1. Studi fenomena kapal baja terapung • 2. Eksperimen sensor tekanan PhET Under Pressure • 3. Proyek miniatur pompa hidrolik • 4. Evaluasi produk & peer assessment.",
+    driveLink: "https://drive.google.com/"
+  },
+  {
+    tp: "TP 3.1",
+    nama: "Modul Ajar: Kalor, Termodinamika & Mitigasi Iklim",
+    alokasi: "5 JP (5 x 45 Menit)",
+    profil: "Beriman & Berakhlak Mulia (Peduli Lingkungan), Bernalar Kritis",
+    deskripsi: "Menganalisis siklus termodinamika, efisiensi mesin termal, serta keterkaitannya dengan pemanasan global dan pulau bahang perkotaan.",
+    sintaks: "1. Analisis anomali suhu kutub • 2. Simulasi radiasi PhET Greenhouse Effect • 3. Perancangan strategi kogenerasi energi hijau • 4. Penilaian diri metakognitif.",
+    driveLink: "https://drive.google.com/"
+  },
+  {
+    tp: "TP 4.1",
+    nama: "Modul Ajar: Gejala Gelombang & Teknologi Komunikasi",
+    alokasi: "5 JP (5 x 45 Menit)",
+    profil: "Bernalar Kritis, Berkebinekaan Global",
+    deskripsi: "Menganalisis fenomena gelombang mekanik, pemantulan sonar dasar laut, efek Doppler ambulans, dan teknologi ultrasonografi.",
+    sintaks: "1. Pengamatan gelombang gempa primer & sekunder • 2. Eksperimen PhET Wave on a String • 3. Misi kalibrasi radar & sonar • 4. Asesmen sumatif & refleksi.",
+    driveLink: "https://drive.google.com/"
+  }
+];
+
+// DATA 35 SISWA
 const DAFTAR_SISWA = [
   { no: 1, nama: "Abel Pratama Katili", gender: "Perempuan" },
   { no: 2, nama: "Adeliani Putri R. Agu", gender: "Perempuan" },
@@ -198,6 +491,15 @@ const USERS = {
 window.addEventListener("DOMContentLoaded", () => {
   isiPilihanMurid();
   muatLinkSumatif();
+  muatLinkModulAjar();
+
+  const today = new Date().toISOString().slice(0, 10);
+  const pDate = document.getElementById("presensi-tanggal-input");
+  const gDate = document.getElementById("guru-presensi-tanggal");
+  const jDate = document.getElementById("jurnal-tanggal");
+  if (pDate) pDate.value = today;
+  if (gDate) gDate.value = today;
+  if (jDate) jDate.value = today;
 
   const saved = localStorage.getItem("lms_physics_session");
   if (saved) {
@@ -290,12 +592,13 @@ function bukaDasbor(role, name) {
     document.getElementById("view-guru").style.display = "block";
     document.getElementById("view-murid").style.display = "none";
     
-    // Buka tab tabel pertama guru
-    pindahTabGuru('lkm');
+    pindahTabGuru('kehadiran');
     renderAdminLinks();
+    renderModulAjarCards();
   } else {
     document.getElementById("user-role-label").innerText = "Siswa Kelas XI • Fase F";
     document.getElementById("student-greeting").innerText = `Selamat Datang, ${name}! ⚡`;
+    document.getElementById("presensi-nama-display").value = name;
     document.getElementById("view-murid").style.display = "block";
     document.getElementById("view-guru").style.display = "none";
 
@@ -304,6 +607,7 @@ function bukaDasbor(role, name) {
     pilihTPPeta(0);
     renderSumatifCards();
     isiDropdownTemanSebaya(name);
+    muatRiwayatPresensiSiswa(name);
   }
 }
 
@@ -323,10 +627,10 @@ function togglePasswordVisibility() {
 }
 
 // =========================================================
-// NAVIGASI 5 MENU UTAMA MURID
+// NAVIGASI 6 MENU UTAMA MURID
 // =========================================================
 function pindahMenuMurid(menu) {
-  const menus = ['materi', 'formatif', 'sumatif', 'peta', 'penilaian'];
+  const menus = ['materi', 'formatif', 'sumatif', 'peta', 'penilaian', 'presensi'];
   menus.forEach(m => {
     const btn = document.getElementById(`tab-menu-${m}`);
     const panel = document.getElementById(`panel-${m}`);
@@ -335,6 +639,7 @@ function pindahMenuMurid(menu) {
   });
 }
 
+// MEMILIH TP DAN MENAMPILKAN IKTP BESERTA MATERI TERINCI
 function pilihTP(index) {
   currentTPIndex = index;
   const pills = document.querySelectorAll("#panel-materi .tp-pill");
@@ -344,6 +649,20 @@ function pilihTP(index) {
   document.getElementById("materi-badge").innerText = data.kode;
   document.getElementById("materi-judul").innerText = data.judul;
   document.getElementById("materi-cp").innerText = `Tujuan Pembelajaran: ${data.cp}`;
+
+  // Tampilkan daftar IKTP
+  const iktpListElem = document.getElementById("materi-iktp-list");
+  iktpListElem.innerHTML = "";
+  if (data.iktp && data.iktp.length > 0) {
+    data.iktp.forEach(ind => {
+      const li = document.createElement("li");
+      li.className = "iktp-item";
+      li.innerHTML = `<span class="iktp-check">✓</span> <span>${ind}</span>`;
+      iktpListElem.appendChild(li);
+    });
+  }
+
+  // Tampilkan isi kajian materi mendalam
   document.getElementById("materi-konten").innerHTML = data.materi;
   document.getElementById("materi-video-frame").src = data.videoEmbed;
 }
@@ -579,12 +898,7 @@ function simpanPenilaianTeman(e) {
     penilai: penilaiNama,
     yangDinilai: temanDinilai,
     tp: tpPilihan,
-    skor: {
-      penguasaanKonsep: ind1,
-      investigasiLab: ind2,
-      kolaborasiDiskusi: ind3,
-      sikapSolutif: ind4
-    },
+    skor: { penguasaanKonsep: ind1, investigasiLab: ind2, kolaborasiDiskusi: ind3, sikapSolutif: ind4 },
     catatan: catatan,
     waktu: new Date().toLocaleString()
   };
@@ -596,11 +910,73 @@ function simpanPenilaianTeman(e) {
   setTimeout(() => { alertEl.style.display = "none"; }, 4000);
 }
 
+function simpanPresensiMurid(e) {
+  e.preventDefault();
+  const session = JSON.parse(localStorage.getItem("lms_physics_session") || "{}");
+  const siswaNama = session.name || "Siswa";
+  const tanggal = document.getElementById("presensi-tanggal-input").value;
+  const status = document.querySelector('input[name="status_kehadiran"]:checked')?.value || "Hadir";
+  const ket = document.getElementById("presensi-keterangan").value.trim();
+
+  if (!tanggal) {
+    alert("Silakan tentukan tanggal presensi!");
+    return;
+  }
+
+  let listPresensi = JSON.parse(localStorage.getItem("lms_presensi_records") || "[]");
+  listPresensi = listPresensi.filter(p => !(p.siswa === siswaNama && p.tanggal === tanggal));
+
+  const newRecord = {
+    siswa: siswaNama,
+    tanggal: tanggal,
+    status: status,
+    keterangan: ket || "Hadir tepat waktu",
+    waktu: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  };
+  listPresensi.push(newRecord);
+  localStorage.setItem("lms_presensi_records", JSON.stringify(listPresensi));
+
+  const alertBox = document.getElementById("presensi-alert");
+  alertBox.style.display = "block";
+  setTimeout(() => { alertBox.style.display = "none"; }, 4000);
+
+  muatRiwayatPresensiSiswa(siswaNama);
+}
+
+function muatRiwayatPresensiSiswa(siswaNama) {
+  const tbody = document.getElementById("tabel-presensi-siswa-body");
+  if (!tbody) return;
+  tbody.innerHTML = "";
+
+  const listPresensi = JSON.parse(localStorage.getItem("lms_presensi_records") || "[]");
+  const riwayat = listPresensi.filter(p => p.siswa === siswaNama).reverse();
+
+  if (riwayat.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; opacity:0.6; padding:16px;">Belum ada riwayat kehadiran tercatat.</td></tr>`;
+    return;
+  }
+
+  riwayat.forEach(r => {
+    const tr = document.createElement("tr");
+    let badgeClass = "badge-done";
+    if (r.status === "Izin") badgeClass = "badge-izin";
+    if (r.status === "Sakit") badgeClass = "badge-sakit";
+
+    tr.innerHTML = `
+      <td style="color:var(--cyan-neon); font-weight:600;">${r.tanggal}</td>
+      <td><span class="status-badge ${badgeClass}">${r.status}</span></td>
+      <td>${r.keterangan || '-'}</td>
+      <td style="opacity:0.8;">${r.waktu}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
 // =========================================================
-// LOGIKA DASBOR GURU / ADMIN & PANEL REKAPITULASI
+// PANEL GURU (7 SUB-TAB)
 // =========================================================
 function pindahTabGuru(tab) {
-  const tabs = ['lkm', 'peta', 'eval-diri', 'eval-teman', 'links'];
+  const tabs = ['kehadiran', 'jurnal', 'modul', 'lkm', 'peta', 'eval', 'links'];
   tabs.forEach(t => {
     const btn = document.getElementById(`tab-guru-${t}`);
     const panel = document.getElementById(`panel-guru-${t}`);
@@ -608,13 +984,245 @@ function pindahTabGuru(tab) {
     if (panel) panel.style.display = (t === tab) ? "block" : "none";
   });
 
+  if (tab === 'kehadiran') renderTabelGuruPresensi();
+  if (tab === 'jurnal') renderTabelGuruJurnal();
+  if (tab === 'modul') renderModulAjarCards();
   if (tab === 'lkm') renderTabelGuruLKM();
   if (tab === 'peta') renderTabelGuruPeta();
-  if (tab === 'eval-diri') renderTabelGuruEvalDiri();
-  if (tab === 'eval-teman') renderTabelGuruEvalTeman();
+  if (tab === 'eval') {
+    renderTabelGuruEvalDiri();
+    renderTabelGuruEvalTeman();
+  }
 }
 
-// 1. REKAP LKM
+function renderTabelGuruPresensi() {
+  const tbody = document.getElementById("tabel-guru-presensi-body");
+  if (!tbody) return;
+  tbody.innerHTML = "";
+
+  const tanggalFilter = document.getElementById("guru-presensi-tanggal").value || new Date().toISOString().slice(0, 10);
+  const listPresensi = JSON.parse(localStorage.getItem("lms_presensi_records") || "[]");
+
+  let countHadir = 0;
+  let countIzin = 0;
+  let countSakit = 0;
+  let countAlpa = 0;
+
+  DAFTAR_SISWA.forEach(s => {
+    const tr = document.createElement("tr");
+    const kodeG = s.gender === "Laki-laki" ? "L" : "P";
+    const record = listPresensi.find(p => p.siswa === s.nama && p.tanggal === tanggalFilter);
+
+    let statusHTML = "";
+    let ketHTML = "-";
+    let waktuHTML = "-";
+
+    if (record) {
+      if (record.status === "Hadir") { countHadir++; statusHTML = `<span class="status-badge badge-done">🟢 Hadir</span>`; }
+      else if (record.status === "Izin") { countIzin++; statusHTML = `<span class="status-badge badge-izin">🟡 Izin</span>`; }
+      else if (record.status === "Sakit") { countSakit++; statusHTML = `<span class="status-badge badge-sakit">🔴 Sakit</span>`; }
+      ketHTML = record.keterangan || "-";
+      waktuHTML = record.waktu || "-";
+    } else {
+      countAlpa++;
+      statusHTML = `<span class="status-badge badge-undone">⚪ Belum Konfirmasi</span>`;
+    }
+
+    tr.innerHTML = `
+      <td style="color:var(--cyan-neon); font-weight:700;">${s.no}</td>
+      <td style="font-weight:600;">${s.nama}</td>
+      <td><span style="opacity:0.75;">${kodeG}</span></td>
+      <td>${statusHTML}</td>
+      <td style="font-size:0.84rem; max-width:200px; overflow:hidden; text-overflow:ellipsis;">${ketHTML}</td>
+      <td style="font-size:0.82rem; opacity:0.8;">${waktuHTML}</td>
+      <td><button class="btn-action-view" onclick="ubahManualPresensi('${s.nama}', '${tanggalFilter}')">Ubah</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  document.getElementById("stat-hadir-count").innerText = countHadir;
+  document.getElementById("stat-izin-count").innerText = countIzin;
+  document.getElementById("stat-sakit-count").innerText = countSakit;
+  document.getElementById("stat-alpa-count").innerText = countAlpa;
+}
+
+function ubahManualPresensi(namaSiswa, tanggal) {
+  const opsi = prompt(`Pilih status kehadiran untuk ${namaSiswa} pada tanggal ${tanggal}:\nKetik: Hadir / Izin / Sakit / Alpa`, "Hadir");
+  if (!opsi) return;
+
+  const clean = opsi.trim();
+  let listPresensi = JSON.parse(localStorage.getItem("lms_presensi_records") || "[]");
+  listPresensi = listPresensi.filter(p => !(p.siswa === namaSiswa && p.tanggal === tanggal));
+
+  if (["Hadir", "Izin", "Sakit"].includes(clean)) {
+    listPresensi.push({
+      siswa: namaSiswa,
+      tanggal: tanggal,
+      status: clean,
+      keterangan: "Diverifikasi Manual oleh Guru",
+      waktu: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    });
+  }
+  localStorage.setItem("lms_presensi_records", JSON.stringify(listPresensi));
+  renderTabelGuruPresensi();
+}
+
+function simpanJurnalGuru(e) {
+  e.preventDefault();
+  const tanggal = document.getElementById("jurnal-tanggal").value;
+  const jam = document.getElementById("jurnal-jam").value.trim();
+  const tp = document.getElementById("jurnal-tp").value;
+  const aktivitas = document.getElementById("jurnal-aktivitas").value.trim();
+  const catatan = document.getElementById("jurnal-catatan").value.trim();
+
+  const listJurnal = JSON.parse(localStorage.getItem("lms_jurnal_guru") || "[]");
+  const newJurnal = {
+    id: Date.now(),
+    tanggal, jam, tp, aktivitas, catatan,
+    waktuInput: new Date().toLocaleString()
+  };
+
+  listJurnal.unshift(newJurnal);
+  localStorage.setItem("lms_jurnal_guru", JSON.stringify(listJurnal));
+
+  alert("✓ Lembar Jurnal Mengajar Berhasil Disimpan!");
+  e.target.reset();
+  document.getElementById("jurnal-tanggal").value = new Date().toISOString().slice(0, 10);
+  renderTabelGuruJurnal();
+}
+
+function renderTabelGuruJurnal() {
+  const tbody = document.getElementById("tabel-guru-jurnal-body");
+  if (!tbody) return;
+  tbody.innerHTML = "";
+
+  const listJurnal = JSON.parse(localStorage.getItem("lms_jurnal_guru") || "[]");
+  if (listJurnal.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; opacity:0.6; padding:20px;">Belum ada rekaman jurnal mengajar. Silakan isi form di atas.</td></tr>`;
+    return;
+  }
+
+  listJurnal.forEach(j => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td style="color:var(--cyan-neon); font-weight:700; white-space:nowrap;">${j.tanggal}</td>
+      <td style="white-space:nowrap;">${j.jam}</td>
+      <td><span class="status-badge badge-done">${j.tp}</span></td>
+      <td style="max-width:260px; font-size:0.85rem; line-height:1.5;">${j.aktivitas}</td>
+      <td style="max-width:240px; font-size:0.85rem; color:#fcd34d;">${j.catatan}</td>
+      <td style="white-space:nowrap;">
+        <button class="btn-action-view" onclick="bukaModalDetailJurnal(${j.id})">Tinjau</button>
+        <button class="btn-action-view" style="border-color:#f43f5e; color:#fda4af; margin-left:4px;" onclick="hapusJurnal(${j.id})">Hapus</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function bukaModalDetailJurnal(id) {
+  const listJurnal = JSON.parse(localStorage.getItem("lms_jurnal_guru") || "[]");
+  const j = listJurnal.find(item => item.id === id);
+  if (!j) return;
+
+  document.getElementById("modal-detail-badge").innerText = "JURNAL HARIAN GURU";
+  document.getElementById("modal-detail-title").innerText = `${j.tp} • ${j.tanggal}`;
+  document.getElementById("modal-detail-subtitle").innerText = `Alokasi Waktu: ${j.jam}`;
+
+  document.getElementById("modal-detail-body").innerHTML = `
+    <div style="margin-bottom:14px; background:rgba(6,11,20,0.6); padding:12px; border-radius:6px; border:1px solid var(--card-border);">
+      <strong style="color:var(--cyan-neon);">Aktivitas Pembelajaran Mendalam (Deep Learning):</strong>
+      <p style="margin-top:6px; color:#f8fafc; white-space:pre-wrap;">${j.aktivitas}</p>
+    </div>
+    <div style="background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.4); padding:12px; border-radius:6px;">
+      <strong style="color:#fbbf24;">Refleksi Guru & Catatan Siswa:</strong>
+      <p style="margin-top:6px; color:#fef3c7; white-space:pre-wrap;">${j.catatan}</p>
+    </div>
+  `;
+  document.getElementById("modal-guru-detail").style.display = "flex";
+}
+
+function hapusJurnal(id) {
+  if (!confirm("Apakah Anda yakin ingin menghapus lembar jurnal ini?")) return;
+  let listJurnal = JSON.parse(localStorage.getItem("lms_jurnal_guru") || "[]");
+  listJurnal = listJurnal.filter(j => j.id !== id);
+  localStorage.setItem("lms_jurnal_guru", JSON.stringify(listJurnal));
+  renderTabelGuruJurnal();
+}
+
+function muatLinkModulAjar() {
+  const saved = localStorage.getItem("lms_modul_links");
+  if (saved) {
+    try {
+      const links = JSON.parse(saved);
+      DATABASE_MODUL_AJAR.forEach((m, idx) => { if (links[idx]) m.driveLink = links[idx]; });
+    } catch (e) {}
+  }
+}
+
+function renderModulAjarCards() {
+  const container = document.getElementById("rpp-cards-container");
+  if (!container) return;
+  container.innerHTML = "";
+
+  DATABASE_MODUL_AJAR.forEach((m, idx) => {
+    const card = document.createElement("div");
+    card.className = "rpp-card";
+    card.innerHTML = `
+      <div>
+        <span class="module-badge">${m.tp}</span>
+        <h4>${m.nama}</h4>
+        <div style="font-size:0.82rem; color:var(--cyan-neon); margin:6px 0;">Alokasi: ${m.alokasi}</div>
+        <p style="font-size:0.86rem; color:var(--text-muted); line-height:1.5; margin-bottom:10px;">${m.deskripsi}</p>
+        <div style="font-size:0.78rem; color:#a7f3d0;"><strong>Profil Pancasila:</strong> ${m.profil}</div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px; margin-top:12px;">
+        <button class="btn-action-view" style="padding:9px; text-align:center;" onclick="bukaModalDetailModul(${idx})">
+          📄 Lihat Struktur Lengkap RPP
+        </button>
+        <div class="admin-link-input" style="margin-top:4px;">
+          <input type="url" id="modul-link-${idx}" value="${m.driveLink}" placeholder="Tautan Google Drive Modul Ajar...">
+          <button onclick="simpanLinkModul(${idx})">Simpan</button>
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function bukaModalDetailModul(idx) {
+  const m = DATABASE_MODUL_AJAR[idx];
+  document.getElementById("modal-detail-badge").innerText = "MODUL AJAR KURIKULUM MERDEKA";
+  document.getElementById("modal-detail-title").innerText = m.nama;
+  document.getElementById("modal-detail-subtitle").innerText = `Fase F • Kelas XI • Alokasi Waktu: ${m.alokasi}`;
+
+  document.getElementById("modal-detail-body").innerHTML = `
+    <div style="margin-bottom:12px; background:rgba(6,11,20,0.6); padding:12px; border-radius:6px; border:1px solid var(--card-border);">
+      <strong style="color:var(--cyan-neon);">Dimensi Profil Pelajar Pancasila:</strong>
+      <p style="margin-top:4px;">${m.profil}</p>
+    </div>
+    <div style="margin-bottom:12px; background:rgba(6,11,20,0.6); padding:12px; border-radius:6px; border:1px solid var(--card-border);">
+      <strong style="color:var(--cyan-neon);">Deskripsi & Pemahaman Bermakna:</strong>
+      <p style="margin-top:4px;">${m.deskripsi}</p>
+    </div>
+    <div style="margin-bottom:14px; background:rgba(14,165,233,0.1); padding:12px; border-radius:6px; border:1px solid rgba(56,189,248,0.3);">
+      <strong style="color:#38bdf8;">Alur Sintaks Pembelajaran Mendalam (Deep Learning):</strong>
+      <p style="margin-top:6px; white-space:pre-wrap;">${m.sintaks}</p>
+    </div>
+    <a href="${m.driveLink}" target="_blank" class="link-box-btn" style="width:100%; text-align:center;">
+      Buka Berkas Lengkap di Google Drive ↗
+    </a>
+  `;
+  document.getElementById("modal-guru-detail").style.display = "flex";
+}
+
+function simpanLinkModul(idx) {
+  const input = document.getElementById(`modul-link-${idx}`);
+  DATABASE_MODUL_AJAR[idx].driveLink = input.value.trim();
+  const links = DATABASE_MODUL_AJAR.map(m => m.driveLink);
+  localStorage.setItem("lms_modul_links", JSON.stringify(links));
+  alert(`✓ Tautan Berkas Modul Ajar ${DATABASE_MODUL_AJAR[idx].tp} berhasil diperbarui!`);
+}
+
 function renderTabelGuruLKM() {
   const tbody = document.getElementById("tabel-lkm-body");
   if (!tbody) return;
@@ -623,14 +1231,12 @@ function renderTabelGuruLKM() {
   DAFTAR_SISWA.forEach(s => {
     const tr = document.createElement("tr");
     const kodeGender = s.gender === "Laki-laki" ? "L" : "P";
-
     let colHTML = `
       <td style="color:var(--cyan-neon); font-weight:700;">${s.no}</td>
       <td style="font-weight:600;">${s.nama}</td>
       <td><span style="opacity:0.75;">${kodeGender}</span></td>
     `;
 
-    // Cek status 4 TP
     const tps = ['TP 1.1', 'TP 2.1', 'TP 3.1', 'TP 4.1'];
     tps.forEach(tp => {
       const itemKey = `lkm_${tp}_${s.nama}`;
@@ -639,7 +1245,7 @@ function renderTabelGuruLKM() {
         colHTML += `
           <td>
             <span class="status-badge badge-done">✓ Selesai</span>
-            <button class="btn-action-view" style="margin-left:6px;" onclick="bukaModalDetailLKM('${tp}', '${s.nama}')">Tinjau</button>
+            <button class="btn-action-view" style="margin-left:4px;" onclick="bukaModalDetailLKM('${tp}', '${s.nama}')">Tinjau</button>
           </td>
         `;
       } else {
@@ -675,22 +1281,18 @@ function bukaModalDetailLKM(tp, nama) {
       <p style="margin-top:6px; color:#f8fafc;">${d.q3 || '-'}</p>
     </div>
   `;
-
   document.getElementById("modal-guru-detail").style.display = "flex";
 }
 
-// 2. REKAP PETA KONSEP
 function renderTabelGuruPeta() {
   const tbody = document.getElementById("tabel-peta-body");
   if (!tbody) return;
   tbody.innerHTML = "";
 
   DAFTAR_SISWA.forEach(s => {
-    // Cari apakah ada peta konsep yang pernah dikirim di salah satu TP
     let found = null;
     let foundTP = "";
-    const tps = ['TP 1.1', 'TP 2.1', 'TP 3.1', 'TP 4.1'];
-    for (let tp of tps) {
+    for (let tp of ['TP 1.1', 'TP 2.1', 'TP 3.1', 'TP 4.1']) {
       const dataStr = localStorage.getItem(`peta_${tp}_${s.nama}`);
       if (dataStr) {
         found = JSON.parse(dataStr);
@@ -701,10 +1303,7 @@ function renderTabelGuruPeta() {
 
     const tr = document.createElement("tr");
     if (found) {
-      const lampiranHTML = found.gambar 
-        ? `<span class="status-badge badge-done">Ada Gambar</span>` 
-        : `<span style="opacity:0.6;">Teks Saja</span>`;
-      
+      const lampiranHTML = found.gambar ? `<span class="status-badge badge-done">Ada Gambar</span>` : `<span style="opacity:0.6;">Teks Saja</span>`;
       tr.innerHTML = `
         <td style="color:var(--cyan-neon); font-weight:700;">${s.no}</td>
         <td style="font-weight:600;">${s.nama}</td>
@@ -712,7 +1311,7 @@ function renderTabelGuruPeta() {
         <td>${found.utama || '-'}</td>
         <td style="color:#fcd34d; font-weight:600;">${found.kesulitan ? '⚠️ ' + found.kesulitan : '-'}</td>
         <td>${lampiranHTML}</td>
-        <td><button class="btn-action-view" onclick="bukaModalDetailPeta('${foundTP}', '${s.nama}')">Tinjau Detail</button></td>
+        <td><button class="btn-action-view" onclick="bukaModalDetailPeta('${foundTP}', '${s.nama}')">Tinjau</button></td>
       `;
     } else {
       tr.innerHTML = `
@@ -742,8 +1341,8 @@ function bukaModalDetailPeta(tp, nama) {
   if (d.gambar) {
     gambarHTML = `
       <div style="margin-top:14px; text-align:center;">
-        <strong style="color:var(--cyan-neon); display:block; margin-bottom:8px;">Foto/Sketsa Peta Konsep:</strong>
-        <img src="${d.gambar}" style="max-width:100%; max-height:280px; border-radius:8px; border:1px solid var(--card-border);" alt="Peta Konsep Siswa">
+        <strong style="color:var(--cyan-neon); display:block; margin-bottom:8px;">Foto/Sketsa Peta Konsep Siswa:</strong>
+        <img src="${d.gambar}" style="max-width:100%; max-height:280px; border-radius:8px; border:1px solid var(--card-border);" alt="Peta Konsep">
       </div>
     `;
   }
@@ -754,16 +1353,14 @@ function bukaModalDetailPeta(tp, nama) {
       <pre style="white-space:pre-wrap; font-family:'Plus Jakarta Sans'; color:#f8fafc; margin-top:6px;">${d.cabang || '-'}</pre>
     </div>
     <div style="background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.4); padding:12px; border-radius:6px;">
-      <strong style="color:#fbbf24;">Materi yang Dirasa Masih Sulit (Perhatian Guru):</strong>
+      <strong style="color:#fbbf24;">Materi yang Masih Sulit (Perhatian Guru):</strong>
       <p style="margin-top:4px; color:#fef3c7;">${d.kesulitan || 'Tidak ada kendala yang dilaporkan.'}</p>
     </div>
     ${gambarHTML}
   `;
-
   document.getElementById("modal-guru-detail").style.display = "flex";
 }
 
-// 3. REKAP PENILAIAN DIRI
 function renderTabelGuruEvalDiri() {
   const tbody = document.getElementById("tabel-eval-diri-body");
   if (!tbody) return;
@@ -799,26 +1396,21 @@ function renderTabelGuruEvalDiri() {
   });
 }
 
-// 4. REKAP PENILAIAN TEMAN
 function renderTabelGuruEvalTeman() {
   const tbody = document.getElementById("tabel-eval-teman-body");
   if (!tbody) return;
   tbody.innerHTML = "";
 
   let listPeer = [];
-  // Pindai seluruh key di localStorage yang diawali eval_peer_
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
     if (key.startsWith("eval_peer_")) {
-      try {
-        const item = JSON.parse(localStorage.getItem(key));
-        listPeer.push(item);
-      } catch (e) {}
+      try { listPeer.push(JSON.parse(localStorage.getItem(key))); } catch (e) {}
     }
   }
 
   if (listPeer.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; opacity:0.6; padding:24px;">Belum ada data penilaian antar teman yang masuk.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; opacity:0.6; padding:20px;">Belum ada data penilaian antar teman.</td></tr>`;
     return;
   }
 
@@ -844,7 +1436,6 @@ function tutupModalDetailGuru() {
   document.getElementById("modal-guru-detail").style.display = "none";
 }
 
-// Fitur Pencarian / Filter Tabel Instan
 function filterTabel(tbodyId, keyword) {
   const tbody = document.getElementById(tbodyId);
   if (!tbody) return;
@@ -852,53 +1443,58 @@ function filterTabel(tbodyId, keyword) {
   const cleanKey = keyword.toLowerCase();
 
   for (let row of rows) {
-    const text = row.textContent.toLowerCase();
-    row.style.display = text.includes(cleanKey) ? "" : "none";
+    row.style.display = row.textContent.toLowerCase().includes(cleanKey) ? "" : "none";
   }
 }
 
-// EKSPOR DATA KE FORMAT CSV (EXCEL-READY UTF-8)
 function eksporDataKeCSV(tipe) {
-  let csvContent = "\uFEFF"; // UTF-8 BOM agar terbaca rapi di Microsoft Excel
-  let filename = `rekap_lms_${tipe}_${new Date().toISOString().slice(0,10)}.csv`;
+  let csv = "\uFEFF";
+  const dateStr = new Date().toISOString().slice(0,10);
 
-  if (tipe === 'lkm') {
-    csvContent += "No,Nama Siswa,Gender,TP 1.1,TP 2.1,TP 3.1,TP 4.1\n";
+  if (tipe === 'presensi') {
+    const tgl = document.getElementById("guru-presensi-tanggal").value || dateStr;
+    csv += `No,Nama Siswa,Gender,Tanggal,Status,Keterangan,Waktu\n`;
+    const listPresensi = JSON.parse(localStorage.getItem("lms_presensi_records") || "[]");
+
     DAFTAR_SISWA.forEach(s => {
-      const statusTP1 = localStorage.getItem(`lkm_TP 1.1_${s.nama}`) ? "Selesai" : "Belum";
-      const statusTP2 = localStorage.getItem(`lkm_TP 2.1_${s.nama}`) ? "Selesai" : "Belum";
-      const statusTP3 = localStorage.getItem(`lkm_TP 3.1_${s.nama}`) ? "Selesai" : "Belum";
-      const statusTP4 = localStorage.getItem(`lkm_TP 4.1_${s.nama}`) ? "Selesai" : "Belum";
-      csvContent += `"${s.no}","${s.nama}","${s.gender}","${statusTP1}","${statusTP2}","${statusTP3}","${statusTP4}"\n`;
+      const r = listPresensi.find(p => p.siswa === s.nama && p.tanggal === tgl);
+      const st = r ? r.status : "Belum Konfirmasi";
+      const ket = r ? (r.keterangan || '').replace(/"/g, '""') : "-";
+      const w = r ? r.waktu : "-";
+      csv += `"${s.no}","${s.nama}","${s.gender}","${tgl}","${st}","${ket}","${w}"\n`;
     });
+    unduhFileBlob(csv, `rekap_presensi_${tgl}.csv`);
+  } else if (tipe === 'jurnal') {
+    csv += `Tanggal,Jam Ke,TP,Aktivitas,Refleksi Guru,Waktu Input\n`;
+    const listJurnal = JSON.parse(localStorage.getItem("lms_jurnal_guru") || "[]");
+    listJurnal.forEach(j => {
+      csv += `"${j.tanggal}","${j.jam}","${j.tp}","${(j.aktivitas||'').replace(/"/g, '""')}","${(j.catatan||'').replace(/"/g, '""')}","${j.waktuInput}"\n`;
+    });
+    unduhFileBlob(csv, `rekap_jurnal_guru_${dateStr}.csv`);
+  } else if (tipe === 'lkm') {
+    csv += "No,Nama Siswa,Gender,TP 1.1,TP 2.1,TP 3.1,TP 4.1\n";
+    DAFTAR_SISWA.forEach(s => {
+      const st1 = localStorage.getItem(`lkm_TP 1.1_${s.nama}`) ? "Selesai" : "Belum";
+      const st2 = localStorage.getItem(`lkm_TP 2.1_${s.nama}`) ? "Selesai" : "Belum";
+      const st3 = localStorage.getItem(`lkm_TP 3.1_${s.nama}`) ? "Selesai" : "Belum";
+      const st4 = localStorage.getItem(`lkm_TP 4.1_${s.nama}`) ? "Selesai" : "Belum";
+      csv += `"${s.no}","${s.nama}","${s.gender}","${st1}","${st2}","${st3}","${st4}"\n`;
+    });
+    unduhFileBlob(csv, `rekap_lkm_${dateStr}.csv`);
   } else if (tipe === 'eval_diri') {
-    csvContent += "No,Nama Siswa,Materi Dipahami,Materi Belum Dipahami,Rencana Tindak Lanjut,Waktu\n";
+    csv += "No,Nama Siswa,Materi Dipahami,Materi Belum Dipahami,Rencana Tindak Lanjut,Waktu\n";
     DAFTAR_SISWA.forEach(s => {
       const data = localStorage.getItem(`eval_diri_${s.nama}`);
       if (data) {
         const d = JSON.parse(data);
-        csvContent += `"${s.no}","${s.nama}","${(d.dipahami||'').replace(/"/g, '""')}","${(d.belumDipahami||'').replace(/"/g, '""')}","${(d.rencanaTindakan||'').replace(/"/g, '""')}","${d.waktu||''}"\n`;
+        csv += `"${s.no}","${s.nama}","${(d.dipahami||'').replace(/"/g, '""')}","${(d.belumDipahami||'').replace(/"/g, '""')}","${(d.rencanaTindakan||'').replace(/"/g, '""')}","${d.waktu||''}"\n`;
       } else {
-        csvContent += `"${s.no}","${s.nama}","Belum Mengisi","Belum Mengisi","Belum Mengisi","-"\n`;
+        csv += `"${s.no}","${s.nama}","Belum Mengisi","Belum Mengisi","Belum Mengisi","-"\n`;
       }
     });
-  } else if (tipe === 'peta') {
-    csvContent += "No,Nama Siswa,TP,Konsep Utama,Materi yang Masih Sulit,Ada Gambar,Waktu\n";
-    DAFTAR_SISWA.forEach(s => {
-      let found = null;
-      let foundTP = "";
-      for (let tp of ['TP 1.1', 'TP 2.1', 'TP 3.1', 'TP 4.1']) {
-        const d = localStorage.getItem(`peta_${tp}_${s.nama}`);
-        if (d) { found = JSON.parse(d); foundTP = tp; break; }
-      }
-      if (found) {
-        csvContent += `"${s.no}","${s.nama}","${foundTP}","${(found.utama||'').replace(/"/g, '""')}","${(found.kesulitan||'').replace(/"/g, '""')}","${found.gambar ? 'Ya' : 'Tidak'}","${found.waktu||''}"\n`;
-      } else {
-        csvContent += `"${s.no}","${s.nama}","-","Belum Mengirim","-","Tidak","-"\n`;
-      }
-    });
+    unduhFileBlob(csv, `rekap_eval_diri_${dateStr}.csv`);
   } else if (tipe === 'eval_teman') {
-    csvContent += "No,Siswa Penilai,Teman yang Dinilai,TP,Rata-rata Skor,Catatan Rekan,Waktu\n";
+    csv += "No,Siswa Penilai,Teman yang Dinilai,TP,Rata-rata Skor,Catatan Rekan,Waktu\n";
     let count = 1;
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
@@ -907,13 +1503,32 @@ function eksporDataKeCSV(tipe) {
           const p = JSON.parse(localStorage.getItem(key));
           const skor = p.skor || {};
           const rata = ((Number(skor.penguasaanKonsep||0) + Number(skor.investigasiLab||0) + Number(skor.kolaborasiDiskusi||0) + Number(skor.sikapSolutif||0)) / 4).toFixed(1);
-          csvContent += `"${count++}","${p.penilai}","${p.yangDinilai}","${p.tp}","${rata}","${(p.catatan||'').replace(/"/g, '""')}","${p.waktu}"\n`;
+          csv += `"${count++}","${p.penilai}","${p.yangDinilai}","${p.tp}","${rata}","${(p.catatan||'').replace(/"/g, '""')}","${p.waktu}"\n`;
         } catch (e) {}
       }
     }
+    unduhFileBlob(csv, `rekap_eval_teman_${dateStr}.csv`);
+  } else if (tipe === 'peta') {
+    csv += "No,Nama Siswa,TP,Konsep Utama,Materi yang Masih Sulit,Ada Gambar,Waktu\n";
+    DAFTAR_SISWA.forEach(s => {
+      let found = null;
+      let foundTP = "";
+      for (let tp of ['TP 1.1', 'TP 2.1', 'TP 3.1', 'TP 4.1']) {
+        const d = localStorage.getItem(`peta_${tp}_${s.nama}`);
+        if (d) { found = JSON.parse(d); foundTP = tp; break; }
+      }
+      if (found) {
+        csv += `"${s.no}","${s.nama}","${foundTP}","${(found.utama||'').replace(/"/g, '""')}","${(found.kesulitan||'').replace(/"/g, '""')}","${found.gambar ? 'Ya' : 'Tidak'}","${found.waktu||''}"\n`;
+      } else {
+        csv += `"${s.no}","${s.nama}","-","Belum Mengirim","-","Tidak","-"\n`;
+      }
+    });
+    unduhFileBlob(csv, `rekap_peta_konsep_${dateStr}.csv`);
   }
+}
 
-  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+function unduhFileBlob(content, filename) {
+  const blob = new Blob([content], { type: "text/csv;charset=utf-8;" });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
   link.setAttribute("download", filename);
@@ -922,62 +1537,37 @@ function eksporDataKeCSV(tipe) {
   document.body.removeChild(link);
 }
 
-// FITUR PENGISI DATA SIMULASI (MEMUDAHKAN GURU MENGUJI COBA TABEL LANGSUNG)
 function isiContohDataSimulasi() {
-  // Simulasi LKM untuk Abel Pratama Katili & Dimas Saputra
-  localStorage.setItem("lkm_TP 1.1_Abel Pratama Katili", JSON.stringify({
-    siswa: "Abel Pratama Katili", tp: "TP 1.1",
-    q1: "Saat beban 50 kg dan gaya 100 N, a = 2.0 m/s². Saat beban dinaikkan 100 kg dengan gaya sama, a turun menjadi 1.0 m/s² (berbanding terbalik).",
-    q2: "Gaya gesek statis menahan benda sampai gaya dorong melampaui fs_max, setelah bergerak gaya kinetis konstan melawan arah gerak.",
-    q3: "Pada rem kendaraan berat, luas kampas rem dan koefisien gesek dioptimalkan untuk menghasilkan gaya deselerasi yang aman.",
-    waktu: new Date().toLocaleString()
-  }));
+  const today = new Date().toISOString().slice(0, 10);
+  
+  const mockPresensi = [
+    { siswa: "Abel Pratama Katili", tanggal: today, status: "Hadir", keterangan: "Hadir di lab komputer", waktu: "07:15" },
+    { siswa: "Adeliani Putri R. Agu", tanggal: today, status: "Hadir", keterangan: "Siap belajar", waktu: "07:20" },
+    { siswa: "Andika Pratama Latoini", tanggal: today, status: "Izin", keterangan: "Dispensasi OSIS", waktu: "07:30" },
+    { siswa: "Dimas Saputra R. Antu", tanggal: today, status: "Hadir", keterangan: "Hadir tepat waktu", waktu: "07:10" },
+    { siswa: "Dea Ananda Nusi", tanggal: today, status: "Sakit", keterangan: "Demam berobat", waktu: "06:45" },
+    { siswa: "Moh. Riski Ahmad", tanggal: today, status: "Hadir", keterangan: "Siap eksplorasi simulasi", waktu: "07:18" }
+  ];
+  localStorage.setItem("lms_presensi_records", JSON.stringify(mockPresensi));
 
-  localStorage.setItem("lkm_TP 2.1_Abel Pratama Katili", JSON.stringify({
-    siswa: "Abel Pratama Katili", tp: "TP 2.1",
-    q1: "Kedalaman 1m = 109 kPa, kedalaman 2m = 119 kPa, kedalaman 3m = 129 kPa. Tekanan naik linier tiap bertambah kedalaman.",
-    q2: "Fluida yang lebih rapat (madu) menghasilkan tekanan hidrostatik yang jauh lebih tajam kenaikannya dibanding air.",
-    q3: "Dinding dasar bendungan dibuat tebal melebar ke bawah untuk menahan tekanan hidrostatik dasar yang sangat besar.",
-    waktu: new Date().toLocaleString()
-  }));
+  const mockJurnal = [
+    {
+      id: 101,
+      tanggal: today,
+      jam: "Jam ke 1 - 3 (3 x 45 Menit)",
+      tp: "TP 1.1",
+      aktivitas: "Orientasi fenomena keruntuhan jembatan akibat resonansi beban. Siswa mengeksplorasi simulator PhET Forces and Motion secara berkelompok dan menganalisis pengaruh massa terhadap akselerasi.",
+      catatan: "Siswa sangat antusias saat simulasi PhET. Sebagian kecil siswa masih kesulitan pada penguraian vektor sudut kemiringan jalan raya (banked turn). Perlu penguatan konsep di awal pertemuan berikutnya.",
+      waktuInput: new Date().toLocaleString()
+    }
+  ];
+  localStorage.setItem("lms_jurnal_guru", JSON.stringify(mockJurnal));
 
-  // Simulasi Peta Konsep Dimas Saputra
-  localStorage.setItem("peta_TP 1.1_Dimas Saputra R. Antu", JSON.stringify({
-    siswa: "Dimas Saputra R. Antu", tp: "TP 1.1",
-    utama: "Hukum Gerak Newton & Stabilitas Struktur Bangunan",
-    cabang: "• Hukum I (Inersia) -> Ketahanan gempa gedung\n• Hukum II (F=m·a) -> Beban dinamis terpaan angin\n• Hukum III (Aksi-Reaksi) -> Tegangan kabel penahan jembatan",
-    kesulitan: "Menghitung komponen vektor sudut kemiringan pada jalan menikung (banked turn).",
-    gambar: "",
-    waktu: new Date().toLocaleString()
-  }));
-
-  // Simulasi Penilaian Diri Adeliani Putri
-  localStorage.setItem("eval_diri_Adeliani Putri R. Agu", JSON.stringify({
-    siswa: "Adeliani Putri R. Agu",
-    dipahami: "Saya sudah sangat memahami prinsip Hukum Pascal pada dongkrak hidrolik dan bagaimana gaya kecil bisa dilipatgandakan dengan memperbesar luas penampang kedua.",
-    belumDipahami: "Penurunan persamaan kontinuitas dan Asas Bernoulli saat fluida mengalir di pipa yang memiliki elevasi ketinggian berbeda.",
-    rencanaTindakan: "Saya akan mengulang simulasi PhET Fluid Flow dan bertanya pada Pak Guru Iskandar di sesi pendampingan.",
-    waktu: new Date().toLocaleString()
-  }));
-
-  // Simulasi Penilaian Teman
-  localStorage.setItem("eval_peer_Moh. Riski Ahmad_oleh_Andika Pratama Latoini", JSON.stringify({
-    penilai: "Andika Pratama Latoini",
-    yangDinilai: "Moh. Riski Ahmad",
-    tp: "TP 1.1",
-    skor: { penguasaanKonsep: "4", investigasiLab: "4", kolaborasiDiskusi: "3", sikapSolutif: "4" },
-    catatan: "Riski sangat hebat saat mengutak-atik simulasi PhET Forces and Motion, analisanya sangat cepat dan jelas!",
-    waktu: new Date().toLocaleString()
-  }));
-
-  alert("✓ Data simulasi berhasil dimasukkan! Panel rekapitulasi akan segera disegarkan.");
-  renderTabelGuruLKM();
-  renderTabelGuruPeta();
-  renderTabelGuruEvalDiri();
-  renderTabelGuruEvalTeman();
+  alert("✓ Data simulasi (Presensi hari ini & Jurnal Mengajar) berhasil disuntikkan!");
+  renderTabelGuruPresensi();
+  renderTabelGuruJurnal();
 }
 
-// PANEL ADMIN: KELOLA TAUTAN SUMATIF
 function renderAdminLinks() {
   const container = document.getElementById("admin-links-manager");
   if (!container) return;
@@ -1002,7 +1592,6 @@ function renderAdminLinks() {
 function simpanLinkUjian(index) {
   const input = document.getElementById(`link-input-${index}`);
   DATABASE_TP[index].defaultLinkUjian = input.value.trim();
-
   const links = DATABASE_TP.map(t => t.defaultLinkUjian);
   localStorage.setItem("lms_sumatif_links", JSON.stringify(links));
   alert(`✓ Tautan Asesmen ${DATABASE_TP[index].kode} berhasil diperbarui!`);
