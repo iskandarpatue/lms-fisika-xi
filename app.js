@@ -1,108 +1,143 @@
 // =========================================================
 // BASIS DATA PEMBELAJARAN FISIKA FASE F KELAS XI (DEEP LEARNING)
-// DENGAN INDIKATOR KETERCAPAIAN TUJUAN PEMBELAJARAN (IKTP)
+// DENGAN IKTP & MATERI RAMAH SISWA SMA (KONTEKSTUAL & JELAS)
 // =========================================================
 const DATABASE_TP = [
   {
     id: 0,
     kode: "TP 1.1",
     nama: "Gerak dan Gaya",
-    judul: "TP 1.1: Hubungan Gerak dan Gaya serta Rekayasa Struktur",
-    cp: "Menganalisis hubungan gerak dan gaya serta pemanfaatannya untuk menjelaskan fenomena alam, desain, atau rekayasa struktur.",
+    judul: "TP 1.1: Hubungan Gerak dan Gaya dalam Kehidupan Sehari-hari (Hukum Newton)",
+    cp: "Menganalisis hubungan gerak dan gaya serta penerapannya untuk menjelaskan fenomena dalam kehidupan sehari-hari.",
     iktp: [
-      "Mengidentifikasi pengaruh resultan gaya terhadap karakteristik gerak benda berdasarkan Hukum I, II, dan III Newton.",
-      "Menganalisis diagram gaya bebas (Free Body Diagram) pada struktur jembatan gantung dan gedung bertingkat tahan beban dinamis.",
-      "Mengevaluasi pemanfaatan gaya normal, gaya sentripetal, dan gaya gesek pada rekayasa jalan menikung miring (banked turn) serta sistem keselamatan transportasi.",
-      "Merumuskan rekomendasi pemecahan masalah rekayasa struktur untuk mencegah kegagalan konstruksi akibat osilasi resonansi dan beban kritis."
+      "Menjelaskan sifat kelembaman (inersia) benda dan penerapan Hukum I Newton saat berkendara.",
+      "Menganalisis hubungan antara gaya total, massa, dan percepatan (Hukum II Newton: F = m × a) dalam aktivitas sehari-hari.",
+      "Mengidentifikasi pasangan gaya aksi-reaksi (Hukum III Newton) serta ciri-cirinya pada berbagai peristiwa gerak.",
+      "Menjelaskan pentingnya penerapan konsep Hukum Newton pada fitur keselamatan transportasi (sabuk pengaman dan helm)."
     ],
     materi: `
-      <h3>1. Orientasi Fenomena: Ketahanan Struktur terhadap Dinamika Beban Riil</h3>
-      <p>Pernahkah kamu memperhatikan bagaimana sebuah jembatan gantung raksasa seperti Jembatan Suramadu atau Jembatan Golden Gate mampu menahan ribuan ton beban kendaraan yang melaju serentak di atasnya, sekaligus menahan tiupan angin badai horizontal dari arah samping? Di sisi lain, pada tanggal 7 November 1940, Jembatan Tacoma Narrows di Amerika Serikat runtuh terpelintir hanya karena hembusan angin berkecepatan 68 km/jam. Mengapa satu struktur dapat berdiri kokoh selama berabad-abad sementara struktur lain roboh dalam hitungan jam?</p>
-      
+      <h3>1. Yuk, Kenalan dengan Gaya dan Gerak!</h3>
+      <p>Pernahkah kamu memikirkan hal-hal sederhana ini saat beraktivitas?</p>
+      <ul>
+        <li>Mengapa saat kamu dibonceng sepeda motor dan temanmu tiba-tiba tancap gas mendadak, badanmu otomatis terhentak ke belakang?</li>
+        <li>Mengapa mendorong gerobak belanja yang kosong terasa jauh lebih ringan dan cepat bergerak dibanding mendorong gerobak yang penuh muatan beras?</li>
+        <li>Mengapa telapak tanganmu terasa sakit saat memukul meja dengan keras, padahal mejanya diam?</li>
+      </ul>
+      <p>Semua peristiwa di atas bukanlah kebetulan gaib, melainkan contoh nyata dari <strong>Hukum-Hukum Newton tentang Gerak</strong> yang dirumuskan oleh ilmuwan terkenal, Sir Isaac Newton. Ada 3 hukum utama yang wajib kamu pahami.</p>
+
       <div class="context-box">
-        <strong>Intisari Nalar Fisis:</strong> Perbedaan fundamentalnya terletak pada bagaimana para insinyur memperhitungkan interaksi antara <strong>gaya statis</strong> (berat sendiri struktur dan muatan diam) dengan <strong>gaya dinamis</strong> (angin, percepatan kendaraan, dan gempa bumi). Kehancuran jembatan terjadi bukan semata karena tiupan angin yang kuat, melainkan karena frekuensi pusaran angin cocok dengan frekuensi alami jembatan, memicu fenomena <em>flutter aeroelastis</em> (osilasi resonansi) yang melipatgandakan gaya internal melampaui batas elastisitas baja penyangga.
+        <strong>Kunci Pemahaman:</strong> Gaya adalah tarikan atau dorongan yang dapat menyebabkan benda diam menjadi bergerak, benda bergerak menjadi berhenti, atau mengubah arah dan kecepatan gerak benda.
       </div>
 
-      <h3>2. Konstruksi Konsep Mendalam: Hukum Newton pada Rekayasa Struktur</h3>
-      <p>Dalam mekanika teknik bangunan, seluruh prinsip bertumpu pada perpaduan ketiga Hukum Newton yang ditransformasikan ke dalam diagram gaya bebas (<em>Free Body Diagram</em>):</p>
+      <h3>2. Hukum I Newton: Hukum Kelembaman (Inersia)</h3>
+      <p>Hukum I Newton berbunyi: <em>"Jika tidak ada gaya luar yang bekerja pada suatu benda (atau resultan gayanya sama dengan nol), maka benda yang diam akan tetap diam, dan benda yang sedang bergerak lurus akan terus bergerak dengan kecepatan tetap."</em></p>
       
-      <h4>A. Keseimbangan Statis (Aplikasi Hukum I Newton: $\\Sigma F = 0$ dan $\\Sigma \\tau = 0$)</h4>
-      <p>Agar jembatan atau gedung pencakar langit tidak bergeser maupun roboh berputar, resultan gaya translasi dan resultan momen gaya (torsi) di setiap titik simpul sambungan harus tepat bernilai nol:</p>
+      <div style="text-align:center; padding: 12px; background:rgba(6,11,20,0.6); border-radius:8px; margin: 12px 0; border: 1px solid rgba(56,189,248,0.3);">
+        <span style="font-size:1.3rem; font-weight:700; color:#38bdf8;">Rumus: ∑F = 0</span><br>
+        <small style="color:#94a3b8;">(Dibaca: Total penjumlahan seluruh gaya sama dengan nol)</small>
+      </div>
+
+      <h4>Apa itu Kelembaman (Inersia)?</h4>
+      <p>Kelembaman adalah <strong>sifat "malas" suatu benda untuk mengubah keadaannya</strong>. Benda cenderung mempertahankan kondisinya saat ini:</p>
       <ul>
-        <li><strong>Keseimbangan Horizontal:</strong> $\\Sigma F_x = 0$ (Gaya dorong angin harus dinetralisir oleh gaya tumpuan pondasi tanah).</li>
-        <li><strong>Keseimbangan Vertikal:</strong> $\\Sigma F_y = 0$ (Total gaya berat jembatan dan muatan $W$ diimbangi oleh komponen vertikal tegangan kabel baja $T_y$).</li>
-        <li><strong>Keseimbangan Rotasi:</strong> $\\Sigma \\tau = 0$ (Momen putar beban tidak boleh memicu puntiran pada gelagar lantai).</li>
+        <li><strong>Saat mobil direm mendadak:</strong> Badanmu awalnya bergerak maju bersama mobil. Saat mobil berhenti mendadak, tubuhmu "ingin tetap maju", sehingga kamu terlempar ke depan. Inilah alasan utama mengapa kita <strong>wajib memakai sabuk pengaman (seatbelt)</strong> agar tubuh kita tertahan dan tidak menabrak kaca depan mobil.</li>
+        <li><strong>Saat motor digas mendadak:</strong> Tubuhmu awalnya diam. Saat motor melesat maju, tubuhmu "ingin tetap diam", sehingga kamu terasa terhentak ke belakang.</li>
       </ul>
 
-      <h4>B. Respons Struktur terhadap Beban Dinamis (Hukum II Newton: $\\Sigma F = m \\cdot a$)</h4>
-      <p>Ketika gempa bumi mengguncang tanah dengan percepatan $a$, tanah bergerak mendadak, namun puncak gedung cenderung mempertahankan posisi diamnya karena sifat kelembaman massa inersia ($m$). Hal ini menciptakan gaya geser inersia horizontal sebesar $F_{inersia} = m \\cdot a$ yang bekerja pada kolom-kolom penyangga lantai bawah. Semakin besar massa bangunan di lantai atas, semakin masif gaya geser penghancur yang diterimanya.</p>
+      <h3>3. Hukum II Newton: Hubungan Gaya, Massa, dan Percepatan</h3>
+      <p>Jika Hukum I membahas saat gaya totalnya nol, Hukum II membahas <strong>bagaimana jika gaya totalnya TIDAK nol</strong>. Benda pasti akan mengalami perubahan kecepatan atau <strong>percepatan</strong>.</p>
+      
+      <div style="text-align:center; padding: 14px; background:rgba(6,11,20,0.6); border-radius:8px; margin: 12px 0; border: 1px solid rgba(56,189,248,0.3);">
+        <span style="font-size:1.4rem; font-weight:700; color:#38bdf8;">F = m × a &nbsp; atau &nbsp; a = F / m</span><br>
+        <p style="margin-top:6px; font-size:0.88rem; color:#cbd5e1;">
+          <strong>F</strong> = Gaya total yang mendorong/menarik (satuan: Newton atau N)<br>
+          <strong>m</strong> = Massa benda (satuan: kilogram atau kg)<br>
+          <strong>a</strong> = Percepatan atau laju penambahan kecepatan (satuan: m/s²)
+        </p>
+      </div>
 
-      <h4>C. Aksi-Reaksi Penopang (Hukum III Newton: $F_{aksi} = -F_{reaksi}$)</h4>
-      <p>Kabel baja penopang jembatan menarik tiang pilon ke arah bawah dan dalam, sementara tiang pilon memberikan gaya dorong penahan yang sama besar ke kabel. Gaya angkur tanah menahan gaya tarik kabel utama melalui blok beton pondasi berbobot ratusan ton.</p>
+      <h4>Dua Aturan Emas Hukum II Newton:</h4>
+      <ol>
+        <li><strong>Semakin besar gaya (F), semakin cepat benda melaju (a bertambah besar):</strong> Menendang bola dengan tenaga kuat membuat bola melesat jauh lebih kencang dibanding menendang pelan.</li>
+        <li><strong>Semakin berat massa benda (m), semakin lambat percepatannya (a mengecil):</strong> Jika kamu mendorong sepeda motor mogok sendirian, jalannya lambat. Tapi jika didorong bersama 3 orang temanmu (gaya F bertambah besar), motor akan bergerak lebih cepat. Menendang bola sepak jauh lebih mudah daripada menendang batu besar bermassa 50 kg dengan gaya yang sama!</li>
+      </ol>
 
+      <h3>4. Hukum III Newton: Hukum Aksi - Reaksi</h3>
+      <p>Hukum III Newton berbunyi: <em>"Ketika suatu benda memberikan gaya pada benda kedua (gaya aksi), maka benda kedua tersebut akan memberikan gaya yang sama besar namun berlawanan arah kepada benda pertama (gaya reaksi)."</em></p>
+
+      <div style="text-align:center; padding: 12px; background:rgba(6,11,20,0.6); border-radius:8px; margin: 12px 0; border: 1px solid rgba(56,189,248,0.3);">
+        <span style="font-size:1.3rem; font-weight:700; color:#38bdf8;">F_aksi = - F_reaksi</span><br>
+        <small style="color:#94a3b8;">(Tanda minus artinya arah gayanya berlawanan arah)</small>
+      </div>
+
+      <h4>Contoh Seru Hukum Aksi-Reaksi di Sekitar Kita:</h4>
+      <ul>
+        <li><strong>Saat Mendayung Sampan/Perahu:</strong> Dayung mendorong air ke belakang (Aksi), dan air mendorong perahu bergerak maju ke depan (Reaksi).</li>
+        <li><strong>Saat Kamu Berjalan Kaki:</strong> Kakimu menjejak dan mendorong lantai tanah ke arah belakang (Aksi), dan lantai tanah mendorong sepatumu melangkah ke depan (Reaksi). Jika lantainya sangat licin (tanpa gesekan), kamu tidak bisa berjalan karena tidak ada gaya reaksi dorong balik!</li>
+        <li><strong>Berenang di Kolam:</strong> Tanganmu mengayuh mendorong air ke belakang, air mendorong tubuhmu meluncur ke depan.</li>
+      </ul>
+
+      <div class="deep-summary-box">
+        <strong>💡 Ciri Mutlak Pasangan Aksi - Reaksi:</strong><br>
+        1. Besarnya selalu sama.<br>
+        2. Arahnya selalu bertolak belakang.<br>
+        3. <em>Bekerja pada 2 benda yang berbeda</em> (Dayung mendorong air, air mendorong perahu). Karena bekerja pada benda berbeda, gaya aksi-reaksi tidak saling meniadakan!
+      </div>
+
+      <h3>5. Tabel Rangkuman Sederhana Hukum Newton</h3>
       <table class="article-table">
         <thead>
           <tr>
-            <th>Besaran Fisis Rekayasa</th>
-            <th>Simbol & Satuan SI</th>
-            <th>Makna Fisis pada Struktur</th>
+            <th>Hukum</th>
+            <th>Rumus Singkat</th>
+            <th>Inti Maknanya</th>
+            <th>Contoh Paling Mudah</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Tegangan Tarik Kabel ($T$)</td>
-            <td>Newton (N)</td>
-            <td>Gaya regang internal yang ditanggung serat kawat baja penopang.</td>
+            <td><strong>Hukum I</strong></td>
+            <td>∑F = 0</td>
+            <td>Benda punya sifat kelembaman (mempertahankan posisinya).</td>
+            <td>Tubuh terdorong ke depan saat mobil direm mendadak.</td>
           </tr>
           <tr>
-            <td>Gaya Normal Tumpuan ($N$)</td>
-            <td>Newton (N)</td>
-            <td>Gaya reaksi tegak lurus pondasi tanah menahan bobot bangunan.</td>
+            <td><strong>Hukum II</strong></td>
+            <td>F = m × a</td>
+            <td>Gaya memicu percepatan; massa yang berat menghambat laju.</td>
+            <td>Mendorong motor sendirian vs mendorong beramai-ramai.</td>
           </tr>
           <tr>
-            <td>Percepatan Dinamis ($a$)</td>
-            <td>m/s²</td>
-            <td>Laju perubahan kecepatan tanah akibat getaran gelombang gempa.</td>
-          </tr>
-          <tr>
-            <td>Momen Torsi ($\tau$)</td>
-            <td>N·m</td>
-            <td>Kecenderungan gaya beban untuk memuntir atau membengkokkan balok.</td>
+            <td><strong>Hukum III</strong></td>
+            <td>F_aksi = -F_reaksi</td>
+            <td>Setiap ada dorongan, selalu ada dorongan balik yang berlawanan.</td>
+            <td>Mendayung air ke belakang membuat perahu maju ke depan.</td>
           </tr>
         </tbody>
       </table>
 
-      <h3>3. Studi Rekayasa Kontekstual: Desain Tikungan Jalan Miring (Banked Road)</h3>
-      <p>Mengapa tikungan sirkuit balap atau jalan tol layang selalu dibangun miring dengan sudut $\\theta$ ke arah dalam? Jika jalan dibuat datar, mobil yang berbelok dengan radius lintasan $R$ pada kecepatan tinggi $v$ hanya mengandalkan gaya gesek ban ($f_s = \\mu_s \\cdot N$) untuk menyediakan gaya sentripetal ($F_s = \\frac{m v^2}{R}$). Saat hujan dan jalan licin ($\mu_s$ anjlok), mobil rentan slip dan terpental keluar jalur.</p>
-      <p>Dengan memiringkan jalan sebesar sudut $\\theta$, gaya normal ($N$) tidak lagi tegak lurus ke atas, melainkan terurai menjadi dua komponen:</p>
-      <ul>
-        <li>Komponen Vertikal: $N \\cos \\theta = m \\cdot g$ (mengimbangi berat mobil).</li>
-        <li>Komponen Horizontal: $N \\sin \\theta = \\frac{m v^2}{R}$ (menyediakan gaya sentripetal pembelok tanpa butuh gesekan ban).</li>
-      </ul>
-      <p>Kecepatan aman ideal pada tikungan miring tanpa gesekan dirumuskan: <strong>$v = \\sqrt{R \\cdot g \\cdot \\tan \\theta}$</strong>. Prinsip ini membuktikan bagaimana pemahaman vektor gaya mampu menyelamatkan jutaan nyawa pengendara di jalan raya.</p>
-
       <div class="misconception-box">
-        <strong>⚠️ Miskonsepsi yang Sering Terjadi:</strong><br>
-        Banyak siswa mengira bahwa benda yang berada dalam keadaan diam tidak memiliki gaya yang bekerja padanya. <em>Fakta Ilmiah:</em> Benda diam di atas meja tetap menerima gaya berat gravitasi bumi ke bawah dan gaya normal ke atas. Benda diam bukan karena "tidak ada gaya", melainkan karena <strong>resultan seluruh gaya yang bekerja bernilai nol ($\\Sigma F = 0$)</strong>.
+        <strong>⚠️ Jangan Salah Paham Lagi:</strong><br>
+        Banyak murid mengira benda yang sedang diam itu sama sekali "tidak memiliki gaya". Itu salah! Benda diam (misalnya buku di atas mejau) tetap ditarik oleh gaya berat gravitasi bumi ke bawah, tetapi ditahan oleh gaya normal meja ke atas. Karena gayanya seimbang (∑F = 0), maka buku tersebut tetap diam tenang di meja.
       </div>
     `,
     videoEmbed: "https://www.youtube-nocookie.com/embed/j-zczJXSxnw",
     game: {
-      judul: "Misi 1: Penyelamatan Jembatan Gantung dari Beban Kritis",
-      deskripsi: "Sebuah truk bermassa 20 ton mogok di tengah bentang jembatan saat angin kencang berhembus 5.000 N. Sebagai insinyur struktur, tindakan fisis manakah yang paling tepat untuk mencegah kabel baja putus?",
+      judul: "Misi 1: Uji Keselamatan Sabuk Pengaman Mobil (Seatbelt Safety)",
+      deskripsi: "Sebuah mobil melaju dengan kecepatan 60 km/jam. Tiba-tiba di depannya ada kucing melintas sehingga sopir menginjak rem mendadak hingga mobil berhenti total. Berdasarkan Hukum Newton, mengapa sabuk pengaman (seatbelt) sangat penting bagi keselamatan penumpang?",
       opsi: [
-        { teks: "A. Menambah kecepatan hembusan angin agar frekuensi alami kabel berubah.", benar: false, alasan: "Salah. Ini justru meningkatkan beban lateral dan risiko osilasi resonansi runtuh." },
-        { teks: "B. Memperbesar sudut kemiringan kabel penyangga utama terhadap tiang agar tegangan kabel berkurang dan mendistribusikan beban ke pondasi angkur.", benar: true, alasan: "Tepat Sekali! Komponen vertikal tegangan kabel penahan T = W / (2 sin θ). Distribusi beban ke angkur pondasi menjadi lebih aman." },
-        { teks: "C. Mengurangi massa tumpuan pondasi jembatan menjadi setengahnya.", benar: false, alasan: "Salah. Pondasi membutuhkan inersia massa yang besar untuk mengunci struktur tanah." }
+        { teks: "A. Sabuk pengaman menahan tubuh penumpang yang ingin terus bergerak maju akibat sifat kelembaman (Hukum I Newton).", benar: true, alasan: "Hebat dan Tepat Sekali! Saat mobil berhenti mendadak, tubuh penumpang memiliki sifat inersia (kelembaman) yang cenderung mempertahankan kelajuannya untuk melesat maju. Sabuk pengaman memberikan gaya penahan ke belakang agar penumpang tidak membentur setir atau kaca mobil." },
+        { teks: "B. Sabuk pengaman menghilangkan gaya gravitasi bumi sehingga tubuh penumpang melayang.", benar: false, alasan: "Salah. Gaya gravitasi bumi tetap ada dan menarik penumpang ke bawah, bukan dihilangkan." },
+        { teks: "C. Sabuk pengaman membuat massa tubuh penumpang menjadi nol.", benar: false, alasan: "Salah. Massa tubuh penumpang tetap konstan dan tidak pernah berubah menjadi nol." }
       ]
     },
     lkm: {
-      title: "LKM 1: Investigasi Gaya dan Gerak pada Benda Bergerak",
-      guide: "Buka simulator PhET Forces and Motion. Ubah nilai Applied Force dan amati percepatan saat massa digandakan.",
+      title: "LKM 1: Eksperimen Gaya Dorong dan Massa pada Gerak Benda",
+      guide: "Buka simulator PhET Forces and Motion Basics. Cobalah mendorong kotak kayu dengan variasi gaya dan amati apa yang terjadi pada kecepatannya.",
       phetUrl: "https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_all.html",
-      q1: "1. Catat nilai percepatan (a) saat massa 50 kg dan gaya 100 N dibanding saat massa 100 kg:",
-      q2: "2. Bagaimana pengaruh gaya gesek statis dan kinetis terhadap percepatan gerak benda?",
-      q3: "3. Jelaskan bagaimana prinsip ini diterapkan dalam merancang sistem pengereman kendaraan berat!"
+      q1: "1. Ketika kamu mendorong kotak 50 kg dengan gaya 100 N, lalu kamu ganti kotak tersebut menjadi kotak 100 kg dengan gaya dorong yang tetap sama (100 N), apakah kotak kedua melaju lebih cepat atau lebih lambat? Mengapa?",
+      q2: "2. Apa yang terjadi pada gerak kotak jika lantai diberi gaya gesek kasar dibanding lantai yang licin tanpa gesekan (es)?",
+      q3: "3. Tuliskan 2 contoh penerapan Hukum I atau Hukum III Newton yang pernah kamu alami langsung saat naik sepeda motor atau angkutan umum!"
     },
     defaultLinkUjian: "https://forms.gle/"
   },
@@ -110,77 +145,72 @@ const DATABASE_TP = [
     id: 1,
     kode: "TP 2.1",
     nama: "Hukum Fluida",
-    judul: "TP 2.1: Penerapan Hukum Fluida dalam Karya Kehidupan Sehari-hari",
+    judul: "TP 2.1: Penerapan Hukum Fluida dalam Kehidupan Sehari-hari",
     cp: "Membuat karya yang menunjukkan penerapan hukum fluida dalam kehidupan sehari-hari.",
     iktp: [
-      "Menganalisis hubungan kedalaman dan massa jenis zat cair terhadap besaran tekanan hidrostatik pada bejana dan bendungan.",
-      "Menerapkan prinsip Hukum Pascal dalam melipatgandakan gaya keluaran mekanis pada sistem dongkrak, rem hidrolik, dan alat berat.",
-      "Menginvestigasi kondisi benda terapung, melayang, dan tenggelam berdasarkan Hukum Archimedes dan rasio massa jenis rata-rata.",
-      "Menganalisis hubungan luas penampang aliran dan kelajuan fluida melalui Asas Kontinuitas serta efek gaya angkat aerodinamika berdasarkan Asas Bernoulli."
+      "Menganalisis faktor-faktor yang mempengaruhi besarnya tekanan cairan (tekanan hidrostatik) pada kedalaman air.",
+      "Menerapkan prinsip Hukum Pascal pada cara kerja dongkrak hidrolik dan rem cakram kendaraan.",
+      "Menjelaskan konsep terapung, melayang, dan tenggelamnya benda berdasarkan Hukum Archimedes.",
+      "Menganalisis hubungan kelajuan aliran dan perbedaan tekanan fluida pada cara kerja sayap pesawat (Asas Bernoulli)."
     ],
     materi: `
-      <h3>1. Orientasi Fenomena: Dari Dongkrak Hidrolik hingga Aerodinamika Sayap</h3>
-      <p>Bagaimana mungkin seorang anak remaja dengan berat badan 50 kg mampu mengangkat mobil sedan bermassa 2.000 kg hanya dengan menginjak tuas kecil dongkrak hidrolik? Mengapa sebutir paku besi seberat 5 gram langsung tenggelam ke dasar laut, sedangkan kapal pesiar berbobot 100.000 ton yang dibangun dari pelat baja tebal dapat terapung stabil di permukaan samudera? Dan bagaimana fluida tak kasat mata seperti udara mampu mengangkat pesawat Boeing berpenumpang ratusan orang ke ketinggian 30.000 kaki?</p>
+      <h3>1. Apa itu Fluida?</h3>
+      <p>Fluida adalah istilah fisika untuk <strong>zat yang bisa mengalir</strong>, yaitu zat cair (air, minyak, sirup) dan gas (udara). Dalam kehidupan sehari-hari, fluida memiliki sifat-sifat luar biasa yang sering kita manfaatkan.</p>
+
+      <h3>2. Tekanan Hidrostatik (Makin Dalam, Makin Tertekan!)</h3>
+      <p>Pernahkah telingamu terasa agak sakit atau berdenging saat menyelam ke dasar kolam renang yang dalam? Hal itu terjadi karena adanya <strong>Tekanan Hidrostatik</strong>.</p>
       
-      <div class="context-box">
-        <strong>Intisari Nalar Fisis:</strong> Fluida (zat yang dapat mengalir, mencakup cairan dan gas) memiliki dua karakter fundamental: saat diam (fluida statis), molekulnya meneruskan tekanan tanpa kompresi signifikan ke seluruh arah. Saat bergerak (fluida dinamis), energi kinetik aliran saling bertukar dengan energi tekanan potensial, menciptakan penurunan tekanan lokal yang menghasilkan daya dorong atau gaya angkat.
+      <div style="text-align:center; padding: 12px; background:rgba(6,11,20,0.6); border-radius:8px; margin: 12px 0; border: 1px solid rgba(56,189,248,0.3);">
+        <span style="font-size:1.3rem; font-weight:700; color:#38bdf8;">Rumus: P = ρ × g × h</span><br>
+        <p style="margin-top:6px; font-size:0.86rem; color:#cbd5e1;">
+          <strong>P</strong> = Tekanan hidrostatik (Pascal atau N/m²)<br>
+          <strong>ρ</strong> (rho) = Massa jenis zat cair (kg/m³)<br>
+          <strong>g</strong> = Percepatan gravitasi bumi (sekitar 9,8 atau 10 m/s²)<br>
+          <strong>h</strong> = Kedalaman air diukur dari permukaan (meter)
+        </p>
       </div>
 
-      <h3>2. Konstruksi Konsep Mendalam: Hukum Fluida Statis</h3>
-      
-      <h4>A. Tekanan Hidrostatik ($P_h = \\rho \\cdot g \\cdot h$)</h4>
-      <p>Setiap lapisan fluida menanggung beban berat lapisan fluida di atasnya. Oleh karena itu, tekanan cairan murni hanya bergantung pada:</p>
+      <p><strong>Intinya sederhana:</strong> Semakin dalam posisi kamu menyelam (h makin besar), semakin banyak tumpukan air di atas tubuhmu yang menekan ke bawah. Inilah sebabnya mengapa dinding dasar bendungan waduk selalu dibuat sangat tebal di bagian bawah agar tidak jebol menahan tekanan air dasar waduk.</p>
+
+      <h3>3. Hukum Pascal: Trik Mengangkat Mobil dengan Tenaga Kecil</h3>
+      <p>Di tempat cuci mobil, kamu pasti pernah melihat mobil seberat 2 ton bisa terangkat tinggi ke atas hanya dengan dongkrak hidrolik. Rahasianya adalah <strong>Hukum Pascal</strong>: <em>Tekanan yang diberikan pada cairan di ruang tertutup akan diteruskan sama besar ke seluruh bagian cairan tersebut.</em></p>
+
+      <div style="text-align:center; padding: 12px; background:rgba(6,11,20,0.6); border-radius:8px; margin: 12px 0; border: 1px solid rgba(56,189,248,0.3);">
+        <span style="font-size:1.3rem; font-weight:700; color:#38bdf8;">Rumus: F₁ / A₁ = F₂ / A₂</span><br>
+        <small style="color:#94a3b8;">F = Gaya tekan (Newton), A = Luas penampang pipa (m²)</small>
+      </div>
+      <p>Dengan menekan pipa sempit yang kecil (A₁), cairan minyak meneruskan tekanan tersebut ke pipa luas yang besar (A₂). Hasilnya, gaya dorong di pipa besar (F₂) berlipat ganda ratusan kali lipat hingga mampu mengangkat mobil dengan sangat mudah!</p>
+
+      <h3>4. Hukum Archimedes: Terapung, Melayang, atau Tenggelam?</h3>
+      <p>Mengapa batu kecil langsung tenggelam, tetapi kapal pesiar raksasa yang terbuat dari baja puluhan ribu ton bisa mengapung di lautan?</p>
+      <p>Menurut Hukum Archimedes: <em>Benda yang dicelupkan ke dalam air akan mendapat gaya dorong ke atas (Gaya Apung) sebesar berat air yang dipindahkan oleh benda tersebut.</em></p>
       <ul>
-        <li>Massa jenis cairan ($\\rho$ dalam kg/m³): Semakin rapat partikel cairan, semakin berat kolom fluida di atas bidang tekan.</li>
-        <li>Kedalaman dari permukaan bebas ($h$ dalam meter): Tekanan berbanding lurus linier dengan kedalaman.</li>
-      </ul>
-      <p><em>Penerapan Rekayasa Bendungan:</em> Inilah alasan dinding dasar bendungan Waduk Jatiluhur atau Cirata selalu dirancang menebal berbentuk trapesium ke bawah, karena tekanan hidrostatik di dasar danau berkali-kali lipat lebih dahsyat dibanding di permukaan.</p>
-
-      <h4>B. Hukum Pascal: Pelipatgandaan Gaya Mekanis ($P_1 = P_2$)</h4>
-      <p>Tekanan yang diberikan pada fluida dalam ruang tertutup akan diteruskan secara merata tanpa berkurang ke segala arah dan ke dinding bejana:</p>
-      <div style="text-align:center; padding: 12px; background:rgba(6,11,20,0.6); border-radius:6px; margin: 10px 0;">
-        <strong>$\\frac{F_1}{A_1} = \\frac{F_2}{A_2} \\implies F_2 = F_1 \\cdot \\left(\\frac{A_2}{A_1}\\right)$</strong>
-      </div>
-      <p>Jika luas piston kedua ($A_2$) dibuat 100 kali lebih besar dibanding piston injak ($A_1$), maka gaya dorong keluaran ($F_2$) otomatis terlipatgandakan 100 kali lipat. Energi kekal karena usaha mekanik tetap sama ($W_1 = W_2$), artinya piston kecil harus ditekan melangkah lebih panjang agar piston besar terangkat beberapa sentimeter.</p>
-
-      <h4>C. Hukum Archimedes & Kondisi Keseimbangan Apung</h4>
-      <p>Benda yang dicelupkan sebagian atau seluruhnya ke dalam fluida akan mengalami gaya ke atas (Gaya Apung, $F_A$) yang besarnya tepat sama dengan berat fluida yang dipindahkan oleh volume tercelup benda tersebut: <strong>$F_A = \\rho_f \\cdot V_{tercelup} \\cdot g$</strong>.</p>
-      <ul>
-        <li><strong>Terapung:</strong> $\\rho_{rata-rata} < \\rho_{fluida} \\implies F_A = W_{total}$. Kapal baja terapung karena memiliki rongga udara lambung yang sangat besar, membuat massa jenis total rata-rata kapal lebih kecil dari air laut.</li>
-        <li><strong>Melayang:</strong> $\\rho_{rata-rata} = \\rho_{fluida} \\implies F_A = W_{total}$ di kedalaman berapa pun (prinsip operasional kapal selam saat tangki ballast terisi separuh).</li>
-        <li><strong>Tenggelam:</strong> $\\rho_{rata-rata} > \\rho_{fluida} \\implies F_A < W_{total}$ (batu atau paku padat).</li>
+        <li><strong>Terapung:</strong> Jika massa jenis rata-rata benda lebih kecil dari air. Kapal baja terapung karena di bagian dalam lambung kapal terdapat rongga udara yang sangat luas, sehingga massa jenis total kapal menjadi lebih ringan dari air laut.</li>
+        <li><strong>Melayang:</strong> Jika massa jenis benda sama persis dengan air (seperti kapal selam yang mengisi tangki pemberatnya dengan air separuh).</li>
+        <li><strong>Tenggelam:</strong> Jika massa jenis benda lebih berat dari air (seperti batu atau paku).</li>
       </ul>
 
-      <h3>3. Konstruksi Konsep Mendalam: Fluida Dinamis & Asas Bernoulli</h3>
-      <p>Pada aliran fluida ideal (tidak termampatkan dan tanpa viskositas gesekan), berlaku dua hukum kekekalan:</p>
-      <ol>
-        <li><strong>Persamaan Kontinuitas:</strong> $A_1 \\cdot v_1 = A_2 \\cdot v_2$. Debit aliran air ($Q = A \\cdot v$) selalu konstan. Saat kamu mempersempit ujung selang air dengan jari ($A$ mengecil), laju semprotan air ($v$) otomatis melonjak drastis.</li>
-        <li><strong>Asas Bernoulli:</strong> $P + \\frac{1}{2}\\rho v^2 + \\rho g h = \\text{Konstan}$. Di mana kelajuan fluida bertambah tinggi, tekanan fisis zat cair/gas tersebut justru menurun.</li>
-      </ol>
-      <p><em>Mekanisme Gaya Angkat Sayap Pesawat (Aerofoil):</em> Penampang sayap dirancang melengkung cembung di bagian atas dan mendatar di bagian bawah. Udara yang melintasi bagian atas sayap mengalir lebih cepat ($v_{atas} > v_{bawah}$), akibatnya tekanan udara di atas sayap turun drastis ($P_{atas} < P_{bawah}$). Selisih tekanan inilah yang menciptakan gaya angkat ke atas: <strong>$F_{angkat} = \\frac{1}{2}\\rho (v_{atas}^2 - v_{bawah}^2) \\cdot A_{sayap}$</strong>.</p>
-
-      <div class="misconception-box">
-        <strong>⚠️ Miskonsepsi yang Sering Terjadi:</strong><br>
-        Banyak yang beranggapan bahwa benda yang lebih berat pasti tenggelam dibanding benda yang lebih ringan. <em>Fakta Ilmiah:</em> Gaya apung tidak ditentukan oleh massa mutlak benda, melainkan oleh <strong>rasio massa jenis (kerapatan massa per satuan volume)</strong>. Batang kayu seberat 500 kg tetap terapung, sementara kelereng 10 gram tenggelam.
-      </div>
+      <h3>5. Asas Bernoulli: Mengapa Pesawat Terbang Bisa Melayang?</h3>
+      <p>Asas Bernoulli menyatakan: <strong>Di mana aliran udara mengalir lebih kencang, di situ tekanannya justru menjadi lebih rendah.</strong></p>
+      <p>Sayap pesawat terbang dirancang melengkung di bagian atas dan datar di bagian bawah. Udara yang mengalir di atas sayap meluncur lebih cepat dibanding udara di bawah sayap. Akibatnya, tekanan udara di atas sayap turun, dan tekanan udara tinggi di bawah sayap mendorong pesawat terangkat naik ke angkasa!</p>
     `,
     videoEmbed: "https://www.youtube-nocookie.com/embed/UJ3-Zm1wbIQ",
     game: {
-      judul: "Misi 2: Operasi Menyelam Kapal Selam Riset Bahari",
-      deskripsi: "Untuk menyelidiki terumbu karang di kedalaman 50 meter secara melayang stabil (keseimbangan netral), langkah fisis apakah yang harus diambil oleh operator katup tangki?",
+      judul: "Misi 2: Mengatur Tangki Kapal Selam Menyelam",
+      deskripsi: "Kapal selam sedang berada di permukaan laut. Agar kapal selam dapat menyelam dan melayang dengan tenang di kedalaman 30 meter untuk memantau terumbu karang, apa yang harus dilakukan kapten kapal?",
       opsi: [
-        { teks: "A. Mengisi tangki ballast hingga massa jenis rata-rata kapal tepat sama dengan massa jenis air laut sekitarnya.", benar: true, alasan: "Hebat! Sesuai Hukum Archimedes, saat ρ_kapal = ρ_fluida, Gaya Apung tepat mengimbangi Berat kapal, membuatnya melayang stabil." },
-        { teks: "B. Membuang seluruh air keluar dari tangki ballast.", benar: false, alasan: "Salah. Membuang air akan membuat kapal terapung kembali ke permukaan." },
-        { teks: "C. Memperbesar luas kemudi sayap tanpa menyentuh tangki ballast.", benar: false, alasan: "Salah. Kemudi hanya mengatur orientasi laju, bukan gaya apung statis." }
+        { teks: "A. Mengisi tangki pemberat dengan air laut secukupnya hingga massa jenis total kapal sama dengan massa jenis air laut di sekitarnya.", benar: true, alasan: "Tepat Sekali! Sesuai Hukum Archimedes, saat massa jenis rata-rata kapal sama dengan air laut, gaya apung ke atas seimbang dengan berat kapal, sehingga kapal selam melayang sempurna." },
+        { teks: "B. Membuang semua air keluar dari tangki kapal selam sampai kosong.", benar: false, alasan: "Salah. Jika air dibuang, kapal selam akan menjadi ringan dan mengapung kembali ke permukaan." },
+        { teks: "C. Mematikan mesin kapal agar kapal jatuh ke dasar laut.", benar: false, alasan: "Salah. Mematikan mesin tanpa mengatur tangki ballast tidak menjamin kapal melayang di kedalaman yang tepat." }
       ]
     },
     lkm: {
-      title: "LKM 2: Eksperimen Tekanan Fluida dan Massa Jenis",
-      guide: "Buka simulator PhET Under Pressure. Pindahkan sensor tekanan pada variasi kedalaman dan jenis fluida.",
+      title: "LKM 2: Eksperimen Tekanan Air dan Gaya Apung",
+      guide: "Buka simulator PhET Under Pressure. Tarik alat pengukur tekanan ke dalam air pada kedalaman 1 meter, 2 meter, dan 3 meter.",
       phetUrl: "https://phet.colorado.edu/sims/html/under-pressure/latest/under-pressure_all.html",
-      q1: "1. Catat tekanan pada kedalaman 1 m, 2 m, dan 3 m di dalam air murni:",
-      q2: "2. Apa yang terjadi pada nilai tekanan hidrostatik jika fluida diganti dengan cairan madu pada kedalaman yang sama?",
-      q3: "3. Jelaskan bagaimana prinsip bejana berhubungan dimanfaatkan pada desain bendungan air!"
+      q1: "1. Berapakah angka tekanan yang ditunjukkan alat ukur saat berada di kedalaman 1 meter dibanding saat kedalaman 3 meter?",
+      q2: "2. Jika cairan air diganti dengan cairan madu yang lebih kental dan pekat, apakah tekanannya bertambah besar atau kecil? Mengapa?",
+      q3: "3. Jelaskan dengan bahasamu sendiri mengapa kapal feri dari besi bisa mengapung di lautan luas!"
     },
     defaultLinkUjian: "https://forms.gle/"
   },
@@ -188,104 +218,66 @@ const DATABASE_TP = [
     id: 2,
     kode: "TP 3.1",
     nama: "Kalor & Termodinamika",
-    judul: "TP 3.1: Kalor, Termodinamika, dan Analisis Perubahan Iklim Global",
+    judul: "TP 3.1: Kalor, Termodinamika, dan Analisis Pemanasan Global",
     cp: "Menganalisis konsep kalor dan termodinamika serta penerapannya untuk mengidentifikasi fenomena perubahan iklim.",
     iktp: [
-      "Membedakan mekanisme perpindahan kalor (konduksi, konveksi, dan radiasi) pada atmosfer, daratan, dan perairan laut.",
-      "Menganalisis perubahan energi dalam sistem gas ideal melalui Hukum I Termodinamika pada proses isotermal, isobarik, isokhorik, dan adiabatik.",
-      "Mengevaluasi batasan efisiensi mesin termal dan arah aliran kalor spontan berdasarkan Hukum II Termodinamika (Siklus Carnot dan Entropi).",
-      "Menghubungkan ketidakseimbangan neraca radiasi termal bumi dan akumulasi emisi gas rumah kaca terhadap dinamika perubahan iklim dan cuaca ekstrem."
+      "Menjelaskan perbedaan suhu dan kalor serta tiga cara perpindahan panas (konduksi, konveksi, dan radiasi).",
+      "Menganalisis Hukum I Termodinamika (kekekalan energi panas menjadi kerja mekanik) dalam sistem gas.",
+      "Menjelaskan prinsip Hukum II Termodinamika bahwa panas mengalir alami dari benda panas ke benda dingin.",
+      "Menganalisis pengaruh perangkap radiasi panas matahari oleh gas rumah kaca terhadap fenomena perubahan iklim global."
     ],
     materi: `
-      <h3>1. Orientasi Fenomena: Ketidakseimbangan Neraca Termal Planet Bumi</h3>
-      <p>Mengapa saat kamu memompa ban sepeda dengan cepat, ujung laras pompa terasa panas menyengat padahal tidak ada api atau sumber panas di dekatnya? Dan pada skala planet, mengapa kenaikan rata-rata suhu bumi sebesar 1,5°C saja dapat mencairkan miliaran ton gletser kutub, memicu siklon tropis dahsyat, dan menenggelamkan pesisir pantai? Apakah panas bumi bertambah karena energi matahari yang membesar, ataukah karena energi yang masuk terperangkap dan tidak bisa keluar?</p>
-      
-      <div class="context-box">
-        <strong>Intisari Nalar Fisis:</strong> Bumi dan atmosfernya bekerja persis seperti sebuah sistem termodinamika tertutup. Radiasi surya berfrekuensi tinggi (sinar tampak dan ultraviolet) menembus atmosfer tanpa halangan untuk menghangatkan daratan dan lautan. Namun, saat bumi melepaskan kembali energi tersebut sebagai radiasi inframerah gelombang panjang, molekul gas rumah kaca (CO₂, CH₄, N₂O) menyerap dan memancarkannya kembali ke permukaan bumi, mengunci neraca termal dalam perangkap panas permanen.
-      </div>
-
-      <h3>2. Konstruksi Konsep Mendalam: Hukum I Termodinamika</h3>
-      <p>Hukum Pertama Termodinamika adalah hukum kekekalan energi yang diterapkan pada sistem gas dan fluida termal:</p>
-      <div style="text-align:center; padding: 12px; background:rgba(6,11,20,0.6); border-radius:6px; margin: 10px 0;">
-        <strong>$\\Delta U = Q - W$</strong>
-      </div>
+      <h3>1. Apa Beda Suhu dan Kalor?</h3>
+      <p>Sering kali kita menyamakan suhu dan kalor, padahal keduanya berbeda:</p>
       <ul>
-        <li><strong>$\\Delta U$ (Perubahan Energi Dalam):</strong> Mencerminkan perubahan energi kinetik getaran mikroskopis molekul gas (berbanding lurus dengan perubahan suhu mutlak $\\Delta T$).</li>
-        <li><strong>$Q$ (Kalor):</strong> Energi termal yang mengalir melintasi batas sistem karena perbedaan suhu (bernilai positif jika kalor masuk ke sistem).</li>
-        <li><strong>$W$ (Usaha Mekanik Luar):</strong> Kerja pemuaian/pemampatan gas ($W = P \\cdot \\Delta V$, bernilai positif jika sistem memuai mendorong lingkungan).</li>
+        <li><strong>Suhu:</strong> Derajat panas atau dinginnya suatu benda yang diukur dengan termometer (satuan: °C atau Kelvin).</li>
+        <li><strong>Kalor:</strong> Bentuk <em>energi panas</em> yang berpindah dari benda bersuhu tinggi ke benda yang bersuhu lebih rendah (satuan: Joule atau Kalori).</li>
       </ul>
 
-      <h4>Empat Proses Termodinamika Khusus:</h4>
-      <table class="article-table">
-        <thead>
-          <tr>
-            <th>Jenis Proses</th>
-            <th>Karakteristik Fisis</th>
-            <th>Bentuk Hukum I Termodinamika</th>
-            <th>Aplikasi Nyata</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Isobarik</strong></td>
-            <td>Tekanan Tetap ($P = C$)</td>
-            <td>$Q = \\Delta U + P \\Delta V$</td>
-            <td>Pemanasan air dalam panci terbuka</td>
-          </tr>
-          <tr>
-            <td><strong>Isokhorik</strong></td>
-            <td>Volume Tetap ($V = C \\implies W = 0$)</td>
-            <td>$Q = \\Delta U$</td>
-            <td>Panci presto tertutup rapat</td>
-          </tr>
-          <tr>
-            <td><strong>Isotermal</strong></td>
-            <td>Suhu Tetap ($T = C \\implies \\Delta U = 0$)</td>
-            <td>$Q = W$</td>
-            <td>Ekspansi gas perlahan dalam silinder konduktif</td>
-          </tr>
-          <tr>
-            <td><strong>Adiabatik</strong></td>
-            <td>Tanpa Aliran Kalor ($Q = 0$)</td>
-            <td>$\\Delta U = -W$</td>
-            <td>Kompresi pompa ban mendadak & semprotan aerosol</td>
-          </tr>
-        </tbody>
-      </table>
+      <h3>2. Tiga Cara Kalor Berpindah di Sekitar Kita</h3>
+      <ol>
+        <li><strong>Konduksi (Lewat Rambatan Zat Padat):</strong> Ujung sendok logam akan terasa panas saat ujung lainnya dimasukkan ke dalam gelas air teh panas. Panas merambat lewat benturan atom logam tanpa zat perantaranya berpindah.</li>
+        <li><strong>Konveksi (Lewat Aliran Cairan atau Gas):</strong> Saat kamu memasak air, air di bagian bawah yang panas akan naik ke atas, dan air dingin turun ke bawah menciptakan sirkulasi aliran. Terjadinya angin darat dan angin laut juga karena konveksi udara!</li>
+        <li><strong>Radiasi (Pancaran Tanpa Perantara):</strong> Hangatnya sinar matahari yang sampai ke kulit kita melintasi jutaan kilometer ruang angkasa yang hampa udara.</li>
+      </ol>
 
-      <h3>3. Hukum II Termodinamika & Efisiensi Mesin Termal (Siklus Carnot)</h3>
-      <p>Hukum Kedua Termodinamika menyatakan bahwa kalor secara spontan hanya mengalir dari benda bersuhu tinggi ke benda bersuhu rendah, dan tidak mungkin ada mesin kalor yang mengubah 100% kalor yang diserap menjadi kerja mekanis tanpa membuang kalor sisa ke lingkungan (Hukum Kelvin-Planck). Efisiensi maksimum teoritis dinyatakan oleh Siklus Carnot:</p>
-      <div style="text-align:center; padding: 12px; background:rgba(6,11,20,0.6); border-radius:6px; margin: 10px 0;">
-        <strong>$\\eta = 1 - \\frac{T_L}{T_H} = \\frac{T_H - T_L}{T_H} \\times 100\\%$</strong>
+      <h3>3. Hukum Termodinamika: Energi Panas Menjadi Gerak</h3>
+      <p>Termodinamika adalah ilmu fisika yang mempelajari bagaimana <strong>panas (kalor) dapat diubah menjadi kerja gerak (usaha)</strong>.</p>
+      
+      <h4>A. Hukum I Termodinamika (Energi itu Kekal):</h4>
+      <div style="text-align:center; padding: 12px; background:rgba(6,11,20,0.6); border-radius:8px; margin: 12px 0; border: 1px solid rgba(56,189,248,0.3);">
+        <span style="font-size:1.3rem; font-weight:700; color:#38bdf8;">Rumus: ΔU = Q - W</span><br>
+        <p style="margin-top:6px; font-size:0.86rem; color:#cbd5e1;">
+          <strong>ΔU</strong> = Perubahan energi dalam gas (berhubungan dengan perubahan suhu gas)<br>
+          <strong>Q</strong> = Kalor yang diserap atau dilepas gas<br>
+          <strong>W</strong> = Usaha/kerja gerak yang dilakukan gas (misal mendorong piston mesin)
+        </p>
       </div>
-      <p>Di mana $T_H$ adalah suhu reservoir panas dan $T_L$ adalah suhu lingkungan pembuangan (dalam Kelvin). Artinya, semua kendaraan bermotor dan pembangkit listrik berbahan bakar batubara pasti membuang kalor dalam jumlah masif ($Q_L$) ke udara dan perairan sekitar, meningkatkan entropi (ketidakteraturan) lingkungan secara global.</p>
 
-      <h3>4. Analisis Termodinamika pada Perubahan Iklim Global</h3>
-      <p>Ketika konsentrasi gas rumah kaca melonjak melampaui ambang normal, terjadi ketidakseimbangan radiasi termal bumi: laju kalor yang masuk ($Q_{in}$) jauh melampaui laju pelepasan kalor ke antariksa ($Q_{out}$). Akibatnya, energi dalam atmosfer dan samudra ($\Delta U$) terus menanjak tajam.</p>
-      <p>Dampaknya adalah pelelehan tudung es kutub yang menurunkan efek <em>albedo</em> (daya pantul sinar matahari oleh salju putih), sehingga daratan gelap menyerap lebih banyak radiasi surya, memicu <em>lingkaran setan umpan balik positif</em> pemanasan global.</p>
+      <h4>B. Hukum II Termodinamika (Arah Aliran Panas):</h4>
+      <p>Panas secara alami hanya akan mengalir dari <strong>benda bersuhu tinggi ke benda bersuhu rendah</strong>. Kalor tidak bisa mengalir spontan ke arah sebaliknya tanpa bantuan mesin luar (contohnya kulkas butuh aliran listrik agar bisa memompa panas keluar dari ruangan dingin kulkas).</p>
 
-      <div class="misconception-box">
-        <strong>⚠️ Miskonsepsi yang Sering Terjadi:</strong><br>
-        Banyak yang mengira bahwa efek rumah kaca sepenuhnya adalah hal yang buruk. <em>Fakta Ilmiah:</em> Efek rumah kaca alami justru mutlak diperlukan agar bumi layak huni (menjaga suhu rata-rata bumi sekitar 15°C; tanpa efek rumah kaca alami, bumi membeku pada suhu -18°C). Yang membahayakan peradaban adalah <strong>efek rumah kaca berlebih (akselerasi antropogenik)</strong> akibat pembakaran bahan bakar fosil dan deforestasi.
-      </div>
+      <h3>4. Mengapa Terjadi Pemanasan Global (Global Warming)?</h3>
+      <p>Bumi kita menerima radiasi panas cahaya matahari setiap hari. Sebagian panas ini diserap tanah dan lautan, lalu dipantulkan kembali ke luar angkasa dalam bentuk radiasi inframerah.</p>
+      <p>Namun, asap kendaraan bermotor, pabrik industri, dan kebakaran hutan melepaskan gas-gas seperti <strong>Karbon Dioksida (CO₂) dan Metana (CH₄)</strong> secara berlebihan ke udara. Gas-gas ini bertindak seperti kaca tebal di langit: <em>mereka membiarkan panas matahari masuk, tetapi menjebak dan menahan panas pantulan keluar</em>. Akibatnya, suhu rata-rata permukaan bumi terus meningkat, mencairkan es kutub dan memicu cuaca ekstrem yang sulit diprediksi.</p>
     `,
     videoEmbed: "https://www.youtube-nocookie.com/embed/oJAbATJCugs",
     game: {
-      judul: "Misi 3: Strategi Mitigasi Emisi Termal Pabrik Hijau",
-      deskripsi: "Pembangkit listrik uap bekerja di antara suhu 600 K dan 300 K. Langkah termodinamika manakah yang paling bijak untuk menekan polusi panas perairan sekitar?",
+      judul: "Misi 3: Mengurangi Suhu Panas Ruang Kelas",
+      deskripsi: "Saat siang hari yang terik, ruang kelas terasa sangat panas menyengat karena atap seng menyerap radiasi matahari. Berdasarkan konsep perpindahan kalor, langkah manakah yang paling efektif dan ramah lingkungan untuk menyejukkan kelas?",
       opsi: [
-        { teks: "A. Membuang air kondensasi panas langsung ke danau.", benar: false, alasan: "Salah. Ini merusak ekosistem akuatik." },
-        { teks: "B. Memanfaatkan kalor buangan untuk sistem kogenerasi dan menaikkan efisiensi mesin termal.", benar: true, alasan: "Sempurna! Menurut Hukum II Termodinamika, kogenerasi mendaur ulang kalor sisa sehingga mengurangi pembuangan panas ke lingkungan bebas." },
-        { teks: "C. Menurunkan suhu reservoir panas agar sama dengan suhu danau.", benar: false, alasan: "Salah. Jika suhu sama, efisiensi mesin menjadi nol." }
+        { teks: "A. Menanam pohon peneduh rindang di samping jendela kelas dan memasang ventilasi udara silang (cross-ventilation).", benar: true, alasan: "Benar Sekali! Pohon menghalangi radiasi sinar matahari langsung, dan ventilasi silang memperlancar konveksi aliran udara panas keluar ruangan digantikan udara sejuk." },
+        { teks: "B. Mengecat dinding kelas dengan warna hitam legam.", benar: false, alasan: "Salah. Warna hitam justru menyerap radiasi panas paling banyak dan membuat ruangan semakin panas." },
+        { teks: "C. Menutup rapat semua jendela dan ventilasi sepanjang siang.", benar: false, alasan: "Salah. Udara panas akan terperangkap di dalam ruangan tanpa sirkulasi konveksi." }
       ]
     },
     lkm: {
-      title: "LKM 3: Simulasi Efek Rumah Kaca dan Keseimbangan Radiasi",
-      guide: "Buka simulator PhET Greenhouse Effect. Uji konsentrasi gas rumah kaca pada zaman es, 1750, dan hari ini.",
+      title: "LKM 3: Pengamatan Efek Rumah Kaca",
+      guide: "Buka simulator PhET Greenhouse Effect. Amati suhu bumi saat kadar gas rumah kaca dinaikkan dari zaman dahulu ke zaman modern.",
       phetUrl: "https://phet.colorado.edu/sims/html/greenhouse-effect/latest/greenhouse-effect_all.html",
-      q1: "1. Berapakah perkiraan suhu permukaan bumi jika tidak ada gas rumah kaca sama sekali di atmosfer?",
-      q2: "2. Bagaimana interaksi partikel gas metana dan CO2 saat menyerap foton inframerah?",
-      q3: "3. Tuliskan rekomendasi solusi konkrit untuk menekan pemanasan lokal di lingkungan sekolahmu!"
+      q1: "1. Apa yang terjadi pada angka suhu permukaan bumi ketika konsentrasi gas rumah kaca dinaikkan?",
+      q2: "2. Bagaimana partikel gas inframerah memantul kembali ke permukaan bumi pada simulasi tersebut?",
+      q3: "3. Tuliskan 2 aksi nyata yang bisa kamu dan teman sekelasmu lakukan untuk mengurangi emisi gas rumah kaca di sekolah!"
     },
     defaultLinkUjian: "https://forms.gle/"
   },
@@ -293,106 +285,68 @@ const DATABASE_TP = [
     id: 3,
     kode: "TP 4.1",
     nama: "Gejala Gelombang",
-    judul: "TP 4.1: Menganalisis Gejala Gelombang dalam Teknologi dan Kehidupan",
+    judul: "TP 4.1: Mengenal Gejala Gelombang dan Bunyi di Sekitar Kita",
     cp: "Menganalisis gejala gelombang dan penerapannya dalam kehidupan sehari-hari.",
     iktp: [
-      "Menganalisis besaran-besaran fisis gelombang (amplitudo, frekuensi, periode, panjang gelombang, cepat rambat) serta persamaannya $v = \\lambda \\cdot f$.",
-      "Menginvestigasi gejala pemantulan (refleksi), pembiasan (refraksi), difraksi, dan interferensi pada gelombang mekanik dan gelombang bunyi.",
-      "Menganalisis pergeseran frekuensi bunyi akibat efek Doppler dan resonansi akustik dalam kehidupan sehari-hari.",
-      "Mengevaluasi pemanfaatan prinsip gelombang pada teknologi sonografi (USG medis), radar kelautan, serat optik komunikasi, dan teknologi peredam bising aktif."
+      "Membedakan konsep getaran dan gelombang serta jenis gelombang transversal dan longitudinal.",
+      "Menghitung hubungan cepat rambat gelombang, panjang gelombang, dan frekuensi (v = λ × f).",
+      "Mengidentifikasi sifat-sifat umum gelombang: pemantulan (refleksi), pembiasan (refraksi), dan penggabungan (interferensi).",
+      "Menjelaskan fenomena pergeseran frekuensi bunyi (Efek Doppler) saat sirine ambulans mendekat dan menjauh."
     ],
     materi: `
-      <h3>1. Orientasi Fenomena: Gelombang sebagai Pengirim Energi Tanpa Memindahkan Materi</h3>
-      <p>Ketika kamu melempar sebutir kerikil ke permukaan kolam air yang tenang, kamu melihat lingkaran riak gelombang merambat menjauh dari titik jatuhnya kerikil. Menariknya, sehelai daun kering yang terapung di atas air hanya bergerak naik-turun di tempatnya dan tidak ikut tersapu hanyut ke tepi kolam. Mengapa demikian? Dan bagaimana mungkin suara sirine ambulans yang melaju mendekat terdengar bernada lebih tinggi dibanding saat mobil itu menjauh melintas di depan kita?</p>
+      <h3>1. Apa itu Gelombang?</h3>
+      <p>Coba kamu lemparkan kerikil ke atas air kolam yang tenang. Kamu akan melihat lingkaran riak gelombang merambat menjauhi titik jatuhnya kerikil. Uniknya, sehelai daun kering yang mengapung di atas air hanya bergerak <strong>naik dan turun di tempat</strong>, tidak ikut tersapu hanyut bersama gelombang!</p>
       
       <div class="context-box">
-        <strong>Intisari Nalar Fisis:</strong> Gelombang pada hakikatnya adalah getaran yang merambat melalui medium (atau ruang hampa untuk gelombang elektromagnetik) yang mentransfer <strong>energi dan momentum</strong> tanpa memindahkan partikel medium secara permanen. Partikel air atau molekul udara hanya berosilasi di sekitar titik setimbangnya.
+        <strong>Intisari Nalar Gelombang:</strong> Gelombang adalah <strong>getaran yang merambat dan memindahkan energi dari satu tempat ke tempat lain tanpa memindahkan zat perantaranya secara permanen</strong>.
       </div>
 
-      <h3>2. Konstruksi Konsep Mendalam: Besaran & Karakteristik Gelombang</h3>
-      <p>Setiap gelombang periodik diatur oleh hubungan fundamental cepat rambat:</p>
-      <div style="text-align:center; padding: 12px; background:rgba(6,11,20,0.6); border-radius:6px; margin: 10px 0;">
-        <strong>$v = \\lambda \\cdot f = \\frac{\\lambda}{T}$</strong>
-      </div>
-      <ul>
-        <li><strong>Panjang Gelombang ($\\lambda$ dalam meter):</strong> Jarak antara dua puncak bukit gelombang berurutan atau jarak satu siklus gelombang utuh.</li>
-        <li><strong>Frekuensi ($f$ dalam Hertz):</strong> Banyaknya gelombang penuh yang terbentuk dalam satu detik ($f = 1/T$).</li>
-        <li><strong>Cepat Rambat ($v$ dalam m/s):</strong> Kelajuan perambatan muka gelombang melintasi ruang, yang nilainya murni ditentukan oleh sifat elastisitas dan inersia medium perantaranya.</li>
-      </ul>
+      <h3>2. Dua Jenis Gelombang Berdasarkan Arah Getarnya</h3>
+      <ol>
+        <li><strong>Gelombang Transversal (Arah getar tegak lurus arah rambat):</strong> Bentuknya memiliki <em>bukit dan lembah</em>. Contohnya: gelombang pada tali yang digerakkan naik-turun, gelombang air, dan gelombang cahaya.</li>
+        <li><strong>Gelombang Longitudinal (Arah getar searah arah rambat):</strong> Bentuknya memiliki <em>rapatan dan renggangan</em>. Contoh paling nyata adalah <strong>gelombang bunyi</strong> yang kita dengar setiap hari dan gelombang pegas (slinki).</li>
+      </ol>
 
-      <h4>Perbedaan Gelombang Transversal vs Longitudinal:</h4>
-      <table class="article-table">
-        <thead>
-          <tr>
-            <th>Parameter Komparasi</th>
-            <th>Gelombang Transversal</th>
-            <th>Gelombang Longitudinal</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Arah Getar vs Rambat</strong></td>
-            <td>Tegak lurus (90°) terhadap arah rambat</td>
-            <td>Sejajar (0° / 180°) searah rambatan getaran</td>
-          </tr>
-          <tr>
-            <td><strong>Bentuk Anatomi</strong></td>
-            <td>Terdiri dari Bukit dan Lembah</td>
-            <td>Terdiri dari Rapatan dan Renggangan</td>
-          </tr>
-          <tr>
-            <td><strong>Contoh Nyata</strong></td>
-            <td>Gelombang tali, gelombang permukaan air, cahaya</td>
-            <td>Gelombang bunyi di udara, gelombang pegas (slinki), gelombang seismik P</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3>3. Gejala-Gejala Karakteristik Gelombang (Sifat Fisis)</h3>
+      <h3>3. Rumus Sakti Cepat Rambat Gelombang</h3>
+      <p>Semua gelombang yang merambat terikat pada satu rumus sederhana yang sangat mudah dihafal:</p>
       
-      <h4>A. Refleksi (Pemantulan) & Hukum Pemantulan</h4>
-      <p>Gelombang memantul saat menabrak bidang batas medium keras dengan sudut datang sama dengan sudut pantul ($\\theta_i = \\theta_r$). Pada ujung terikat, gelombang mengalami pembalikan fase 180°, sedangkan pada ujung bebas terpantul sefase tanpa pembalikan.</p>
+      <div style="text-align:center; padding: 12px; background:rgba(6,11,20,0.6); border-radius:8px; margin: 12px 0; border: 1px solid rgba(56,189,248,0.3);">
+        <span style="font-size:1.4rem; font-weight:700; color:#38bdf8;">v = λ × f</span><br>
+        <p style="margin-top:6px; font-size:0.86rem; color:#cbd5e1;">
+          <strong>v</strong> = Cepat rambat gelombang (satuan: meter per detik atau m/s)<br>
+          <strong>λ</strong> (lambda) = Panjang satu gelombang penuh (satuan: meter atau m)<br>
+          <strong>f</strong> = Frekuensi atau banyaknya getaran tiap detik (satuan: Hertz atau Hz)
+        </p>
+      </div>
 
-      <h4>B. Refraksi (Pembiasan) & Hukum Snellius</h4>
-      <p>Ketika gelombang merambat memasuki medium lain yang berbeda kerapatannya, cepat rambatnya berubah ($v_1 \\neq v_2$) sehingga arah rambatannya berbelok: $\\frac{\\sin \\theta_1}{\\sin \\theta_2} = \\frac{v_1}{v_2} = \\frac{\\lambda_1}{\\lambda_2}$. Frekuensi gelombang selalu tetap konstan karena ditentukan oleh sumber getarannya.</p>
-
-      <h4>C. Interferensi: Penguatan & Peniadaan Gelombang</h4>
-      <p>Bila dua gelombang koheren (frekuensi dan beda fase konstan) bertemu pada satu titik:</p>
+      <h3>4. Sifat-Sifat Keren Gelombang</h3>
       <ul>
-        <li><strong>Interferensi Konstruktif (Saling Menguatkan):</strong> Terjadi saat puncak bertemu puncak, menghasilkan amplitudo gabungan dua kali lipat (bunyi terdengar jauh lebih keras).</li>
-        <li><strong>Interferensi Destruktif (Saling Menghilangkan):</strong> Terjadi saat puncak bertemu lembah, menghasilkan amplitudo nol.</li>
+        <li><strong>Refleksi (Pemantulan):</strong> Gelombang memantul saat menabrak dinding batas keras. Contohnya suara gemamu yang terdengar kembali saat berteriak di dalam gua atau di dekat tebing bukit.</li>
+        <li><strong>Refraksi (Pembiasan):</strong> Gelombang berbelok saat memasuki medium yang berbeda kerapatannya. Contohnya tongkat yang tampak patah atau bengkok saat dimasukkan ke dalam baskom air jernih.</li>
+        <li><strong>Interferensi (Perpaduan Dua Gelombang):</strong> Jika puncak bertemu puncak, suaranya menjadi semakin keras (saling menguatkan). Jika puncak bertemu lembah, suaranya saling meniadakan (dipakai pada teknologi earphone peredam bising canggih / *Noise Cancelling*).</li>
       </ul>
-      <p><em>Penerapan Teknologi Headphone ANC (Active Noise Cancelling):</em> Mikrofon kecil menangkap gelombang kebisingan mesin pesawat dari luar, lalu sirkuit memproses dan memancarkan gelombang tandingan yang berlawanan fase 180° ke telinga pendengar, sehingga suara dengung mesin hilang seketika karena interferensi destruktif.</p>
 
-      <h4>D. Efek Doppler Bunyi</h4>
-      <p>Efek Doppler adalah fenomena pergeseran frekuensi yang didengar oleh pengamat ($f_p$) akibat gerak relatif antara sumber bunyi dan pengamat:</p>
-      <div style="text-align:center; padding: 12px; background:rgba(6,11,20,0.6); border-radius:6px; margin: 10px 0;">
-        <strong>$f_p = \\left(\\frac{v \\pm v_p}{v \\mp v_s}\\right) f_s$</strong>
-      </div>
-      <p>Saat ambulans melaju mendekat ($v_s$ bernilai minus), muka gelombang di depan mobil terdesak memadat (panjang gelombang efektif mengecil), sehingga telinga kita menangkap lebih banyak siklus getaran per detik (frekuensi terasa melengking tinggi).</p>
-
-      <div class="misconception-box">
-        <strong>⚠️ Miskonsepsi yang Sering Terjadi:</strong><br>
-        Banyak siswa mengira bahwa saat volume suara diperkeras (teriakan kencang), bunyi akan merambat lebih cepat sampai ke telinga kawan. <em>Fakta Ilmiah:</em> Cepat rambat bunyi di udara murni ditentukan oleh suhu dan kerapatan medium udara ($v = \\sqrt{\\gamma R T / M}$), bukan oleh amplitudo getaran. Suara bisikan halus dan teriakan kencang merambat dengan kecepatan yang persis sama.
-      </div>
+      <h3>5. Efek Doppler: Misteri Suara Sirine Ambulans</h3>
+      <p>Pernahkah kamu berada di pinggir jalan raya saat mobil ambulans lewat? Saat ambulans melaju mendekatimu, nada sirinenya terdengar <strong>melengking tinggi</strong>. Begitu ambulans tepat lewat dan menjauhimu, nadanya mendadak berubah menjadi <strong>lebih rendah dan berat</strong>.</p>
+      <p>Fenomena ini disebut <strong>Efek Doppler</strong>. Saat mobil ambulans bergerak mendekati telingamu, gelombang bunyi di depan mobil terdesak memadat (panjang gelombangnya memendek), sehingga frekuensi bunyi yang tertangkap oleh telingamu menjadi lebih rapat dan terdengar melengking tinggi.</p>
     `,
     videoEmbed: "https://www.youtube-nocookie.com/embed/edeb3pZ-mhk",
     game: {
-      judul: "Misi 4: Kalibrasi Sonar Kapal Peneliti Palung Laut",
-      deskripsi: "Sebuah kapal menembakkan pulsa ultrasonik berkecepatan 1.500 m/s di air laut. Pantulan gema diterima kembali setelah 4 detik. Berapakah kedalaman palung tersebut?",
+      judul: "Misi 4: Mengukur Kedalaman Laut dengan Sonar",
+      deskripsi: "Sebuah kapal nelayan menembakkan pulsa gelombang bunyi sonar ke dasar laut dengan cepat rambat 1.500 m/s di air laut. Bunyi pantulan gema dari dasar laut diterima kembali oleh kapal setelah 2 detik. Berapakah kedalaman laut tersebut?",
       opsi: [
-        { teks: "A. 6.000 meter tanpa dispersi sedikit pun.", benar: false, alasan: "Salah. 4 detik adalah waktu tempuh bolak-balik." },
-        { teks: "B. 3.000 meter; gelombang memantul karena perbedaan massa jenis batas dasar laut.", benar: true, alasan: "Tepat! Kedalaman s = (v · t) / 2 = (1500 · 4) / 2 = 3.000 meter." },
-        { teks: "C. 1.500 meter di bawah kapal.", benar: false, alasan: "Salah perhitungan waktu." }
+        { teks: "A. 1.500 meter di bawah permukaan laut.", benar: true, alasan: "Hebat dan Sangat Tepat! Waktu 2 detik adalah waktu bolak-balik (pergi menabrak dasar lalu memantul kembali). Waktu satu arah adalah 1 detik. Kedalaman = Cepat rambat × waktu = 1.500 m/s × 1 s = 1.500 meter." },
+        { teks: "B. 3.000 meter di bawah permukaan laut.", benar: false, alasan: "Salah. Ingat bahwa waktu 2 detik adalah waktu tempuh bolak-balik bunyi, sehingga harus dibagi dua." },
+        { teks: "C. 750 meter di bawah permukaan laut.", benar: false, alasan: "Salah dalam pembagian nilai cepat rambat." }
       ]
     },
     lkm: {
-      title: "LKM 4: Eksperimen Cepat Rambat dan Interferensi Gelombang",
-      guide: "Buka simulator PhET Wave on a String. Atur ke mode Oscillate dan variasikan frekuensi serta tegangan tali.",
+      title: "LKM 4: Eksperimen Getaran dan Frekuensi Gelombang Tali",
+      guide: "Buka simulator PhET Wave on a String. Pasang mode 'Oscillate' dan amati bentuk bukit serta lembah gelombangnya.",
       phetUrl: "https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_all.html",
-      q1: "1. Catat panjang gelombang (λ) saat frekuensi 1.0 Hz dibanding saat 2.0 Hz pada tegangan konstan:",
-      q2: "2. Bagaimana pengaruh tegangan tali (Tension) terhadap cepat rambat gelombang?",
-      q3: "3. Jelaskan bagaimana fenomena resonansi gelombang bunyi dimanfaatkan pada alat musik akustik!"
+      q1: "1. Ketika kamu menaikkan angka frekuensi (f) menjadi lebih besar, apakah gelombang tali menjadi semakin rapat atau semakin renggang?",
+      q2: "2. Bagaimana perbedaan gerak partikel tali (naik-turun) dengan arah rambatan gelombang (maju ke samping)? Jenis gelombang apakah ini?",
+      q3: "3. Tuliskan contoh pemanfaatan gelombang bunyi ultrasonik dalam dunia kedokteran yang kamu ketahui!"
     },
     defaultLinkUjian: "https://forms.gle/"
   }
@@ -402,38 +356,38 @@ const DATABASE_TP = [
 const DATABASE_MODUL_AJAR = [
   {
     tp: "TP 1.1",
-    nama: "Modul Ajar: Gerak, Gaya & Rekayasa Struktur",
+    nama: "Modul Ajar: Gerak dan Gaya (Hukum-Hukum Newton)",
     alokasi: "5 JP (5 x 45 Menit)",
-    profil: "Bernalar Kritis, Gotong Royong, Kreatif",
-    deskripsi: "Pembelajaran mendalam untuk mengidentifikasi distribusi beban statis/dinamis, inersia, dan desain keamanan struktur jembatan/gedung.",
-    sintaks: "1. Orientasi fenomena runtuhnya jembatan Tacoma Narrows • 2. Investigasi PhET Forces & Motion • 3. Misi rekayasa pemecahan beban kritis • 4. Refleksi metakognitif.",
+    profil: "Bernalar Kritis, Mandiri, Bergotong Royong",
+    deskripsi: "Pembelajaran mendalam untuk mengidentifikasi Hukum I, II, dan III Newton serta penerapannya pada fenomena gerak sehari-hari dan keselamatan berkendara.",
+    sintaks: "1. Orientasi fenomena berkendara motor & mobil • 2. Investigasi PhET Forces and Motion Basics • 3. Misi analisis sabuk pengaman • 4. Refleksi metakognitif.",
     driveLink: "https://drive.google.com/"
   },
   {
     tp: "TP 2.1",
-    nama: "Modul Ajar: Mekanika Fluida & Karya Teknologi",
+    nama: "Modul Ajar: Mekanika Fluida & Penerapannya",
     alokasi: "5 JP (5 x 45 Menit)",
     profil: "Kreatif, Mandiri, Bernalar Kritis",
-    deskripsi: "Pembuatan proyek miniatur hidrolik dan investigasi hukum Archimedes serta Bernoulli pada perancangan kapal selam & pesawat terbang.",
-    sintaks: "1. Studi fenomena kapal baja terapung • 2. Eksperimen sensor tekanan PhET Under Pressure • 3. Proyek miniatur pompa hidrolik • 4. Evaluasi produk & peer assessment.",
+    deskripsi: "Penyelidikan tekanan hidrostatik, hukum Pascal pada dongkrak, hukum Archimedes pada kapal, dan asas Bernoulli pada sayap pesawat.",
+    sintaks: "1. Studi fenomena kapal baja terapung • 2. Eksperimen sensor tekanan PhET Under Pressure • 3. Game misi penyelaman kapal selam • 4. Evaluasi & peer assessment.",
     driveLink: "https://drive.google.com/"
   },
   {
     tp: "TP 3.1",
-    nama: "Modul Ajar: Kalor, Termodinamika & Mitigasi Iklim",
+    nama: "Modul Ajar: Kalor, Termodinamika & Pemanasan Global",
     alokasi: "5 JP (5 x 45 Menit)",
     profil: "Beriman & Berakhlak Mulia (Peduli Lingkungan), Bernalar Kritis",
-    deskripsi: "Menganalisis siklus termodinamika, efisiensi mesin termal, serta keterkaitannya dengan pemanasan global dan pulau bahang perkotaan.",
-    sintaks: "1. Analisis anomali suhu kutub • 2. Simulasi radiasi PhET Greenhouse Effect • 3. Perancangan strategi kogenerasi energi hijau • 4. Penilaian diri metakognitif.",
+    deskripsi: "Menganalisis konsep perpindahan kalor, hukum termodinamika pada gas, dan dampaknya terhadap perubahan iklim global.",
+    sintaks: "1. Analisis fenomena panas matahari & suhu bumi • 2. Simulasi radiasi PhET Greenhouse Effect • 3. Diskusi mitigasi emisi gas rumah kaca • 4. Penilaian diri mandiri.",
     driveLink: "https://drive.google.com/"
   },
   {
     tp: "TP 4.1",
-    nama: "Modul Ajar: Gejala Gelombang & Teknologi Komunikasi",
+    nama: "Modul Ajar: Gejala Gelombang dan Bunyi",
     alokasi: "5 JP (5 x 45 Menit)",
     profil: "Bernalar Kritis, Berkebinekaan Global",
-    deskripsi: "Menganalisis fenomena gelombang mekanik, pemantulan sonar dasar laut, efek Doppler ambulans, dan teknologi ultrasonografi.",
-    sintaks: "1. Pengamatan gelombang gempa primer & sekunder • 2. Eksperimen PhET Wave on a String • 3. Misi kalibrasi radar & sonar • 4. Asesmen sumatif & refleksi.",
+    deskripsi: "Menganalisis besaran fisis gelombang, sifat pemantulan bunyi sonar, pembiasan, dan efek Doppler sirine ambulans.",
+    sintaks: "1. Pengamatan gelombang air dan sirine jalan • 2. Eksperimen PhET Wave on a String • 3. Misi sonar kedalaman laut • 4. Asesmen sumatif & refleksi.",
     driveLink: "https://drive.google.com/"
   }
 ];
@@ -639,7 +593,6 @@ function pindahMenuMurid(menu) {
   });
 }
 
-// MEMILIH TP DAN MENAMPILKAN IKTP BESERTA MATERI TERINCI
 function pilihTP(index) {
   currentTPIndex = index;
   const pills = document.querySelectorAll("#panel-materi .tp-pill");
@@ -650,7 +603,6 @@ function pilihTP(index) {
   document.getElementById("materi-judul").innerText = data.judul;
   document.getElementById("materi-cp").innerText = `Tujuan Pembelajaran: ${data.cp}`;
 
-  // Tampilkan daftar IKTP
   const iktpListElem = document.getElementById("materi-iktp-list");
   iktpListElem.innerHTML = "";
   if (data.iktp && data.iktp.length > 0) {
@@ -662,7 +614,6 @@ function pilihTP(index) {
     });
   }
 
-  // Tampilkan isi kajian materi mendalam
   document.getElementById("materi-konten").innerHTML = data.materi;
   document.getElementById("materi-video-frame").src = data.videoEmbed;
 }
@@ -1556,8 +1507,8 @@ function isiContohDataSimulasi() {
       tanggal: today,
       jam: "Jam ke 1 - 3 (3 x 45 Menit)",
       tp: "TP 1.1",
-      aktivitas: "Orientasi fenomena keruntuhan jembatan akibat resonansi beban. Siswa mengeksplorasi simulator PhET Forces and Motion secara berkelompok dan menganalisis pengaruh massa terhadap akselerasi.",
-      catatan: "Siswa sangat antusias saat simulasi PhET. Sebagian kecil siswa masih kesulitan pada penguraian vektor sudut kemiringan jalan raya (banked turn). Perlu penguatan konsep di awal pertemuan berikutnya.",
+      aktivitas: "Orientasi fenomena inersia saat naik motor mendadak direm. Siswa mengeksplorasi simulator PhET Forces and Motion Basics secara mandiri untuk membuktikan F = m x a.",
+      catatan: "Siswa sangat antusias saat simulasi gerak dan gaya. Analisis Hukum I dan II Newton sudah dikuasai dengan baik oleh mayoritas siswa.",
       waktuInput: new Date().toLocaleString()
     }
   ];
