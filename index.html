@@ -3,24 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LMS Fisika XI — Portal Pembelajaran Mendalam</title>
+  <title>LMS Fisika XI — Pembelajaran Mendalam (Deep Learning)</title>
   
-  <!-- Font Google Futuristik -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   
   <style>
-    /* =========================================================
-       VARIABEL WARNA & TEMA (FUTURISTIK KOSMIK & SAINS BIRU)
-       ========================================================= */
     :root {
       --bg-cosmos: #060b14;
       --bg-surface: #0d1527;
-      --card-glass: rgba(13, 22, 43, 0.85);
+      --card-glass: rgba(13, 22, 43, 0.92);
       --card-border: rgba(56, 189, 248, 0.25);
       --card-border-glow: rgba(56, 189, 248, 0.55);
-      
       --blue-primary: #0284c7;
       --blue-electric: #0ea5e9;
       --cyan-neon: #38bdf8;
@@ -28,664 +23,176 @@
       --text-muted: #94a3b8;
       --text-dim: #64748b;
       --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-purple: #a855f7;
       --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 20px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background-color: var(--bg-cosmos); color: var(--text-main); min-height: 100vh; position: relative; overflow-x: hidden; }
 
-    body {
-      background-color: var(--bg-cosmos);
-      color: var(--text-main);
-      min-height: 100vh;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    /* Background Latar Kosmik */
+    /* Latar Belakang Sains Kosmik */
     .physics-bg-grid {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-image: 
-        linear-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .physics-glow-orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(100px);
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.6;
-    }
-
-    .orb-1 {
-      width: 450px;
-      height: 450px;
-      background: radial-gradient(circle, #0284c7 0%, rgba(2, 132, 199, 0) 70%);
-      top: -100px;
-      right: -100px;
-    }
-
-    .orb-2 {
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, #0369a1 0%, rgba(3, 105, 161, 0) 70%);
-      bottom: -150px;
-      left: -120px;
-    }
-
-    /* Formula Terapung Dekoratif */
-    .floating-formula {
-      position: fixed;
-      font-family: 'Space Grotesk', monospace;
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: rgba(56, 189, 248, 0.15);
-      user-select: none;
-      pointer-events: none;
-      z-index: 0;
-      animation: floatFormula 10s ease-in-out infinite alternate;
-    }
-
-    .f-1 { top: 12%; left: 8%; }
-    .f-2 { top: 25%; right: 10%; animation-delay: 2s; }
-    .f-3 { bottom: 18%; left: 12%; animation-delay: 4s; }
-    .f-4 { bottom: 15%; right: 15%; animation-delay: 6s; }
-
-    @keyframes floatFormula {
-      0% { transform: translateY(0) rotate(-2deg); }
-      100% { transform: translateY(-20px) rotate(3deg); }
-    }
-
-    /* Kartu Login Glassmorphism */
-    .auth-wrapper {
-      position: relative;
-      z-index: 10;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-
-    .auth-glass-card {
-      background: var(--card-glass);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-lg);
-      width: 100%;
-      max-width: 460px;
-      padding: 38px 32px;
-      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 35px -5px rgba(14, 165, 233, 0.15);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .auth-glass-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--cyan-neon), transparent);
-    }
-
-    /* Animasi Atom Fisika */
-    .auth-header {
-      text-align: center;
-      margin-bottom: 24px;
-    }
-
-    .atom-loader {
-      position: relative;
-      width: 58px;
-      height: 58px;
-      margin: 0 auto 16px;
-    }
-
-    .nucleus {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 12px;
-      height: 12px;
-      background: var(--cyan-neon);
-      box-shadow: 0 0 15px var(--cyan-neon);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .electron-orbit {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 1.5px solid rgba(56, 189, 248, 0.45);
-    }
-
-    .orbit-1 {
-      transform: rotate(0deg) rotateX(75deg);
-      animation: orbitRotate 4s linear infinite;
-    }
-
-    .orbit-2 {
-      transform: rotate(60deg) rotateX(75deg);
-      animation: orbitRotate 4s linear infinite reverse;
-    }
-
-    .orbit-3 {
-      transform: rotate(120deg) rotateX(75deg);
-      animation: orbitRotate 5s linear infinite;
-    }
-
-    @keyframes orbitRotate {
-      0% { transform: rotate(0deg) rotateX(75deg); }
-      100% { transform: rotate(360deg) rotateX(75deg); }
-    }
-
-    .quantum-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(14, 165, 233, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      color: var(--cyan-neon);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.8px;
-      padding: 5px 14px;
-      border-radius: 24px;
-      margin-bottom: 12px;
-    }
-
-    .pulse-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--cyan-neon);
-      box-shadow: 0 0 8px var(--cyan-neon);
-      border-radius: 50%;
-      animation: pulseNeon 2s infinite;
-    }
-
-    @keyframes pulseNeon {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.3; transform: scale(0.8); }
-    }
-
-    .glow-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      color: #ffffff;
-      text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
-      margin-bottom: 6px;
-    }
-
-    .subtitle {
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      line-height: 1.45;
-    }
-
-    /* Tabs Peran */
-    .role-selector {
-      display: flex;
-      background: rgba(8, 14, 28, 0.7);
-      border: 1px solid rgba(56, 189, 248, 0.2);
-      border-radius: var(--radius-sm);
-      padding: 4px;
-      margin-bottom: 22px;
-    }
-
-    .role-btn {
-      flex: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-size: 0.86rem;
-      font-weight: 600;
-      padding: 10px 14px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-
-    .tab-icon {
-      width: 16px;
-      height: 16px;
-    }
-
-    .role-btn.active {
-      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-      color: #ffffff;
-      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
-    }
-
-    /* Form Input */
-    .form-group {
-      margin-bottom: 18px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--cyan-neon);
-      letter-spacing: 0.8px;
-      margin-bottom: 8px;
-    }
-
-    .label-bullet {
-      color: var(--blue-electric);
-      margin-right: 4px;
-    }
-
-    .input-wrapper {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .input-icon {
-      position: absolute;
-      left: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-    }
-
-    .input-icon svg {
-      width: 18px;
-      height: 18px;
-      stroke: var(--text-dim);
-    }
-
-    .input-wrapper input {
-      width: 100%;
-      background: rgba(6, 11, 20, 0.7);
-      border: 1.5px solid rgba(56, 189, 248, 0.2);
-      border-radius: var(--radius-sm);
-      padding: 13px 44px;
-      color: var(--text-main);
-      font-size: 0.94rem;
-      outline: none;
-      transition: all 0.25s ease;
-    }
-
-    .input-wrapper input:focus {
-      border-color: var(--cyan-neon);
-      box-shadow: 0 0 16px rgba(56, 189, 248, 0.22);
-      background: rgba(10, 18, 33, 0.9);
-    }
-
-    .toggle-pwd {
-      position: absolute;
-      right: 12px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 6px;
-      display: flex;
-      align-items: center;
-    }
-
-    .toggle-pwd svg {
-      width: 18px;
-      height: 18px;
-      stroke: var(--text-dim);
-    }
-
-    .btn-primary-futuristic {
-      width: 100%;
-      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-      border: 1px solid rgba(56, 189, 248, 0.4);
-      border-radius: var(--radius-sm);
-      padding: 14px 20px;
-      color: #ffffff;
-      font-weight: 700;
-      font-size: 0.92rem;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      box-shadow: 0 4px 20px rgba(2, 132, 199, 0.4);
-      transition: all 0.25s ease;
-      margin-top: 10px;
-    }
-
-    .btn-primary-futuristic:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 25px rgba(14, 165, 233, 0.55);
-      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
-    }
-
-    .error-banner {
-      background: rgba(244, 63, 94, 0.12);
-      border: 1px solid rgba(244, 63, 94, 0.4);
-      color: #fda4af;
-      font-size: 0.82rem;
-      padding: 10px 14px;
-      border-radius: var(--radius-sm);
-      margin-bottom: 16px;
-      text-align: center;
-    }
-
-    .auth-footer {
-      margin-top: 24px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      text-align: center;
-    }
-
-    .physics-chips {
-      font-size: 0.76rem;
-      color: var(--text-dim);
-    }
-
-    .physics-chips span {
-      color: var(--cyan-neon);
-    }
-
-    /* Modal Pilih Murid */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(4, 8, 16, 0.88);
-      backdrop-filter: blur(16px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-      padding: 20px;
-    }
-
-    .modal-card {
-      background: var(--card-glass);
-      border: 1px solid var(--card-border-glow);
-      border-radius: var(--radius-lg);
-      width: 100%;
-      max-width: 480px;
-      padding: 34px 28px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 35px rgba(56, 189, 248, 0.2);
-    }
-
-    .modal-badge {
-      display: inline-block;
-      background: rgba(14, 165, 233, 0.15);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      color: var(--cyan-neon);
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 20px;
-      margin-bottom: 12px;
-    }
-
-    .modal-header h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.35rem;
-      color: #ffffff;
-      margin-bottom: 8px;
-    }
-
-    .modal-header p {
-      font-size: 0.86rem;
-      color: var(--text-muted);
-      margin-bottom: 22px;
-      line-height: 1.5;
-    }
-
-    .select-wrapper {
-      position: relative;
-    }
-
-    .select-wrapper select {
-      width: 100%;
-      background: #091122;
-      border: 1.5px solid rgba(56, 189, 248, 0.35);
-      border-radius: var(--radius-sm);
-      padding: 13px 16px;
-      color: #ffffff;
-      font-size: 0.95rem;
-      outline: none;
-      cursor: pointer;
-      appearance: none;
-    }
-
-    .select-wrapper::after {
-      content: "▼";
-      font-size: 0.75rem;
-      color: var(--cyan-neon);
-      position: absolute;
-      right: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none;
-    }
-
-    .select-wrapper select option {
-      background: #0b1426;
-      color: #ffffff;
-    }
-
-    /* Dasbor */
-    .dashboard-wrapper {
-      position: relative;
-      z-index: 10;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .dash-navbar {
-      background: rgba(13, 21, 39, 0.85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--card-border);
-      padding: 16px 36px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .brand-atom {
-      width: 32px;
-      height: 32px;
-      border: 1.5px dashed var(--cyan-neon);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: spinSlow 10s linear infinite;
-    }
-
-    .mini-nucleus {
-      width: 8px;
-      height: 8px;
-      background: var(--cyan-neon);
-      border-radius: 50%;
-    }
-
-    @keyframes spinSlow {
-      100% { transform: rotate(360deg); }
-    }
-
-    .brand h2 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.15rem;
-      color: #ffffff;
-    }
-
-    .brand small {
-      color: var(--cyan-neon);
-      font-size: 0.75rem;
-    }
-
-    .user-menu {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .user-status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.88rem;
-      color: var(--text-main);
-    }
-
-    .online-indicator {
-      width: 8px;
-      height: 8px;
-      background: var(--accent-emerald);
-      box-shadow: 0 0 8px var(--accent-emerald);
-      border-radius: 50%;
-    }
-
-    .btn-logout {
-      background: rgba(244, 63, 94, 0.12);
-      border: 1px solid rgba(244, 63, 94, 0.3);
-      color: #fda4af;
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .dash-content {
-      max-width: 1140px;
-      width: 100%;
-      margin: 36px auto;
-      padding: 0 24px;
-    }
-
-    .hero-banner {
-      background: linear-gradient(135deg, rgba(2, 132, 199, 0.3) 0%, rgba(13, 21, 39, 0.7) 100%);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-md);
-      padding: 32px;
-      margin-bottom: 32px;
-    }
-
-    .hero-text h3 {
-      font-size: 1.45rem;
-      font-family: 'Space Grotesk', sans-serif;
-      color: #ffffff;
-      margin-bottom: 10px;
-    }
-
-    .hero-text p {
-      color: var(--text-muted);
-      font-size: 0.94rem;
-      line-height: 1.6;
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-    }
-
-    .dash-card {
-      background: var(--card-glass);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-md);
-      padding: 26px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .dash-card h4 {
-      font-size: 1.12rem;
-      color: #ffffff;
-      font-family: 'Space Grotesk', sans-serif;
-    }
-
-    .dash-card p {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.55;
-    }
-
-    .card-status {
-      align-self: flex-start;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 5px 12px;
-      border-radius: 20px;
-      background: rgba(16, 185, 129, 0.15);
-      color: #6ee7b7;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-
-    .card-status.admin-badge {
-      background: rgba(56, 189, 248, 0.15);
-      color: var(--cyan-neon);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-    }
-
-    @media (max-width: 640px) {
-      .auth-glass-card { padding: 26px 18px; }
-      .floating-formula { display: none; }
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background-image: linear-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+      background-size: 40px 40px; pointer-events: none; z-index: 0;
+    }
+    .physics-glow-orb { position: fixed; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; opacity: 0.5; }
+    .orb-1 { width: 400px; height: 400px; background: radial-gradient(circle, #0284c7, transparent 70%); top: -80px; right: -80px; }
+    .orb-2 { width: 450px; height: 450px; background: radial-gradient(circle, #0369a1, transparent 70%); bottom: -100px; left: -100px; }
+
+    /* Login Area */
+    .auth-wrapper { position: relative; z-index: 10; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .auth-glass-card { background: var(--card-glass); backdrop-filter: blur(20px); border: 1px solid var(--card-border); border-radius: var(--radius-lg); width: 100%; max-width: 460px; padding: 36px 30px; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(14, 165, 233, 0.15); }
+    .auth-header { text-align: center; margin-bottom: 22px; }
+    .atom-loader { position: relative; width: 54px; height: 54px; margin: 0 auto 14px; }
+    .nucleus { position: absolute; top: 50%; left: 50%; width: 12px; height: 12px; background: var(--cyan-neon); box-shadow: 0 0 15px var(--cyan-neon); border-radius: 50%; transform: translate(-50%, -50%); }
+    .electron-orbit { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; border: 1.5px solid rgba(56, 189, 248, 0.45); }
+    .orbit-1 { transform: rotate(0deg) rotateX(75deg); animation: orbitRotate 4s linear infinite; }
+    .orbit-2 { transform: rotate(60deg) rotateX(75deg); animation: orbitRotate 4s linear infinite reverse; }
+    .orbit-3 { transform: rotate(120deg) rotateX(75deg); animation: orbitRotate 5s linear infinite; }
+    @keyframes orbitRotate { 0% { transform: rotate(0deg) rotateX(75deg); } 100% { transform: rotate(360deg) rotateX(75deg); } }
+
+    .quantum-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--cyan-neon); font-size: 0.72rem; font-weight: 700; padding: 5px 12px; border-radius: 24px; margin-bottom: 12px; }
+    .pulse-dot { width: 6px; height: 6px; background: var(--cyan-neon); border-radius: 50%; box-shadow: 0 0 8px var(--cyan-neon); }
+    .glow-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.75rem; font-weight: 700; color: #fff; text-shadow: 0 0 20px rgba(56, 189, 248, 0.4); margin-bottom: 6px; }
+    .subtitle { color: var(--text-muted); font-size: 0.85rem; line-height: 1.45; }
+
+    .role-selector { display: flex; background: rgba(8, 14, 28, 0.7); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: var(--radius-sm); padding: 4px; margin-bottom: 20px; }
+    .role-btn { flex: 1; background: transparent; border: none; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; padding: 10px; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+    .role-btn.active { background: linear-gradient(135deg, #0284c7, #0369a1); color: #fff; }
+
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 0.72rem; font-weight: 700; color: var(--cyan-neon); margin-bottom: 8px; }
+    .input-wrapper { position: relative; display: flex; align-items: center; }
+    .input-wrapper input { width: 100%; background: rgba(6, 11, 20, 0.7); border: 1.5px solid rgba(56, 189, 248, 0.2); border-radius: var(--radius-sm); padding: 13px 40px 13px 16px; color: var(--text-main); font-size: 0.94rem; outline: none; }
+    .input-wrapper input:focus { border-color: var(--cyan-neon); box-shadow: 0 0 16px rgba(56, 189, 248, 0.22); }
+    .toggle-pwd { position: absolute; right: 12px; background: none; border: none; cursor: pointer; }
+
+    .btn-primary-futuristic { width: 100%; background: linear-gradient(135deg, #0284c7, #0369a1); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: var(--radius-sm); padding: 13px; color: #fff; font-weight: 700; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 20px rgba(2, 132, 199, 0.4); }
+    .btn-primary-futuristic:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(14, 165, 233, 0.55); }
+    .error-banner { background: rgba(244, 63, 94, 0.12); border: 1px solid rgba(244, 63, 94, 0.4); color: #fda4af; font-size: 0.82rem; padding: 10px; border-radius: var(--radius-sm); margin-bottom: 16px; text-align: center; }
+
+    /* Modal Siswa */
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(4, 8, 16, 0.9); backdrop-filter: blur(16px); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
+    .modal-card { background: var(--card-glass); border: 1px solid var(--card-border-glow); border-radius: var(--radius-lg); width: 100%; max-width: 480px; padding: 32px 26px; }
+    .select-wrapper { position: relative; }
+    .select-wrapper select { width: 100%; background: #091122; border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: var(--radius-sm); padding: 13px 16px; color: #fff; font-size: 0.92rem; outline: none; appearance: none; }
+    .select-wrapper::after { content: "▼"; font-size: 0.75rem; color: var(--cyan-neon); position: absolute; right: 16px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+    .select-wrapper select option { background: #0b1426; color: #fff; }
+
+    /* Dashboard Layout */
+    .dashboard-wrapper { position: relative; z-index: 10; min-height: 100vh; display: flex; flex-direction: column; }
+    .dash-navbar { background: rgba(13, 21, 39, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--card-border); padding: 16px 32px; display: flex; justify-content: space-between; align-items: center; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-atom { width: 30px; height: 30px; border: 1.5px dashed var(--cyan-neon); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .mini-nucleus { width: 8px; height: 8px; background: var(--cyan-neon); border-radius: 50%; }
+    .brand h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; color: #fff; }
+    .brand small { color: var(--cyan-neon); font-size: 0.75rem; }
+    .user-menu { display: flex; align-items: center; gap: 16px; font-size: 0.88rem; }
+    .online-indicator { display: inline-block; width: 8px; height: 8px; background: var(--accent-emerald); border-radius: 50%; box-shadow: 0 0 8px var(--accent-emerald); margin-right: 6px; }
+    .btn-logout { background: rgba(244, 63, 94, 0.12); border: 1px solid rgba(244, 63, 94, 0.3); color: #fda4af; padding: 7px 14px; border-radius: 6px; font-size: 0.82rem; font-weight: 600; cursor: pointer; }
+
+    .dash-content { max-width: 1180px; width: 100%; margin: 28px auto; padding: 0 20px; }
+    .hero-banner { background: linear-gradient(135deg, rgba(2, 132, 199, 0.35), rgba(13, 21, 39, 0.85)); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 26px; margin-bottom: 24px; }
+    .hero-text h3 { font-size: 1.4rem; font-family: 'Space Grotesk', sans-serif; color: #fff; margin-bottom: 6px; }
+    .hero-text p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.5; }
+
+    /* MENU NAV TABS (5 Menu Murid) */
+    .menu-nav-tabs { display: flex; gap: 8px; margin-bottom: 24px; border-bottom: 1px solid rgba(56, 189, 248, 0.2); padding-bottom: 12px; overflow-x: auto; }
+    .menu-nav-btn { background: rgba(13, 21, 39, 0.6); border: 1px solid var(--card-border); color: var(--text-muted); padding: 11px 18px; border-radius: 10px; font-size: 0.88rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; white-space: nowrap; transition: all 0.2s; }
+    .menu-nav-btn.active { background: linear-gradient(135deg, #0284c7, #0369a1); color: #fff; border-color: var(--cyan-neon); box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4); }
+
+    /* TP Selector Pill Bar */
+    .tp-bar { display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 6px; }
+    .tp-pill { background: rgba(8, 14, 28, 0.7); border: 1px solid rgba(56, 189, 248, 0.2); color: var(--text-muted); padding: 8px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .tp-pill.active { background: var(--blue-primary); color: #fff; border-color: var(--cyan-neon); }
+
+    /* Box Modul Utama */
+    .module-box { background: var(--card-glass); border: 1px solid var(--card-border); border-radius: var(--radius-lg); padding: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .module-badge { display: inline-block; background: rgba(14, 165, 233, 0.15); border: 1px solid var(--cyan-neon); color: var(--cyan-neon); font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 16px; margin-bottom: 10px; }
+    .module-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.45rem; color: #fff; margin-bottom: 8px; }
+    .module-goal { color: var(--cyan-neon); font-size: 0.86rem; margin-bottom: 20px; line-height: 1.5; }
+
+    .article-body { line-height: 1.8; color: #cbd5e1; font-size: 0.95rem; margin-bottom: 24px; }
+    .article-body h4 { color: #fff; font-size: 1.15rem; margin: 18px 0 8px; font-family: 'Space Grotesk', sans-serif; }
+    .article-body p { margin-bottom: 12px; }
+    .context-box { background: rgba(14, 165, 233, 0.08); border-left: 3px solid var(--cyan-neon); padding: 14px 18px; border-radius: 4px; margin: 16px 0; color: #e2e8f0; font-size: 0.92rem; }
+
+    .video-section { margin-top: 26px; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 20px; }
+    .video-section h4 { color: #fff; font-size: 1.1rem; margin-bottom: 12px; }
+    .video-wrapper { position: relative; width: 100%; padding-top: 56.25%; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--card-border); background: #000; }
+    .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+    /* Formatif Games & LKM */
+    .formatif-mode-toggle { display: flex; gap: 10px; margin-bottom: 20px; }
+    .mode-btn { flex: 1; background: rgba(6, 11, 20, 0.6); border: 1px solid var(--card-border); color: var(--text-muted); padding: 10px; border-radius: 8px; font-size: 0.88rem; font-weight: 700; cursor: pointer; text-align: center; }
+    .mode-btn.active { background: rgba(56, 189, 248, 0.15); border-color: var(--cyan-neon); color: var(--cyan-neon); }
+
+    .game-mission-card { background: rgba(6, 11, 20, 0.75); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: var(--radius-md); padding: 24px; margin-bottom: 20px; }
+    .mission-badge { background: rgba(245, 158, 11, 0.15); color: #fbbf24; font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; display: inline-block; margin-bottom: 10px; }
+    .game-options { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+    .option-btn { background: rgba(13, 21, 39, 0.8); border: 1px solid var(--card-border); color: #e2e8f0; padding: 12px 16px; border-radius: 8px; font-size: 0.9rem; text-align: left; cursor: pointer; }
+    .option-btn:hover { background: rgba(56, 189, 248, 0.15); border-color: var(--cyan-neon); }
+    .game-result { margin-top: 14px; padding: 12px; border-radius: 6px; font-size: 0.88rem; display: none; }
+
+    .phet-container { position: relative; width: 100%; padding-top: 56.25%; border-radius: var(--radius-md); overflow: hidden; border: 1.5px solid var(--card-border); margin-bottom: 20px; background: #000; }
+    .phet-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+    .lkm-form { background: rgba(6, 11, 20, 0.6); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 20px; }
+    .lkm-field { margin-bottom: 16px; }
+    .lkm-field label { display: block; font-size: 0.82rem; color: var(--cyan-neon); font-weight: 600; margin-bottom: 6px; }
+    .lkm-field textarea { width: 100%; background: #091122; border: 1px solid var(--card-border); border-radius: 6px; padding: 10px 14px; color: #fff; font-size: 0.9rem; min-height: 80px; resize: vertical; outline: none; }
+
+    /* Sumatif */
+    .sumatif-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .sumatif-card { background: var(--card-glass); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 24px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; }
+    .sumatif-card h4 { font-family: 'Space Grotesk', sans-serif; color: #fff; font-size: 1.15rem; }
+    .sumatif-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+    .link-box-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #0284c7, #0369a1); border: 1px solid var(--cyan-neon); color: #fff; padding: 10px 16px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.88rem; cursor: pointer; }
+
+    /* ================= MENU PETA KONSEP ================= */
+    .concept-map-builder { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
+    .concept-box-half { background: rgba(6, 11, 20, 0.6); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 20px; }
+    .concept-box-half h4 { color: #fff; font-family: 'Space Grotesk'; font-size: 1.05rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .dropzone-upload { border: 2px dashed rgba(56, 189, 248, 0.4); border-radius: var(--radius-sm); padding: 24px; text-align: center; cursor: pointer; transition: all 0.2s; background: rgba(13, 21, 39, 0.4); }
+    .dropzone-upload:hover { border-color: var(--cyan-neon); background: rgba(14, 165, 233, 0.1); }
+    .preview-map-img { max-width: 100%; max-height: 240px; border-radius: 8px; margin-top: 14px; display: none; border: 1px solid var(--card-border); }
+
+    /* ================= MENU PENILAIAN DIRI & ANTAR TEMAN ================= */
+    .eval-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+    .eval-tab-btn { flex: 1; background: rgba(6, 11, 20, 0.6); border: 1px solid var(--card-border); color: var(--text-muted); padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 700; cursor: pointer; text-align: center; }
+    .eval-tab-btn.active { background: rgba(168, 85, 247, 0.15); border-color: var(--accent-purple); color: #d8b4fe; }
+
+    .peer-rubric-card { background: rgba(6, 11, 20, 0.6); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 20px; margin-bottom: 18px; }
+    .rubric-item { margin-bottom: 18px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); padding-bottom: 14px; }
+    .rubric-item:last-child { border-bottom: none; }
+    .rubric-title { font-size: 0.9rem; color: #fff; font-weight: 600; margin-bottom: 4px; }
+    .rubric-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px; }
+    .rating-group { display: flex; gap: 12px; flex-wrap: wrap; }
+    .rating-label { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: #e2e8f0; cursor: pointer; background: rgba(13, 21, 39, 0.8); padding: 6px 12px; border-radius: 6px; border: 1px solid var(--card-border); }
+    .rating-label input { accent-color: var(--cyan-neon); }
+
+    /* Admin Manager */
+    .admin-link-input { margin-top: 10px; display: flex; gap: 8px; }
+    .admin-link-input input { flex: 1; background: #091122; border: 1px solid var(--card-border); border-radius: 6px; padding: 8px 12px; color: #fff; font-size: 0.85rem; outline: none; }
+    .admin-link-input button { background: var(--accent-emerald); border: none; color: #fff; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 600; }
+
+    @media (max-width: 820px) {
+      .concept-map-builder { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Background Ornamen Kosmik & Partikel Fisika -->
   <div class="physics-bg-grid"></div>
   <div class="physics-glow-orb orb-1"></div>
   <div class="physics-glow-orb orb-2"></div>
 
-  <!-- Formula Fisika Terapung -->
-  <div class="floating-formula f-1">Δp · Δx ≥ ℏ/2</div>
-  <div class="floating-formula f-2">E = m · c²</div>
-  <div class="floating-formula f-3">λ = h / p</div>
-  <div class="floating-formula f-4">F = -k · Δx</div>
-
-  <!-- ==================== CONTAINER LOGIN FUTURISTIK ==================== -->
+  <!-- ==================== HALAMAN LOGIN ==================== -->
   <main id="login-container" class="auth-wrapper">
     <div class="auth-glass-card">
-      
-      <!-- Lencana Atas & Animasi Atom -->
       <div class="auth-header">
         <div class="atom-loader">
           <div class="electron-orbit orbit-1"></div>
@@ -693,132 +200,55 @@
           <div class="electron-orbit orbit-3"></div>
           <div class="nucleus"></div>
         </div>
-
-        <div class="quantum-badge">
-          <span class="pulse-dot"></span>
-          KURIKULUM MERDEKA • FISIKA FASE F (KELAS XI)
-        </div>
-
+        <div class="quantum-badge"><span class="pulse-dot"></span> KURIKULUM MERDEKA • FISIKA FASE F</div>
         <h1 class="glow-title">QUANTUM LMS</h1>
         <p class="subtitle">Media Pembelajaran Interaktif Berbasis Pembelajaran Mendalam</p>
       </div>
 
-      <!-- Tab Pemilihan Peran -->
       <div class="role-selector">
-        <button type="button" class="role-btn active" id="btn-tab-murid" onclick="setRole('murid')">
-          <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-          </svg>
-          Portal Murid
-        </button>
-        <button type="button" class="role-btn" id="btn-tab-guru" onclick="setRole('guru')">
-          <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="7" r="4"></circle>
-            <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"></path>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-          </svg>
-          Guru / Admin
-        </button>
+        <button type="button" class="role-btn active" id="btn-tab-murid" onclick="setRole('murid')">Portal Murid</button>
+        <button type="button" class="role-btn" id="btn-tab-guru" onclick="setRole('guru')">Guru / Admin</button>
       </div>
 
-      <!-- Form Input -->
       <form id="login-form" onsubmit="handleLogin(event)">
         <div id="error-banner" class="error-banner" style="display: none;"></div>
-
         <div class="form-group">
-          <label for="username" id="label-username">
-            <span class="label-bullet">▸</span> IDENTIFIKASI PENGGUNA
-          </label>
+          <label for="username" id="label-username">IDENTIFIKASI PENGGUNA</label>
           <div class="input-wrapper">
-            <span class="input-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="3"></circle>
-                <path d="M3 12h3m12 0h3M12 3v3m0 12v3"></path>
-              </svg>
-            </span>
-            <input 
-              type="text" 
-              id="username" 
-              placeholder="Ketik: murid" 
-              required 
-              autocomplete="username"
-            >
+            <input type="text" id="username" placeholder="Ketik: murid" required autocomplete="username">
           </div>
         </div>
-
         <div class="form-group">
-          <label for="password">
-            <span class="label-bullet">▸</span> ENKRIPSI KATA SANDI
-          </label>
+          <label for="password">KATA SANDI</label>
           <div class="input-wrapper">
-            <span class="input-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-              </svg>
-            </span>
-            <input 
-              type="password" 
-              id="password" 
-              placeholder="Masukkan password..." 
-              required 
-              autocomplete="current-password"
-            >
-            <button type="button" class="toggle-pwd" onclick="togglePasswordVisibility()" title="Lihat Sandi">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-            </button>
+            <input type="password" id="password" placeholder="Masukkan password..." required autocomplete="current-password">
+            <button type="button" class="toggle-pwd" onclick="togglePasswordVisibility()">👁️</button>
           </div>
         </div>
-
-        <button type="submit" id="btn-submit" class="btn-primary-futuristic">
-          <span class="btn-text">MASUK KE RUANG BELAJAR</span>
-          <span>→</span>
-        </button>
+        <button type="submit" class="btn-primary-futuristic">MASUK KE RUANG BELAJAR →</button>
       </form>
-
-      <div class="auth-footer">
-        <div class="physics-chips">
-          <span>Kinematika</span> • <span>Termodinamika</span> • <span>Gelombang</span>
-        </div>
-      </div>
     </div>
   </main>
 
-  <!-- ==================== MODAL PILIH IDENTITAS SISWA ==================== -->
+  <!-- ==================== MODAL PILIH 35 SISWA ==================== -->
   <div id="modal-pilih-siswa" class="modal-overlay" style="display: none;">
     <div class="modal-card">
-      <div class="modal-header">
-        <div class="modal-badge">PRESENSI KELAS DIGITAL</div>
-        <h3>Siapakah yang Sedang Belajar? 🎓</h3>
-        <p>Pilih nama lengkapmu dari daftar peserta didik Kelas XI:</p>
-      </div>
-
-      <div class="modal-body">
-        <div class="form-group">
-          <div class="select-wrapper">
-            <select id="select-nama-murid" required>
-              <option value="" disabled selected>-- Klik untuk memilih namamu --</option>
-            </select>
-          </div>
+      <div class="quantum-badge">PRESENSI DIGITAL KELAS XI</div>
+      <h3 style="font-family:'Space Grotesk'; font-size:1.3rem; margin-bottom:8px;">Siapakah yang Sedang Belajar? 🎓</h3>
+      <p style="font-size:0.86rem; color:var(--text-muted); margin-bottom:20px;">Pilih nama lengkapmu dari 35 peserta didik kelas XI:</p>
+      <div class="form-group">
+        <div class="select-wrapper">
+          <select id="select-nama-murid" required>
+            <option value="" disabled selected>-- Klik untuk memilih namamu --</option>
+          </select>
         </div>
-
-        <div id="student-error" class="error-banner" style="display: none;">
-          Silakan pilih namamu terlebih dahulu!
-        </div>
-
-        <button type="button" class="btn-primary-futuristic" onclick="konfirmasiNamaSiswa()">
-          <span>MULAI BELAJAR SEKARANG</span>
-          <span>🚀</span>
-        </button>
       </div>
+      <div id="student-error" class="error-banner" style="display: none;">Pilih namamu terlebih dahulu!</div>
+      <button type="button" class="btn-primary-futuristic" onclick="konfirmasiNamaSiswa()">MULAI BELAJAR SEKARANG 🚀</button>
     </div>
   </div>
 
-  <!-- ==================== CONTAINER DASBOR ==================== -->
+  <!-- ==================== DASBOR UTAMA ==================== -->
   <div id="dashboard-container" class="dashboard-wrapper" style="display: none;">
     <header class="dash-navbar">
       <div class="brand">
@@ -829,65 +259,333 @@
         </div>
       </div>
       <div class="user-menu">
-        <div class="user-status">
-          <span class="online-indicator"></span>
-          <span id="welcome-text">Memuat...</span>
-        </div>
+        <div><span class="online-indicator"></span><span id="welcome-text">Memuat...</span></div>
         <button class="btn-logout" onclick="handleLogout()">Keluar Sesi</button>
       </div>
     </header>
 
     <main class="dash-content">
-      <!-- Area Murid -->
-      <section id="view-murid" class="view-panel" style="display: none;">
+      
+      <!-- ================= DASBOR MURID ================= -->
+      <section id="view-murid" style="display: none;">
         <div class="hero-banner">
           <div class="hero-text">
-            <h3 id="student-greeting">Selamat Datang di Laboratorium Digital! ⚡</h3>
-            <p>Eksplorasi konsep fisika melalui investigasi fenomena alam dan simulasi interaktif.</p>
+            <h3 id="student-greeting">Selamat Datang di Portal Eksplorasi Fisika! ⚡</h3>
+            <p>Konstruksi pemahaman mendalam (*deep learning*) melalui materi kontekstual, gamifikasi & LKM PhET, peta konsep analitis, asesmen sumatif, dan refleksi penilaian metakognitif.</p>
           </div>
         </div>
-        
-        <div class="cards-grid">
-          <div class="dash-card">
-            <h4>📖 Modul Konsep Fisika</h4>
-            <p>Kinematika, Fluida, Termodinamika & Gelombang Mekanik.</p>
-            <span class="card-status">Tersedia</span>
+
+        <!-- TAB NAVIGASI 5 MENU UTAMA MURID -->
+        <div class="menu-nav-tabs">
+          <button class="menu-nav-btn active" id="tab-menu-materi" onclick="pindahMenuMurid('materi')">
+            📚 1. Materi Ajar
+          </button>
+          <button class="menu-nav-btn" id="tab-menu-formatif" onclick="pindahMenuMurid('formatif')">
+            🎮 2. Tes Formatif
+          </button>
+          <button class="menu-nav-btn" id="tab-menu-sumatif" onclick="pindahMenuMurid('sumatif')">
+            📝 3. Tes Sumatif
+          </button>
+          <button class="menu-nav-btn" id="tab-menu-peta" onclick="pindahMenuMurid('peta')">
+            🗺️ 4. Peta Konsep
+          </button>
+          <button class="menu-nav-btn" id="tab-menu-penilaian" onclick="pindahMenuMurid('penilaian')">
+            ⚖️ 5. Penilaian Diri & Teman
+          </button>
+        </div>
+
+        <!-- ================= PANEL 1: MATERI AJAR ================= -->
+        <div id="panel-materi" class="panel-section">
+          <div class="tp-bar">
+            <button class="tp-pill active" onclick="pilihTP(0)">TP 1.1: Gerak & Gaya</button>
+            <button class="tp-pill" onclick="pilihTP(1)">TP 2.1: Hukum Fluida</button>
+            <button class="tp-pill" onclick="pilihTP(2)">TP 3.1: Kalor & Termodinamika</button>
+            <button class="tp-pill" onclick="pilihTP(3)">TP 4.1: Gejala Gelombang</button>
           </div>
-          <div class="dash-card">
-            <h4>🧪 Simulasi PhET Interaktif</h4>
-            <p>Eksperimen digital dan pengujian variabel bebas terikat secara visual.</p>
-            <span class="card-status">Siap Eksplorasi</span>
+
+          <div class="module-box">
+            <span class="module-badge" id="materi-badge">TP 1.1</span>
+            <h2 class="module-title" id="materi-judul">Memuat Judul...</h2>
+            <p class="module-goal" id="materi-cp">Capaian Tujuan Pembelajaran...</p>
+            <div class="article-body" id="materi-konten"></div>
+            <div class="video-section">
+              <h4>🎬 Video Pembelajaran Kontekstual Pendukung</h4>
+              <div class="video-wrapper">
+                <iframe id="materi-video-frame" src="" allowfullscreen></iframe>
+              </div>
+            </div>
           </div>
-          <div class="dash-card">
-            <h4>✍️ Asesmen Pemahaman HOTS</h4>
-            <p>Latihan bernalar kritis tingkat tinggi dengan umpan balik langsung.</p>
-            <span class="card-status">Tantangan Baru</span>
+        </div>
+
+        <!-- ================= PANEL 2: TES FORMATIF ================= -->
+        <div id="panel-formatif" class="panel-section" style="display: none;">
+          <div class="tp-bar">
+            <button class="tp-pill active" onclick="pilihTPFormatif(0)">TP 1.1: Gerak & Gaya</button>
+            <button class="tp-pill" onclick="pilihTPFormatif(1)">TP 2.1: Hukum Fluida</button>
+            <button class="tp-pill" onclick="pilihTPFormatif(2)">TP 3.1: Kalor & Termodinamika</button>
+            <button class="tp-pill" onclick="pilihTPFormatif(3)">TP 4.1: Gejala Gelombang</button>
+          </div>
+
+          <div class="formatif-mode-toggle">
+            <button class="mode-btn active" id="btn-mode-game" onclick="gantiModeFormatif('game')">🎯 Pilihan A: Misi Gamifikasi Fisika</button>
+            <button class="mode-btn" id="btn-mode-lkm" onclick="gantiModeFormatif('lkm')">🧪 Pilihan B: LKM Eksperimen Virtual (PhET)</button>
+          </div>
+
+          <!-- Misi Game -->
+          <div id="box-game-formatif" class="game-mission-card">
+            <span class="mission-badge">MISI TANTANGAN REKAYASA & NALAR</span>
+            <h3 id="game-title" style="color:#fff; font-family:'Space Grotesk'; margin-bottom:8px;">Memuat Misi...</h3>
+            <p id="game-desc" style="color:var(--text-muted); font-size:0.92rem; line-height:1.6;"></p>
+            <div class="game-options" id="game-options-box"></div>
+            <div id="game-result-box" class="game-result"></div>
+          </div>
+
+          <!-- LKM PhET -->
+          <div id="box-lkm-formatif" style="display: none;">
+            <div class="module-box">
+              <h3 id="lkm-title" style="color:#fff; font-family:'Space Grotesk'; margin-bottom:8px;">LKM Eksperimen Virtual</h3>
+              <p id="lkm-guide" style="color:var(--text-muted); font-size:0.9rem; margin-bottom:16px;"></p>
+              <div class="phet-container">
+                <iframe id="lkm-phet-frame" src="" allowfullscreen></iframe>
+              </div>
+              <form class="lkm-form" onsubmit="simpanLKM(event)">
+                <div class="lkm-field">
+                  <label id="label-lkm-q1">1. Hasil Pengamatan Variabel:</label>
+                  <textarea id="lkm-input-1" required></textarea>
+                </div>
+                <div class="lkm-field">
+                  <label id="label-lkm-q2">2. Analisis Hubungan Konseptual:</label>
+                  <textarea id="lkm-input-2" required></textarea>
+                </div>
+                <div class="lkm-field">
+                  <label id="label-lkm-q3">3. Kesimpulan Akhir & Solusi Rekayasa:</label>
+                  <textarea id="lkm-input-3" required></textarea>
+                </div>
+                <button type="submit" class="btn-primary-futuristic" style="width: auto; padding: 10px 24px;">💾 Simpan LKM Online</button>
+                <div id="lkm-saved-alert" class="game-result" style="margin-top: 12px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #6ee7b7;">✓ LKM tersimpan di sistem!</div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= PANEL 3: TES SUMATIF ================= -->
+        <div id="panel-sumatif" class="panel-section" style="display: none;">
+          <div class="module-box">
+            <span class="module-badge">EVALUASI AKHIR PEMBELAJARAN</span>
+            <h2 class="module-title">Portal Asesmen Sumatif Fisika Fase F</h2>
+            <p class="module-goal">Kerjakan tes evaluasi akhir secara mandiri dan jujur untuk mengukur ketuntasan kompetensi bernalar kritis.</p>
+            <div class="sumatif-grid" id="sumatif-cards-container"></div>
+          </div>
+        </div>
+
+        <!-- ================= PANEL 4: PEMBUATAN PETA KONSEP ================= -->
+        <div id="panel-peta" class="panel-section" style="display: none;">
+          <div class="tp-bar">
+            <button class="tp-pill active" onclick="pilihTPPeta(0)">TP 1.1: Gerak & Gaya</button>
+            <button class="tp-pill" onclick="pilihTPPeta(1)">TP 2.1: Hukum Fluida</button>
+            <button class="tp-pill" onclick="pilihTPPeta(2)">TP 3.1: Kalor & Termodinamika</button>
+            <button class="tp-pill" onclick="pilihTPPeta(3)">TP 4.1: Gejala Gelombang</button>
+          </div>
+
+          <div class="module-box">
+            <span class="module-badge" id="peta-badge">TP 1.1</span>
+            <h2 class="module-title" id="peta-title">Peta Konsep Pembelajaran Mendalam</h2>
+            <p class="module-goal">Hubungkan konsep-konsep kunci yang telah kamu pelajari. Peta konsep ini dianalisis oleh guru untuk mendeteksi materi mana yang sudah sangat kamu kuasai atau masih perlu bimbingan.</p>
+
+            <div class="concept-map-builder">
+              <!-- Opsi A: Susun Berbasis Teks & Hubungan Logis -->
+              <div class="concept-box-half">
+                <h4>✍️ Opsi 1: Rekonstruksi Teks Struktur Konsep</h4>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:12px;">Tuliskan hierarki konsep utama, sub-konsep, dan kata hubung relasi fisisnya:</p>
+                <div class="form-group">
+                  <label>1. Konsep Sentral / Utama:</label>
+                  <input type="text" id="peta-text-utama" style="width:100%; background:#091122; border:1px solid var(--card-border); border-radius:6px; padding:10px; color:#fff;" placeholder="Contoh: Hukum Newton & Dinamika Struktur">
+                </div>
+                <div class="form-group">
+                  <label>2. Cabang Sub-Konsep & Kata Hubung (Relasi):</label>
+                  <textarea id="peta-text-cabang" style="width:100%; background:#091122; border:1px solid var(--card-border); border-radius:6px; padding:10px; color:#fff; min-height:100px; resize:vertical;" placeholder="Contoh:
+• Inersia (Hukum I) --menjelaskan ketahanan gedung saat gempa
+• F = m·a (Hukum II) --menentukan gaya dorong angin jembatan
+• Aksi-Reaksi (Hukum III) --menjadi dasar tegangan kabel penopang"></textarea>
+                </div>
+                <div class="form-group">
+                  <label>3. Konsep yang Menurutmu Paling Menantang / Belum Tuntas:</label>
+                  <input type="text" id="peta-text-kesulitan" style="width:100%; background:#091122; border:1px solid var(--card-border); border-radius:6px; padding:10px; color:#fff;" placeholder="Sebutkan rumus/konsep yang masih membingungkan...">
+                </div>
+              </div>
+
+              <!-- Opsi B: Unggah Sketsa / Foto Peta Konsep -->
+              <div class="concept-box-half">
+                <h4>🖼️ Opsi 2: Unggah Foto / Sketsa Gambar Peta Konsep</h4>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:12px;">Jika kamu menggambar peta konsep kreatif di kertas, Canva, atau MindMap, unggah fotonya di sini:</p>
+                <div class="dropzone-upload" onclick="document.getElementById('peta-file-input').click()">
+                  <div style="font-size:2rem; margin-bottom:8px;">📁</div>
+                  <div style="font-size:0.88rem; font-weight:600; color:#fff;">Klik untuk Pilih Foto Peta Konsep</div>
+                  <small style="color:var(--cyan-neon);">Mendukung format JPG, PNG, WebP</small>
+                </div>
+                <input type="file" id="peta-file-input" accept="image/*" style="display:none;" onchange="handleImageUploadPeta(event)">
+                <img id="peta-preview-img" class="preview-map-img" alt="Pratinjau Peta Konsep">
+              </div>
+            </div>
+
+            <div style="margin-top:20px; display:flex; gap:14px; align-items:center;">
+              <button class="btn-primary-futuristic" style="width:auto; padding:12px 28px;" onclick="simpanPetaKonsep()">
+                💾 Kirim Peta Konsep ke Guru
+              </button>
+              <span id="peta-saved-status" style="font-size:0.85rem; color:#6ee7b7; display:none;">✓ Peta konsep berhasil dikirim & tersimpan!</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= PANEL 5: PENILAIAN DIRI & TEMAN ================= -->
+        <div id="panel-penilaian" class="panel-section" style="display: none;">
+          <div class="eval-tabs">
+            <button class="eval-tab-btn active" id="btn-eval-diri" onclick="gantiSubPenilaian('diri')">
+              🧘 1. Penilaian Diri (Metakognisi)
+            </button>
+            <button class="eval-tab-btn" id="btn-eval-teman" onclick="gantiSubPenilaian('teman')">
+              🤝 2. Penilaian Antar Teman (Kolaborasi)
+            </button>
+          </div>
+
+          <!-- SUB-A: PENILAIAN DIRI -->
+          <div id="sub-penilaian-diri" class="module-box">
+            <span class="module-badge">REFLEKSI METAKOGNISI MANDIRI</span>
+            <h2 class="module-title">Penilaian Diri Pembelajaran Mendalam</h2>
+            <p class="module-goal">Jawablah 3 pertanyaan refleksi berikut dengan kalimat paragraf yang jujur dan mendalam untuk mengenali kekuatan dan kebutuhan belajarmu:</p>
+
+            <form onsubmit="simpanPenilaianDiri(event)">
+              <div class="lkm-field">
+                <label>a. Materi atau konsep fisika apa saja yang telah kamu pahami secara mendalam hari ini?</label>
+                <textarea id="eval-diri-a" placeholder="Ceritakan konsep yang sudah kamu kuasai, cara kerjanya, atau hubungannya dengan kehidupan sehari-hari..." required></textarea>
+              </div>
+              <div class="lkm-field">
+                <label>b. Materi atau konsep fisika apa yang masih membingungkan atau belum kamu pahami hari ini?</label>
+                <textarea id="eval-diri-b" placeholder="Jelaskan secara spesifik bagian mana yang sulit (misal: penurunan rumus, visualisasi arah gaya, atau perhitungan matematisnya)..." required></textarea>
+              </div>
+              <div class="lkm-field">
+                <label>c. Apa rencana tindakan nyata yang akan kamu lakukan untuk mengatasi kendala pada poin b?</label>
+                <textarea id="eval-diri-c" placeholder="Tuliskan rencanamu (misal: bertanya ke Pak Guru Iskandar, mengulang simulasi PhET, berdiskusi dengan teman, atau mencari referensi video)..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn-primary-futuristic" style="width:auto; padding:12px 28px;">
+                💾 Simpan Refleksi Penilaian Diri
+              </button>
+              <div id="eval-diri-alert" class="game-result" style="margin-top:12px; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.4); color:#6ee7b7;">✓ Refleksi penilaian dirimu telah dicatat oleh sistem!</div>
+            </form>
+          </div>
+
+          <!-- SUB-B: PENILAIAN ANTAR TEMAN -->
+          <div id="sub-penilaian-teman" class="module-box" style="display:none;">
+            <span class="module-badge">OBSERVASI & GOTONG ROYONG</span>
+            <h2 class="module-title">Penilaian Antar Teman (Peer Assessment)</h2>
+            <p class="module-goal">Berikan apresiasi dan evaluasi objektif terhadap teman kelompok belajarmu berdasarkan indikator pembelajaran mendalam fisika:</p>
+
+            <form onsubmit="simpanPenilaianTeman(event)">
+              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:20px;">
+                <div>
+                  <label style="font-size:0.8rem; font-weight:700; color:var(--cyan-neon); margin-bottom:6px; display:block;">PILIH TEMAN YANG KAMU NILAI:</label>
+                  <div class="select-wrapper">
+                    <select id="select-teman-dinilai" required>
+                      <option value="" disabled selected>-- Pilih salah satu dari 35 teman --</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label style="font-size:0.8rem; font-weight:700; color:var(--cyan-neon); margin-bottom:6px; display:block;">PILIH FOKUS TUJUAN PEMBELAJARAN (TP):</label>
+                  <div class="select-wrapper">
+                    <select id="select-tp-teman" required>
+                      <option value="TP 1.1">TP 1.1: Gerak dan Gaya</option>
+                      <option value="TP 2.1">TP 2.1: Hukum Fluida</option>
+                      <option value="TP 3.1">TP 3.1: Kalor & Termodinamika</option>
+                      <option value="TP 4.1">TP 4.1: Gejala Gelombang</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 4 Indikator Penilaian Antar Teman -->
+              <div class="peer-rubric-card">
+                <div class="rubric-item">
+                  <div class="rubric-title">1. Penguasaan & Kontribusi Konseptual Fisis</div>
+                  <div class="rubric-desc">Teman aktif mengemukakan argumen fisika yang logis dan membantu menjelaskan konsep saat belajar bersama.</div>
+                  <div class="rating-group">
+                    <label class="rating-label"><input type="radio" name="peer_ind_1" value="4" required> 4 - Sangat Aktif & Paham</label>
+                    <label class="rating-label"><input type="radio" name="peer_ind_1" value="3"> 3 - Cukup Aktif</label>
+                    <label class="rating-label"><input type="radio" name="peer_ind_1" value="2"> 2 - Kurang Berinisiatif</label>
+                    <label class="rating-label"><input type="radio" name="peer_ind_1" value="1"> 1 - Pasif</label>
+                  </div>
+                </div>
+
+                <div class="rubric-item">
+                  <div class="rubric-title">2. Keterampilan Investigasi Lab & LKM PhET</div>
+                  <div class="rubric-desc">Teman cermat dalam memanipulasi variabel simulasi, mengamati data, dan mencatat kesimpulan ilmiah.</div>
+                  <div class="rating-group">
+                    <label class="rating-label"><input type="radio" name="peer_ind_2" value="4" required> 4 - Sangat Teliti & Cermat</label>
+                    <label class="rating-label"><input type="radio" name="peer_ind_2" value="3"> 3 - Cukup Terampil</label>
+                    <label class="rating-label"><input type="radio" name="peer_ind_2" value="2"> 2 - Kurang Teliti</label>
+                    <label class="rating-label"><input type="radio" name="peer_ind_2" value="1"> 1 - Tidak Ikut Eksperimen</label>
+                  </div>
+                </div>
+
+                <div class="rubric-item">
+                  <div class="rubric-title">3. Kolaborasi, Komunikasi & Keterbukaan Diskusi</div>
+                  <div class="rubric-desc">Teman menghargai gagasan rekan, tidak memotong pembicaraan, dan terbuka terhadap masukan pembenaran konsep.</div>
+                  <div class="rating-group">
+                    <label class="rating-label"><input type="radio" name="peer_ind_3" value="4" required> 4 - Sangat Menghargai & Terbuka</label>
+                    <label class="rating-label"><input type="radio" name="peer_ind_3" value="3"> 3 - Cukup Kooperatif</label>
+                    <label class="rating-label"><input type="radio" name="peer_ind_3" value="2"> 2 - Kurang Mendengarkan</label>
+                    <label class="rating-label"><input type="radio" name="peer_ind_3" value="1"> 1 - Individualis</label>
+                  </div>
+                </div>
+
+                <div class="rubric-item">
+                  <div class="rubric-title">4. Sikap Pantang Menyerah & Pemecahan Masalah HOTS</div>
+                  <div class="rubric-desc">Teman antusias menyelesaikan tantangan misi fisika tanpa cepat putus asa saat menemui kerumitan hitungan.</div>
+                  <div class="rating-group">
+                    <label class="rating-label"><input type="radio" name="peer_ind_4" value="4" required> 4 - Gigih & Solutif</label>
+                    <label class="rating-label"><input type="radio" name="peer_ind_4" value="3"> 3 - Cukup Berusaha</label>
+                    <label class="rating-label"><input type="radio" name="peer_ind_4" value="2"> 2 - Mudah Mengeluh</label>
+                    <label class="rating-label"><input type="radio" name="peer_ind_4" value="1"> 1 - Tidak Ada Usaha</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="lkm-field">
+                <label>Catatan Apresiasi atau Saran Konstruktif untuk Temanmu:</label>
+                <textarea id="peer-notes" placeholder="Contoh: Terima kasih sudah sangat membantu saat analisis gaya gesek! Semoga ke depan kita lebih teliti lagi saat menghitung resultan gayanya..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn-primary-futuristic" style="width:auto; padding:12px 28px;">
+                💾 Kirim Penilaian Antar Teman
+              </button>
+              <div id="eval-teman-alert" class="game-result" style="margin-top:12px; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.4); color:#6ee7b7;">✓ Penilaian untuk rekan kelompok telah terkirim!</div>
+            </form>
           </div>
         </div>
       </section>
 
-      <!-- Area Guru -->
-      <section id="view-guru" class="view-panel" style="display: none;">
+      <!-- ================= DASBOR GURU / ADMIN ================= -->
+      <section id="view-guru" style="display: none;">
         <div class="hero-banner">
           <div class="hero-text">
-            <h3>Pusat Kendali Pengajar 🔭</h3>
-            <p>Kelola modul ajar Kurikulum Merdeka, instrumen asesmen, dan rekap capaian siswa.</p>
+            <h3>Pusat Kendali Pengajar: Pak Guru Iskandar Patue 🔭</h3>
+            <p>Kelola tautan asesmen sumatif, tinjau LKM online, pantau peta konsep siswa, dan periksa rekap penilaian diri & antar teman 35 peserta didik.</p>
           </div>
         </div>
 
-        <div class="cards-grid">
-          <div class="dash-card">
-            <h4>📊 Rekap Capaian Siswa</h4>
-            <p>Pantau hasil asesmen dari 35 siswa secara langsung.</p>
-            <span class="card-status admin-badge">Pantau Data</span>
-          </div>
-          <div class="dash-card">
-            <h4>📝 Bank Soal & Asesmen</h4>
-            <p>Susun kuis konseptual dan studi kasus fisika.</p>
-            <span class="card-status admin-badge">Kelola Soal</span>
-          </div>
+        <div class="module-box" style="margin-bottom:24px;">
+          <h3 style="color:#fff; font-family:'Space Grotesk'; margin-bottom:14px;">⚙️ Kelola Tautan Asesmen Sumatif Siswa</h3>
+          <p style="color:var(--text-muted); font-size:0.88rem; margin-bottom:16px;">Tautan ini akan langsung muncul di menu nomor 3 pada akun seluruh murid:</p>
+          <div id="admin-links-manager" style="display:flex; flex-direction:column; gap:14px;"></div>
+        </div>
+
+        <div class="module-box">
+          <h3 style="color:#fff; font-family:'Space Grotesk'; margin-bottom:14px;">📊 Informasi Penyimpanan & Rekap Data Murid</h3>
+          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.6;">Seluruh hasil pengisian <strong>LKM PhET</strong>, <strong>Peta Konsep</strong>, <strong>Penilaian Diri</strong>, dan <strong>Penilaian Antar Teman</strong> tersimpan aman di peramban murid berdasarkan identitas presensi mereka. Pada tahap integrasi basis data berikutnya, data ini dapat langsung disinkronkan otomatis ke Firebase Cloud Firestore agar bisa kamu unduh dalam format rekap tabel nilai.</p>
         </div>
       </section>
+
     </main>
   </div>
 
