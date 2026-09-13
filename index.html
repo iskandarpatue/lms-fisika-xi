@@ -121,7 +121,6 @@
     .btn-primary-futuristic:hover { background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%); transform: translateY(-1px); }
     .error-banner { background: #fff1f2; border: 1px solid #fecdd3; color: var(--accent-rose); font-size: 0.82rem; padding: 10px; border-radius: var(--radius-sm); margin-bottom: 16px; text-align: center; }
 
-    /* Modals */
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
     .modal-card { background: var(--surface-white); border: 1px solid var(--card-border); border-radius: var(--radius-lg); width: 100%; max-width: 600px; padding: 32px 26px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15); }
     .select-wrapper { position: relative; }
@@ -183,7 +182,6 @@
     .module-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: var(--blue-deep); margin-bottom: 8px; }
     .module-goal { color: var(--blue-primary); font-size: 0.9rem; font-weight: 600; margin-bottom: 18px; line-height: 1.5; }
 
-    /* Kotak IKTP */
     .iktp-container {
       background: #f0f9ff; border: 1.5px solid var(--card-border);
       border-left: 4px solid var(--blue-primary); border-radius: var(--radius-md);
@@ -198,7 +196,6 @@
     .iktp-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; color: #334155; line-height: 1.5; }
     .iktp-check { color: var(--accent-emerald); font-weight: 800; font-size: 1.1rem; line-height: 1.2; }
 
-    /* Konten Artikel */
     .article-body { line-height: 1.85; color: #334155; font-size: 0.97rem; margin-bottom: 24px; }
     .article-body h3 { color: var(--blue-deep); font-size: 1.3rem; margin: 26px 0 12px; font-family: 'Space Grotesk', sans-serif; border-bottom: 2px solid #e0f2fe; padding-bottom: 6px; }
     .article-body h4 { color: var(--blue-primary); font-size: 1.1rem; margin: 18px 0 8px; font-family: 'Space Grotesk', sans-serif; }
@@ -219,7 +216,6 @@
     .video-wrapper { position: relative; width: 100%; padding-top: 56.25%; border-radius: var(--radius-md); overflow: hidden; border: 1.5px solid var(--card-border); background: #000; box-shadow: 0 4px 14px rgba(0,0,0,0.06); }
     .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-    /* Formatif Games */
     .formatif-mode-toggle { display: flex; gap: 10px; margin-bottom: 20px; }
     .mode-btn { flex: 1; background: #ffffff; border: 1.5px solid var(--card-border); color: var(--text-dim); padding: 10px; border-radius: 8px; font-size: 0.88rem; font-weight: 700; cursor: pointer; text-align: center; }
     .mode-btn.active { background: #e0f2fe; border-color: var(--blue-primary); color: var(--blue-deep); }
@@ -231,7 +227,6 @@
     .option-btn:hover { background: #f0f9ff; border-color: var(--blue-primary); }
     .game-result { margin-top: 14px; padding: 14px; border-radius: 8px; font-size: 0.9rem; display: none; }
 
-    /* Gaya Khusus TTS & Matching Game */
     .tts-clue-item { background: #ffffff; border: 1px solid #bae6fd; border-radius: 8px; padding: 14px; margin-bottom: 12px; }
     .matching-card { border: 1.5px solid var(--card-border); border-radius: 8px; padding: 14px; background: #ffffff; cursor: pointer; transition: all 0.2s; font-size: 0.9rem; }
     .matching-card.selected { border-color: var(--blue-primary); background: #e0f2fe; font-weight: 700; }
@@ -421,29 +416,84 @@
 
     <main class="dash-content">
       
-      <!-- ================= 1. DASBOR MURID (8 MENU) ================= -->
+      <!-- ================= 1. DASBOR MURID (8 MENU BERURUTAN SESUAI PERMINTAAN) ================= -->
       <section id="view-murid" style="display: none;">
         <div class="hero-banner">
           <div class="hero-text">
             <h3 id="student-greeting">Selamat Datang di Portal Eksplorasi Fisika! ⚡</h3>
-            <p>Konstruksi pemahaman mendalam (*deep learning*) melalui materi kontekstual, simulasi PhET, kuis misi gamifikasi, remedial & pengayaan terpadu, serta tutor AI.</p>
+            <p>Konstruksi pemahaman mendalam (*deep learning*) melalui presensi harian, materi ajar kontekstual, simulasi PhET, kuis misi gamifikasi, evaluasi sumatif, serta bimbingan Tutor AI.</p>
           </div>
         </div>
 
-        <!-- 8 TAB NAVIGASI MURID -->
+        <!-- 8 TAB NAVIGASI MURID URUTAN BARU -->
         <div class="menu-nav-tabs">
-          <button class="menu-nav-btn active" id="tab-menu-materi" onclick="pindahMenuMurid('materi')">📚 1. Materi Ajar & IKTP</button>
-          <button class="menu-nav-btn" id="tab-menu-formatif" onclick="pindahMenuMurid('formatif')">🎮 2. Tes Formatif (Game & LKM)</button>
-          <button class="menu-nav-btn" id="tab-menu-sumatif" onclick="pindahMenuMurid('sumatif')">📝 3. Tes Sumatif</button>
+          <button class="menu-nav-btn active" id="tab-menu-presensi" onclick="pindahMenuMurid('presensi')">📅 1. Daftar Hadir</button>
+          <button class="menu-nav-btn" id="tab-menu-materi" onclick="pindahMenuMurid('materi')">📚 2. Materi Ajar & IKTP</button>
+          <button class="menu-nav-btn" id="tab-menu-formatif" onclick="pindahMenuMurid('formatif')">🎮 3. Tes Formatif</button>
           <button class="menu-nav-btn" id="tab-menu-peta" onclick="pindahMenuMurid('peta')">🗺️ 4. Peta Konsep</button>
           <button class="menu-nav-btn" id="tab-menu-penilaian" onclick="pindahMenuMurid('penilaian')">⚖️ 5. Penilaian Diri & Teman</button>
-          <button class="menu-nav-btn" id="tab-menu-presensi" onclick="pindahMenuMurid('presensi')">📅 6. Daftar Hadir</button>
+          <button class="menu-nav-btn" id="tab-menu-sumatif" onclick="pindahMenuMurid('sumatif')">📝 6. Tes Sumatif</button>
           <button class="menu-nav-btn" id="tab-menu-remedial" onclick="pindahMenuMurid('remedial')">🚀 7. Remedial & Pengayaan</button>
           <button class="menu-nav-btn" id="tab-menu-ai" onclick="pindahMenuMurid('ai')">🤖 8. Tutor Fisika AI</button>
         </div>
 
-        <!-- PANEL 1: MATERI AJAR & IKTP -->
-        <div id="panel-materi" class="panel-section">
+        <!-- PANEL 1: DAFTAR HADIR MURID -->
+        <div id="panel-presensi" class="panel-section">
+          <div class="module-box">
+            <span class="module-badge">PRESENSI BELAJAR FISIKA</span>
+            <h2 class="module-title">Daftar Hadir Peserta Didik</h2>
+            <p class="module-goal">Konfirmasikan kehadiranmu sebelum memulai aktivitas belajar. Kehadiran ini otomatis tercatat di jurnal pengampu guru.</p>
+            
+            <form onsubmit="simpanPresensiMurid(event)" style="background:#f8fafc; padding:22px; border-radius:var(--radius-md); border:1.5px solid var(--card-border); max-width:620px; margin-bottom:24px;">
+              <div class="lkm-field">
+                <label>Nama Lengkap Siswa:</label>
+                <input type="text" id="presensi-nama-display" readonly style="background:#e2e8f0; color:#475569;">
+              </div>
+              
+              <div class="lkm-field">
+                <label>Pilih Tanggal Presensi:</label>
+                <input type="date" id="presensi-tanggal-input" required>
+              </div>
+
+              <div class="lkm-field">
+                <label>Status Kehadiran Hari Ini:</label>
+                <div class="rating-group" style="margin-top:8px;">
+                  <label class="rating-label"><input type="radio" name="status_kehadiran" value="Hadir" checked> 🟢 Hadir (Siap Belajar)</label>
+                  <label class="rating-label"><input type="radio" name="status_kehadiran" value="Izin"> 🟡 Izin (Ada Keperluan)</label>
+                  <label class="rating-label"><input type="radio" name="status_kehadiran" value="Sakit"> 🔴 Sakit</label>
+                </div>
+              </div>
+
+              <div class="lkm-field">
+                <label>Keterangan / Kesiapan Belajar (Opsional):</label>
+                <textarea id="presensi-keterangan" placeholder="Contoh: Hadir tepat waktu, siap belajar fisika hari ini..."></textarea>
+              </div>
+
+              <button type="submit" class="btn-primary-futuristic" style="width:auto; padding:12px 28px;">
+                📅 Kirim Konfirmasi Kehadiran
+              </button>
+              <div id="presensi-alert" class="game-result" style="margin-top:12px; background:#ecfdf5; border:1px solid #a7f3d0; color:#065f46;">✓ Kehadiranmu telah berhasil tercatat di sistem!</div>
+            </form>
+
+            <h4 style="color:var(--blue-deep); font-family:'Space Grotesk'; margin-bottom:12px;">Riwayat Kehadiran Terakhirmu:</h4>
+            <div class="cyber-table-container">
+              <table class="cyber-table">
+                <thead>
+                  <tr>
+                    <th>Tanggal</th>
+                    <th>Status</th>
+                    <th>Keterangan</th>
+                    <th>Waktu Konfirmasi</th>
+                  </tr>
+                </thead>
+                <tbody id="tabel-presensi-siswa-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 2: MATERI AJAR & IKTP -->
+        <div id="panel-materi" class="panel-section" style="display: none;">
           <div class="tp-bar">
             <button class="tp-pill active" onclick="pilihTP(0)">TP 1.1: Gerak & Gaya</button>
             <button class="tp-pill" onclick="pilihTP(1)">TP 2.1: Hukum Fluida</button>
@@ -474,7 +524,7 @@
           </div>
         </div>
 
-        <!-- PANEL 2: FORMATIF -->
+        <!-- PANEL 3: FORMATIF -->
         <div id="panel-formatif" class="panel-section" style="display: none;">
           <div class="tp-bar">
             <button class="tp-pill active" onclick="pilihTPFormatif(0)">TP 1.1: Gerak & Gaya</button>
@@ -488,7 +538,6 @@
             <button class="mode-btn" id="btn-mode-lkm" onclick="gantiModeFormatif('lkm')">🧪 Pilihan B: LKM Eksperimen Virtual (PhET)</button>
           </div>
 
-          <!-- OPSI A: GAME INTERAKTIF BERVARIASI PER IKTP -->
           <div id="box-game-formatif" class="game-mission-card">
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
               <span class="mission-badge" id="game-badge-type">GAME INTERAKTIF</span>
@@ -501,13 +550,10 @@
             <h3 id="game-title" style="color:var(--blue-deep); font-family:'Space Grotesk'; margin-bottom:8px;">Memuat Tantangan Game...</h3>
             <p id="game-desc" style="color:var(--text-muted); font-size:0.94rem; line-height:1.6;"></p>
             
-            <!-- Tempat Kontainer Game Berubah Dinamis (Misi / TTS / Menjodohkan / Detektif) -->
             <div id="game-dynamic-area" style="margin-top:16px;"></div>
-            
             <div id="game-result-box" class="game-result"></div>
           </div>
 
-          <!-- OPSI B: LKM PHET -->
           <div id="box-lkm-formatif" style="display: none;">
             <div class="module-box">
               <h3 id="lkm-title" style="color:var(--blue-deep); font-family:'Space Grotesk'; margin-bottom:8px;">LKM Eksperimen Virtual</h3>
@@ -535,17 +581,7 @@
           </div>
         </div>
 
-        <!-- PANEL 3: SUMATIF -->
-        <div id="panel-sumatif" class="panel-section" style="display: none;">
-          <div class="module-box">
-            <span class="module-badge">EVALUASI AKHIR PEMBELAJARAN</span>
-            <h2 class="module-title">Portal Asesmen Sumatif Fisika Fase F</h2>
-            <p class="module-goal">Kerjakan tes evaluasi akhir secara mandiri dan jujur untuk mengukur ketuntasan kompetensi bernalar kritis.</p>
-            <div class="sumatif-grid" id="sumatif-cards-container"></div>
-          </div>
-        </div>
-
-        <!-- PANEL 4: PETA KONSEP (DENGAN PILIHAN TP DAN IKTP) -->
+        <!-- PANEL 4: PETA KONSEP -->
         <div id="panel-peta" class="panel-section" style="display: none;">
           <div class="module-box">
             <span class="module-badge">STRUKTUR KOGNITIF & DIAGNOSTIK</span>
@@ -609,7 +645,7 @@
           </div>
         </div>
 
-        <!-- PANEL 5: PENILAIAN DIRI & TEMAN (DENGAN PILIHAN TP DAN IKTP) -->
+        <!-- PANEL 5: PENILAIAN DIRI & TEMAN -->
         <div id="panel-penilaian" class="panel-section" style="display: none;">
           <div class="eval-tabs">
             <button class="eval-tab-btn active" id="btn-eval-diri" onclick="gantiSubPenilaian('diri')">🧘 1. Penilaian Diri (Metakognisi)</button>
@@ -742,58 +778,13 @@
           </div>
         </div>
 
-        <!-- PANEL 6: DAFTAR HADIR MURID -->
-        <div id="panel-presensi" class="panel-section" style="display: none;">
+        <!-- PANEL 6: TES SUMATIF -->
+        <div id="panel-sumatif" class="panel-section" style="display: none;">
           <div class="module-box">
-            <span class="module-badge">PRESENSI BELAJAR FISIKA</span>
-            <h2 class="module-title">Daftar Hadir Peserta Didik</h2>
-            <p class="module-goal">Konfirmasikan kehadiranmu sebelum memulai aktivitas belajar. Kehadiran ini otomatis tercatat di jurnal pengampu guru.</p>
-            
-            <form onsubmit="simpanPresensiMurid(event)" style="background:#f8fafc; padding:22px; border-radius:var(--radius-md); border:1.5px solid var(--card-border); max-width:620px; margin-bottom:24px;">
-              <div class="lkm-field">
-                <label>Nama Lengkap Siswa:</label>
-                <input type="text" id="presensi-nama-display" readonly style="background:#e2e8f0; color:#475569;">
-              </div>
-              
-              <div class="lkm-field">
-                <label>Pilih Tanggal Presensi:</label>
-                <input type="date" id="presensi-tanggal-input" required>
-              </div>
-
-              <div class="lkm-field">
-                <label>Status Kehadiran Hari Ini:</label>
-                <div class="rating-group" style="margin-top:8px;">
-                  <label class="rating-label"><input type="radio" name="status_kehadiran" value="Hadir" checked> 🟢 Hadir (Siap Belajar)</label>
-                  <label class="rating-label"><input type="radio" name="status_kehadiran" value="Izin"> 🟡 Izin (Ada Keperluan)</label>
-                  <label class="rating-label"><input type="radio" name="status_kehadiran" value="Sakit"> 🔴 Sakit</label>
-                </div>
-              </div>
-
-              <div class="lkm-field">
-                <label>Keterangan / Kesiapan Belajar (Opsional):</label>
-                <textarea id="presensi-keterangan" placeholder="Contoh: Hadir tepat waktu, siap belajar fisika hari ini..."></textarea>
-              </div>
-
-              <button type="submit" class="btn-primary-futuristic" style="width:auto; padding:12px 28px;">
-                📅 Kirim Konfirmasi Kehadiran
-              </button>
-              <div id="presensi-alert" class="game-result" style="margin-top:12px; background:#ecfdf5; border:1px solid #a7f3d0; color:#065f46;">✓ Kehadiranmu telah berhasil tercatat di sistem!</div>
-            </form>
-
-            <h4 style="color:var(--blue-deep); font-family:'Space Grotesk'; margin-bottom:12px;">Riwayat Kehadiran Terakhirmu:</h4>
-            <div class="cyber-table-container">
-              <table class="cyber-table">
-                <thead>
-                  <tr>
-                    <th>Tanggal</th>
-                    <th>Status</th>
-                    <th>Keterangan</th>
-                    <th>Waktu Konfirmasi</th>
-                  </tr>
-                </thead>
-                <tbody id="tabel-presensi-siswa-body"></tbody>
-              </table>
-            </div>
+            <span class="module-badge">EVALUASI AKHIR PEMBELAJARAN</span>
+            <h2 class="module-title">Portal Asesmen Sumatif Fisika Fase F</h2>
+            <p class="module-goal">Kerjakan tes evaluasi akhir secara mandiri dan jujur untuk mengukur ketuntasan kompetensi bernalar kritis.</p>
+            <div class="sumatif-grid" id="sumatif-cards-container"></div>
           </div>
         </div>
 
@@ -858,7 +849,7 @@
           </div>
         </div>
 
-        <!-- PANEL 8: TUTOR FISIKA AI MURID (CERDAS 4 TP) -->
+        <!-- PANEL 8: TUTOR FISIKA AI MURID -->
         <div id="panel-ai" class="panel-section" style="display: none;">
           <div class="module-box">
             <span class="module-badge">ASISTEN CERDAS INTERAKTIF</span>
@@ -890,7 +881,7 @@
 
       </section>
 
-      <!-- ================= 2. DASBOR GURU / ADMIN (9 MENU) ================= -->
+      <!-- ================= 2. DASBOR GURU / ADMIN ================= -->
       <section id="view-guru" style="display: none;">
         <div class="hero-banner">
           <div class="hero-text">
