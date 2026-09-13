@@ -1,10 +1,40 @@
 // =========================================================
 // LMS FISIKA KELAS XI - KURIKULUM MERDEKA (DEEP LEARNING)
-// BERKAS UTAMA: app.js (KODE LENGKAP & UTUH)
+// BERKAS UTAMA: app.js (TERINTEGRASI FIREBASE CLOUD FIRESTORE)
 // =========================================================
 
 // ---------------------------------------------------------
-// 1. BASIS DATA MATERI, IKTP, VIDEO INDONESIA, GAME, LKM, & REMEDIAL/PENGAYAAN
+// 0. KONFIGURASI FIREBASE CLOUD FIRESTORE (GANTI DENGAN KUNCI ASLI KAMU)
+// ---------------------------------------------------------
+const firebaseConfig = {
+  apiKey: "AIzaSyD9_ASC2WM2be4ujLJ_hz5l0iJyV0Qbe8I",
+  authDomain: "lms-fisika-xi.firebaseapp.com",
+  projectId: "lms-fisika-xi",
+  storageBucket: "lms-fisika-xi.firebasestorage.app",
+  messagingSenderId: "51911987806",
+  appId: "1:51911987806:web:9b557e0228d420c4ae9acf",
+  measurementId: "G-Y9FEL7KX9T"
+};
+
+let db = null;
+let isFirebaseActive = false;
+
+// Inisialisasi Firebase Otomatis
+try {
+  if (typeof firebase !== "undefined" && firebaseConfig.apiKey !== "GANTI_DENGAN_API_KEY_KAMU") {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+    isFirebaseActive = true;
+    console.log("✓ Berhasil terhubung ke Firebase Cloud Firestore!");
+  } else {
+    console.log("ℹ️ Mode Offline/Lokal aktif (Kunci Firebase belum diisi).");
+  }
+} catch (err) {
+  console.warn("Peringatan inisialisasi Firebase:", err);
+}
+
+// ---------------------------------------------------------
+// 1. BASIS DATA MATERI, IKTP, VIDEO INDONESIA, GAME, LKM, & REMEDIAL
 // ---------------------------------------------------------
 const DATABASE_TP = [
   {
@@ -103,9 +133,9 @@ const DATABASE_TP = [
         judul: "Misi 1.1.1: Detektif Posisi dan Perpindahan Lapangan",
         deskripsi: "Rafi berlari mengelilingi lapangan sekolah berbentuk persegi panjang (panjang 40 m, lebar 30 m) dari titik A ke B lalu ke C, sehingga menempuh lintasan setengah keliling. Berapakah jarak dan perpindahan kedudukan Rafi?",
         opsi: [
-          { teks: "A. Jarak = 70 meter; Perpindahan = 50 meter secara diagonal dari titik A ke C.", benar: true, alasan: "Tepat Sekali! Jarak adalah total panjang lintasan (40 m + 30 m = 70 m). Perpindahan adalah jarak garis lurus terpendek dari A ke C menggunakan dalil Pythagoras: √(40² + 30²) = 50 meter." },
-          { teks: "B. Jarak = 50 meter; Perpindahan = 70 meter.", benar: false, alasan: "Keliru. Jarak tidak boleh lebih pendek daripada perpindahan garis lurus." },
-          { teks: "C. Jarak = 70 meter; Perpindahan = 0 meter.", benar: false, alasan: "Salah. Perpindahan bernilai nol hanya jika Rafi kembali lagi ke titik awal A." }
+          { teks: "A. Jarak = 70 meter; Perpindahan = 50 meter secara diagonal dari titik A ke C.", benar: true, alasan: "Tepat Sekali! Jarak adalah total panjang lintasan (40 m + 30 m = 70 m). Perpindahan adalah garis lurus terpendek: √(40² + 30²) = 50 meter." },
+          { teks: "B. Jarak = 50 meter; Perpindahan = 70 meter.", benar: false, alasan: "Keliru. Jarak tidak boleh lebih pendek daripada perpindahan." },
+          { teks: "C. Jarak = 70 meter; Perpindahan = 0 meter.", benar: false, alasan: "Salah. Perpindahan bernilai nol jika Rafi kembali ke titik awal A." }
         ]
       },
       {
@@ -113,8 +143,8 @@ const DATABASE_TP = [
         judul: "Misi 1.1.2: Membaca Speedometer vs Kecepatan GPS",
         deskripsi: "Saat melintasi jalan tol yang berbelok-belok, jarum speedometer mobil menunjukkan angka stabil 60 km/jam. Apakah kelajuan dan kecepatan mobil tersebut sama?",
         opsi: [
-          { teks: "A. Kelajuan mobil tetap (60 km/jam), tetapi kecepatannya terus berubah karena arah geraknya berubah di setiap tikungan.", benar: true, alasan: "Hebat! Kecepatan adalah besaran vektor yang memiliki nilai dan arah. Meski kelajuannya tetap 60 km/jam, jika arah berbelok, maka kecepatannya dianggap berubah." },
-          { teks: "B. Kelajuan dan kecepatannya persis sama di setiap saat.", benar: false, alasan: "Kurang tepat. Kecepatan memperhitungkan arah gerak vektor." }
+          { teks: "A. Kelajuan mobil tetap (60 km/jam), tetapi kecepatannya terus berubah karena arah geraknya berubah di setiap tikungan.", benar: true, alasan: "Hebat! Kecepatan adalah besaran vektor. Meski kelajuannya tetap 60 km/jam, jika arah berbelok, maka kecepatannya dianggap berubah." },
+          { teks: "B. Kelajuan dan kecepatannya persis sama di setiap saat.", benar: false, alasan: "Kurang tepat. Kecepatan memperhitungkan arah vektor." }
         ]
       },
       {
@@ -122,8 +152,8 @@ const DATABASE_TP = [
         judul: "Misi 1.1.3: Tantangan Balap Karung GLB vs GLBB",
         deskripsi: "Dalam lomba balap karung, atlet A melompat dengan kecepatan konstan 2 m/s dari garis start ke finis, sedangkan atlet B melompat dari keadaan diam dengan percepatan tetap 1 m/s². Siapakah yang melaju dengan gerak GLBB?",
         opsi: [
-          { teks: "A. Atlet B, karena kecepatannya terus bertambah secara teratur setiap detik akibat percepatan konstan.", benar: true, alasan: "Sempurna! Ciri utama GLBB adalah adanya percepatan konstan (a) yang menyebabkan kecepatan bertambah teratur." },
-          { teks: "B. Atlet A, karena geraknya lurus beraturan.", benar: false, alasan: "Salah. Atlet A bergerak secara GLB (kecepatan konstan, percepatan nol)." }
+          { teks: "A. Atlet B, karena kecepatannya terus bertambah secara teratur setiap detik akibat percepatan konstan.", benar: true, alasan: "Sempurna! Ciri utama GLBB adalah adanya percepatan konstan (a)." },
+          { teks: "B. Atlet A, karena geraknya lurus beraturan.", benar: false, alasan: "Salah. Atlet A bergerak secara GLB (kecepatan konstan)." }
         ]
       },
       {
@@ -131,7 +161,7 @@ const DATABASE_TP = [
         judul: "Misi 1.1.4: Uji Keselamatan Sabuk Pengaman Mobil",
         deskripsi: "Mobil melaju kencang lalu direm mendadak karena ada kucing melintas. Mengapa tubuh penumpang terhentak keras ke depan?",
         opsi: [
-          { teks: "A. Karena tubuh memiliki kelembaman (inersia Hukum I Newton) yang ingin mempertahankan kelajuannya untuk terus melesat maju.", benar: true, alasan: "Tepat Sekali! Sabuk pengaman memberikan gaya penahan ke belakang agar tubuh tidak menghantam kaca depan mobil." },
+          { teks: "A. Karena tubuh memiliki kelembaman (inersia Hukum I Newton) yang ingin mempertahankan kelajuannya untuk terus melesat maju.", benar: true, alasan: "Tepat Sekali! Sabuk pengaman memberikan gaya penahan ke belakang agar tubuh tidak membentur kaca depan mobil." },
           { teks: "B. Karena gravitasi bumi mendadak bertambah besar saat mobil direm.", benar: false, alasan: "Salah. Gravitasi bumi selalu tetap konstan ke arah bawah." }
         ]
       }
@@ -445,7 +475,7 @@ const DATABASE_MODUL_AJAR = [
 ];
 
 // ---------------------------------------------------------
-// 3. DAFTAR 35 SISWA
+// 3. DAFTAR 35 SISWA KELAS XI
 // ---------------------------------------------------------
 const DAFTAR_SISWA = [
   { no: 1, nama: "Abel Pratama Katili", gender: "Perempuan" },
@@ -498,7 +528,7 @@ let selectedMatchingKonsep = null;
 let currentUploadedMapBase64 = "";
 
 // ---------------------------------------------------------
-// 4. INISIALISASI SAAT HALAMAN DIMUAT
+// 4. INISIALISASI SAAT HALAMAN SELESAI DIMUAT
 // ---------------------------------------------------------
 window.addEventListener("DOMContentLoaded", () => {
   isiPilihanMurid();
@@ -513,6 +543,7 @@ window.addEventListener("DOMContentLoaded", () => {
   if (gDate) gDate.value = today;
   if (jDate) jDate.value = today;
 
+  // Cek Sesi Tersimpan
   const saved = localStorage.getItem("lms_physics_session");
   if (saved) {
     try {
@@ -536,6 +567,9 @@ function isiPilihanMurid() {
   });
 }
 
+// ---------------------------------------------------------
+// 5. AUTENTIKASI LOGIN
+// ---------------------------------------------------------
 function setRole(role) {
   currentRole = role;
   const tabM = document.getElementById("btn-tab-murid");
@@ -593,7 +627,7 @@ function simpanDanBukaSesi(role, name) {
   bukaDasbor(role, name);
 }
 
-// Menampilkan Dasbor Sesuai Peran & Membuka Menu 1 (Daftar Hadir) untuk Murid
+// Menampilkan Dasbor & Membuka Menu 1 (Daftar Hadir) untuk Murid
 function bukaDasbor(role, name) {
   document.getElementById("login-container").style.display = "none";
   document.getElementById("modal-pilih-siswa").style.display = "none";
@@ -617,7 +651,7 @@ function bukaDasbor(role, name) {
     document.getElementById("view-murid").style.display = "block";
     document.getElementById("view-guru").style.display = "none";
 
-    // Inisialisasi seluruh komponen murid
+    // Inisialisasi seluruh modul
     pilihTP(0);
     pilihTPFormatif(0);
     perbaruiPilihanIKTPPeta(0);
@@ -628,7 +662,7 @@ function bukaDasbor(role, name) {
     isiDropdownTemanSebaya(name);
     muatRiwayatPresensiSiswa(name);
 
-    // Langsung buka Menu 1: Daftar Hadir sebagai layar awal murid
+    // Buka Menu 1: Daftar Hadir sebagai layar awal murid
     pindahMenuMurid('presensi');
   }
 }
@@ -649,10 +683,10 @@ function togglePasswordVisibility() {
 }
 
 // ---------------------------------------------------------
-// 5. NAVIGASI 8 MENU MURID (SESUAI URUTAN TERBARU)
+// 6. NAVIGASI 8 MENU MURID (URUTAN TERBARU)
 // ---------------------------------------------------------
 function pindahMenuMurid(menu) {
-  // Urutan menu: 1. Presensi, 2. Materi, 3. Formatif, 4. Peta, 5. Penilaian, 6. Sumatif, 7. Remedial, 8. AI
+  // Urutan: 1. Presensi, 2. Materi, 3. Formatif, 4. Peta, 5. Penilaian, 6. Sumatif, 7. Remedial, 8. AI
   const menus = ['presensi', 'materi', 'formatif', 'peta', 'penilaian', 'sumatif', 'remedial', 'ai'];
   menus.forEach(m => {
     const btn = document.getElementById(`tab-menu-${m}`);
@@ -662,7 +696,7 @@ function pindahMenuMurid(menu) {
   });
 }
 
-// MENU 1 (MURID): DAFTAR HADIR
+// MENU 1: DAFTAR HADIR (DENGAN SYNC CLOUD FIRESTORE)
 function simpanPresensiMurid(e) {
   e.preventDefault();
   const session = JSON.parse(localStorage.getItem("lms_physics_session") || "{}");
@@ -673,18 +707,28 @@ function simpanPresensiMurid(e) {
 
   if (!tanggal) { alert("Tentukan tanggal presensi!"); return; }
 
-  let listPresensi = JSON.parse(localStorage.getItem("lms_presensi_records") || "[]");
-  listPresensi = listPresensi.filter(p => !(p.siswa === siswaNama && p.tanggal === tanggal));
-
   const newRecord = {
     siswa: siswaNama,
     tanggal: tanggal,
     status: status,
     keterangan: ket || "Hadir tepat waktu",
-    waktu: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    waktu: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    timestamp: Date.now()
   };
+
+  // 1. Simpan Lokal Cache
+  let listPresensi = JSON.parse(localStorage.getItem("lms_presensi_records") || "[]");
+  listPresensi = listPresensi.filter(p => !(p.siswa === siswaNama && p.tanggal === tanggal));
   listPresensi.push(newRecord);
   localStorage.setItem("lms_presensi_records", JSON.stringify(listPresensi));
+
+  // 2. Sinkronisasi ke Cloud Firestore
+  if (isFirebaseActive && db) {
+    const docId = `${tanggal}_${siswaNama.replace(/\s+/g, '_')}`;
+    db.collection("presensi").doc(docId).set(newRecord)
+      .then(() => console.log("✓ Presensi tersinkron ke Cloud Firestore"))
+      .catch(err => console.warn("Gagal simpan cloud:", err));
+  }
 
   const alertBox = document.getElementById("presensi-alert");
   alertBox.style.display = "block";
@@ -722,7 +766,7 @@ function muatRiwayatPresensiSiswa(siswaNama) {
   });
 }
 
-// MENU 2 (MURID): MATERI & IKTP
+// MENU 2: MATERI & IKTP
 function pilihTP(index) {
   currentTPIndex = index;
   const pills = document.querySelectorAll("#panel-materi .tp-pill");
@@ -748,7 +792,7 @@ function pilihTP(index) {
   document.getElementById("materi-video-frame").src = data.videoEmbed;
 }
 
-// MENU 3 (MURID): FORMATIF (VARIASI GAME PER TP & PER IKTP)
+// MENU 3: FORMATIF (VARIASI GAME PER TP & PER IKTP)
 function pilihTPFormatif(index) {
   currentTPFormatifIndex = index;
   const pills = document.querySelectorAll("#panel-formatif .tp-pill");
@@ -756,7 +800,6 @@ function pilihTPFormatif(index) {
 
   const data = DATABASE_TP[index];
 
-  // Muat Selector IKTP untuk Game
   const selIKTP = document.getElementById("game-iktp-selector");
   selIKTP.innerHTML = "";
   data.iktp.forEach((ind, idx) => {
@@ -788,7 +831,7 @@ function gantiSubGameIKTP(iktpIdx) {
   const resBox = document.getElementById("game-result-box");
   resBox.style.display = "none";
 
-  // VARIASI GAME 1: MISI SKENARIO (TP 1.1)
+  // VARIASI 1: MISI SKENARIO (TP 1.1)
   if (data.gameType === "misi") {
     document.getElementById("game-badge-type").innerText = "MISI SKENARIO FISIKA";
     const sub = data.gameIKTP[currentSubGameIKTPIndex] || data.gameIKTP[0];
@@ -807,8 +850,7 @@ function gantiSubGameIKTP(iktpIdx) {
     });
     area.appendChild(optBox);
   }
-
-  // VARIASI GAME 2: TEKA-TEKI SILANG (TTS) INTERAKTIF (TP 2.1)
+  // VARIASI 2: TEKA-TEKI SILANG (TTS) FLUIDA (TP 2.1)
   else if (data.gameType === "tts") {
     document.getElementById("game-badge-type").innerText = "TEKA-TEKI SILANG (TTS) FLUIDA";
     const sub = data.gameIKTP[currentSubGameIKTPIndex] || data.gameIKTP[0];
@@ -831,8 +873,7 @@ function gantiSubGameIKTP(iktpIdx) {
       <button class="btn-primary-futuristic" style="width:auto; padding:10px 22px; margin-top:8px;" onclick="verifikasiTTS('${sub.kunciMendatar}', '${sub.kunciMenurun}')">Periksa Jawaban TTS 🧩</button>
     `;
   }
-
-  // VARIASI GAME 3: MENJODOHKAN (MATCHING GAME) (TP 3.1)
+  // VARIASI 3: MATCHING GAME TERMAL (TP 3.1)
   else if (data.gameType === "matching") {
     document.getElementById("game-badge-type").innerText = "GAME MENJODOHKAN KONSEP TERMAL";
     const sub = data.gameIKTP[currentSubGameIKTPIndex] || data.gameIKTP[0];
@@ -850,7 +891,6 @@ function gantiSubGameIKTP(iktpIdx) {
     });
     html += `</div><div style="display:flex; flex-direction:column; gap:10px;"><strong style="color:var(--blue-deep);">Kartu Pasangan:</strong>`;
     
-    // Acak urutan pasangan kanan
     const acak = [...sub.pasangan].sort(() => Math.random() - 0.5);
     acak.forEach((p, idx) => {
       html += `<div class="matching-card" id="match-target-${idx}" onclick="cocokkanKartuTarget(${idx}, '${p.konsep}')">🔸 ${p.cocok}</div>`;
@@ -858,8 +898,7 @@ function gantiSubGameIKTP(iktpIdx) {
     html += `</div></div>`;
     area.innerHTML = html;
   }
-
-  // VARIASI GAME 4: DETEKTIF GELOMBANG (TP 4.1)
+  // VARIASI 4: DETEKTIF GELOMBANG (TP 4.1)
   else if (data.gameType === "detektif") {
     document.getElementById("game-badge-type").innerText = "DETEKTIF GELOMBANG & BUNYI";
     const sub = data.gameIKTP[currentSubGameIKTPIndex] || data.gameIKTP[0];
@@ -880,7 +919,7 @@ function gantiSubGameIKTP(iktpIdx) {
   }
 }
 
-// Logika Validasi Game Formatif
+// Logika Validasi Game
 function verifikasiJawabanGameMisi(pilihan) {
   const resBox = document.getElementById("game-result-box");
   resBox.style.display = "block";
@@ -917,10 +956,7 @@ function pilihKartuKonsep(idx, konsepNama) {
 }
 
 function cocokkanKartuTarget(idx, targetKonsepNama) {
-  if (!selectedMatchingKonsep) {
-    alert("Klik kartu konsep di sebelah kiri terlebih dahulu!");
-    return;
-  }
+  if (!selectedMatchingKonsep) { alert("Klik kartu konsep di sebelah kiri terlebih dahulu!"); return; }
   const targetEl = document.getElementById(`match-target-${idx}`);
   const resBox = document.getElementById("game-result-box");
   resBox.style.display = "block";
@@ -951,13 +987,7 @@ function verifikasiDetektif(pilihan) {
   }
 }
 
-function gantiModeFormatif(mode) {
-  document.getElementById("btn-mode-game").classList.toggle("active", mode === 'game');
-  document.getElementById("btn-mode-lkm").classList.toggle("active", mode === 'lkm');
-  document.getElementById("box-game-formatif").style.display = mode === 'game' ? "block" : "none";
-  document.getElementById("box-lkm-formatif").style.display = mode === 'lkm' ? "block" : "none";
-}
-
+// SIMPAN LKM PHET (SYNC FIRESTORE)
 function simpanLKM(e) {
   e.preventDefault();
   const session = JSON.parse(localStorage.getItem("lms_physics_session") || "{}");
@@ -970,13 +1000,23 @@ function simpanLKM(e) {
     q1: document.getElementById("lkm-input-1").value,
     q2: document.getElementById("lkm-input-2").value,
     q3: document.getElementById("lkm-input-3").value,
-    waktu: new Date().toLocaleString()
+    waktu: new Date().toLocaleString(),
+    timestamp: Date.now()
   };
+
   localStorage.setItem(`lkm_${tpKode}_${siswaNama}`, JSON.stringify(dataLKM));
+
+  if (isFirebaseActive && db) {
+    const docId = `${tpKode}_${siswaNama.replace(/\s+/g, '_')}`;
+    db.collection("lkm").doc(docId).set(dataLKM)
+      .then(() => console.log("✓ LKM tersinkron ke Cloud Firestore"))
+      .catch(err => console.warn("Gagal simpan cloud:", err));
+  }
+
   document.getElementById("lkm-saved-alert").style.display = "block";
 }
 
-// MENU 4 (MURID): PETA KONSEP (DENGAN TP & IKTP)
+// MENU 4: PETA KONSEP (SYNC FIRESTORE)
 function perbaruiPilihanIKTPPeta(tpIndex) {
   const data = DATABASE_TP[tpIndex];
   const selIKTP = document.getElementById("peta-iktp-selector");
@@ -1048,18 +1088,26 @@ function simpanPetaKonsep() {
     cabang: document.getElementById("peta-text-cabang").value,
     kesulitan: document.getElementById("peta-text-kesulitan").value,
     gambar: currentUploadedMapBase64,
-    waktu: new Date().toLocaleString()
+    waktu: new Date().toLocaleString(),
+    timestamp: Date.now()
   };
 
   localStorage.setItem(`peta_${tpKode}_IKTP${iktpIdx}_${sName}`, JSON.stringify(dataPeta));
   localStorage.setItem(`peta_terakhir_${sName}`, JSON.stringify(dataPeta));
+
+  if (isFirebaseActive && db) {
+    const docId = `${tpKode}_IKTP${iktpIdx}_${sName.replace(/\s+/g, '_')}`;
+    db.collection("peta_konsep").doc(docId).set(dataPeta)
+      .then(() => console.log("✓ Peta Konsep tersinkron ke Cloud Firestore"))
+      .catch(err => console.warn("Gagal simpan cloud:", err));
+  }
 
   const statusEl = document.getElementById("peta-saved-status");
   statusEl.style.display = "inline";
   setTimeout(() => { statusEl.style.display = "none"; }, 4000);
 }
 
-// MENU 5 (MURID): PENILAIAN DIRI & TEMAN (DENGAN TP & IKTP)
+// MENU 5: PENILAIAN DIRI & TEMAN (SYNC FIRESTORE)
 function gantiSubPenilaian(sub) {
   document.getElementById("btn-eval-diri").classList.toggle("active", sub === 'diri');
   document.getElementById("btn-eval-teman").classList.toggle("active", sub === 'teman');
@@ -1118,10 +1166,18 @@ function simpanPenilaianDiri(e) {
     dipahami: document.getElementById("eval-diri-a").value,
     belumDipahami: document.getElementById("eval-diri-b").value,
     rencanaTindakan: document.getElementById("eval-diri-c").value,
-    waktu: new Date().toLocaleString()
+    waktu: new Date().toLocaleString(),
+    timestamp: Date.now()
   };
 
   localStorage.setItem(`eval_diri_${siswaNama}`, JSON.stringify(dataSelf));
+
+  if (isFirebaseActive && db) {
+    db.collection("penilaian_diri").doc(siswaNama.replace(/\s+/g, '_')).set(dataSelf)
+      .then(() => console.log("✓ Penilaian Diri tersinkron ke Cloud Firestore"))
+      .catch(err => console.warn("Gagal simpan cloud:", err));
+  }
+
   const alertEl = document.getElementById("eval-diri-alert");
   alertEl.style.display = "block";
   setTimeout(() => { alertEl.style.display = "none"; }, 4000);
@@ -1148,17 +1204,26 @@ function simpanPenilaianTeman(e) {
     iktp: `IKTP ${parseInt(iktpIdx) + 1}`,
     skor: { penguasaanKonsep: ind1, investigasiLab: ind2, kolaborasiDiskusi: ind3, sikapSolutif: ind4 },
     catatan: catatan,
-    waktu: new Date().toLocaleString()
+    waktu: new Date().toLocaleString(),
+    timestamp: Date.now()
   };
 
   localStorage.setItem(`eval_peer_${temanDinilai}_oleh_${penilaiNama}`, JSON.stringify(dataPeer));
+
+  if (isFirebaseActive && db) {
+    const docId = `${temanDinilai.replace(/\s+/g, '_')}_oleh_${penilaiNama.replace(/\s+/g, '_')}`;
+    db.collection("penilaian_teman").doc(docId).set(dataPeer)
+      .then(() => console.log("✓ Penilaian Teman tersinkron ke Cloud Firestore"))
+      .catch(err => console.warn("Gagal simpan cloud:", err));
+  }
+
   const alertEl = document.getElementById("eval-teman-alert");
   alertEl.style.display = "block";
   e.target.reset();
   setTimeout(() => { alertEl.style.display = "none"; }, 4000);
 }
 
-// MENU 6 (MURID): TES SUMATIF
+// MENU 6: TES SUMATIF
 function muatLinkSumatif() {
   const savedLinks = localStorage.getItem("lms_sumatif_links");
   if (savedLinks) {
@@ -1188,7 +1253,7 @@ function renderSumatifCards() {
   });
 }
 
-// MENU 7 (MURID): REMEDIAL & PENGAYAAN (DENGAN TP & IKTP)
+// MENU 7: REMEDIAL & PENGAYAAN (SYNC FIRESTORE)
 function perbaruiIKTPRemedial(tpIdx) {
   const sel = document.getElementById("remedial-iktp-selector");
   sel.innerHTML = "";
@@ -1237,10 +1302,17 @@ function simpanJawabanRemedial() {
   const iktpIdx = document.getElementById("remedial-iktp-selector").value;
   const tpKode = DATABASE_TP[tpIdx].kode;
 
-  const data = { siswa: sName, tp: tpKode, iktp: `IKTP ${parseInt(iktpIdx) + 1}`, tipe: "Remedial", jawaban: ans, waktu: new Date().toLocaleString() };
+  const data = { siswa: sName, tp: tpKode, iktp: `IKTP ${parseInt(iktpIdx) + 1}`, tipe: "Remedial", jawaban: ans, waktu: new Date().toLocaleString(), timestamp: Date.now() };
   localStorage.setItem(`remedial_${tpKode}_IKTP${iktpIdx}_${sName}`, JSON.stringify(data));
   localStorage.setItem(`remedial_terakhir_${sName}`, JSON.stringify(data));
-  
+
+  if (isFirebaseActive && db) {
+    const docId = `remedial_${tpKode}_IKTP${iktpIdx}_${sName.replace(/\s+/g, '_')}`;
+    db.collection("remedial_pengayaan").doc(docId).set(data)
+      .then(() => console.log("✓ Remedial tersinkron ke Cloud Firestore"))
+      .catch(err => console.warn("Gagal simpan cloud:", err));
+  }
+
   const alertEl = document.getElementById("remedial-alert");
   alertEl.style.display = "block";
   setTimeout(() => { alertEl.style.display = "none"; }, 4000);
@@ -1256,16 +1328,23 @@ function simpanJawabanPengayaan() {
   const iktpIdx = document.getElementById("remedial-iktp-selector").value;
   const tpKode = DATABASE_TP[tpIdx].kode;
 
-  const data = { siswa: sName, tp: tpKode, iktp: `IKTP ${parseInt(iktpIdx) + 1}`, tipe: "Pengayaan", jawaban: ans, waktu: new Date().toLocaleString() };
+  const data = { siswa: sName, tp: tpKode, iktp: `IKTP ${parseInt(iktpIdx) + 1}`, tipe: "Pengayaan", jawaban: ans, waktu: new Date().toLocaleString(), timestamp: Date.now() };
   localStorage.setItem(`pengayaan_${tpKode}_IKTP${iktpIdx}_${sName}`, JSON.stringify(data));
   localStorage.setItem(`pengayaan_terakhir_${sName}`, JSON.stringify(data));
+
+  if (isFirebaseActive && db) {
+    const docId = `pengayaan_${tpKode}_IKTP${iktpIdx}_${sName.replace(/\s+/g, '_')}`;
+    db.collection("remedial_pengayaan").doc(docId).set(data)
+      .then(() => console.log("✓ Pengayaan tersinkron ke Cloud Firestore"))
+      .catch(err => console.warn("Gagal simpan cloud:", err));
+  }
 
   const alertEl = document.getElementById("pengayaan-alert");
   alertEl.style.display = "block";
   setTimeout(() => { alertEl.style.display = "none"; }, 4000);
 }
 
-// MENU 8 (MURID): TUTOR FISIKA AI MURID
+// MENU 8: TUTOR FISIKA AI MURID
 function tanyaAIPrompt(teks) {
   document.getElementById("ai-user-input").value = teks;
   handleKirimPesanAI(new Event('submit'));
@@ -1293,7 +1372,7 @@ function handleKirimPesanAI(e) {
     botMsgEl.innerHTML = `<strong>Tutor AI:</strong> ${hasilkanJawabanAIFisika(userText)}`;
     container.appendChild(botMsgEl);
     container.scrollTop = container.scrollHeight;
-  }, 500);
+  }, 450);
 }
 
 function hasilkanJawabanAIFisika(pertanyaan) {
@@ -1344,7 +1423,7 @@ function hasilkanJawabanAIFisika(pertanyaan) {
 }
 
 // ---------------------------------------------------------
-// 6. LOGIKA DASBOR GURU (9 SUB-TAB)
+// 7. LOGIKA DASBOR GURU (9 SUB-TAB)
 // ---------------------------------------------------------
 function pindahTabGuru(tab) {
   const tabs = ['kehadiran', 'jurnal', 'modul', 'remedial', 'ai', 'lkm', 'peta', 'eval', 'links'];
@@ -1367,51 +1446,77 @@ function pindahTabGuru(tab) {
   }
 }
 
-// 1. REKAP PRESENSI TERSINKRON
+// 1. REKAP PRESENSI TERSINKRON (REAL-TIME CLOUD)
 function renderTabelGuruPresensi() {
   const tbody = document.getElementById("tabel-guru-presensi-body");
   if (!tbody) return;
   tbody.innerHTML = "";
 
   const tanggalFilter = document.getElementById("guru-presensi-tanggal").value || new Date().toISOString().slice(0, 10);
-  const listPresensi = JSON.parse(localStorage.getItem("lms_presensi_records") || "[]");
 
-  let countHadir = 0, countIzin = 0, countSakit = 0, countAlpa = 0;
+  // Fungsi Pembantu Render Baris
+  function renderRows(listPresensi) {
+    tbody.innerHTML = "";
+    let countHadir = 0, countIzin = 0, countSakit = 0, countAlpa = 0;
 
-  DAFTAR_SISWA.forEach(s => {
-    const tr = document.createElement("tr");
-    const kodeG = s.gender === "Laki-laki" ? "L" : "P";
-    const record = listPresensi.find(p => p.siswa === s.nama && p.tanggal === tanggalFilter);
+    DAFTAR_SISWA.forEach(s => {
+      const tr = document.createElement("tr");
+      const kodeG = s.gender === "Laki-laki" ? "L" : "P";
+      const record = listPresensi.find(p => p.siswa === s.nama && p.tanggal === tanggalFilter);
 
-    let statusHTML = "", ketHTML = "-", waktuHTML = "-";
+      let statusHTML = "", ketHTML = "-", waktuHTML = "-";
 
-    if (record) {
-      if (record.status === "Hadir") { countHadir++; statusHTML = `<span class="status-badge badge-done">🟢 Hadir</span>`; }
-      else if (record.status === "Izin") { countIzin++; statusHTML = `<span class="status-badge badge-izin">🟡 Izin</span>`; }
-      else if (record.status === "Sakit") { countSakit++; statusHTML = `<span class="status-badge badge-sakit">🔴 Sakit</span>`; }
-      ketHTML = record.keterangan || "-";
-      waktuHTML = record.waktu || "-";
-    } else {
-      countAlpa++;
-      statusHTML = `<span class="status-badge badge-undone">⚪ Belum Konfirmasi</span>`;
-    }
+      if (record) {
+        if (record.status === "Hadir") { countHadir++; statusHTML = `<span class="status-badge badge-done">🟢 Hadir</span>`; }
+        else if (record.status === "Izin") { countIzin++; statusHTML = `<span class="status-badge badge-izin">🟡 Izin</span>`; }
+        else if (record.status === "Sakit") { countSakit++; statusHTML = `<span class="status-badge badge-sakit">🔴 Sakit</span>`; }
+        ketHTML = record.keterangan || "-";
+        waktuHTML = record.waktu || "-";
+      } else {
+        countAlpa++;
+        statusHTML = `<span class="status-badge badge-undone">⚪ Belum Konfirmasi</span>`;
+      }
 
-    tr.innerHTML = `
-      <td style="color:#0284c7; font-weight:700;">${s.no}</td>
-      <td style="font-weight:600;">${s.nama}</td>
-      <td><span style="opacity:0.75;">${kodeG}</span></td>
-      <td>${statusHTML}</td>
-      <td style="font-size:0.86rem; max-width:200px; overflow:hidden; text-overflow:ellipsis;">${ketHTML}</td>
-      <td style="font-size:0.84rem; color:#64748b;">${waktuHTML}</td>
-      <td><button class="btn-action-view" onclick="ubahManualPresensi('${s.nama}', '${tanggalFilter}')">Ubah</button></td>
-    `;
-    tbody.appendChild(tr);
-  });
+      tr.innerHTML = `
+        <td style="color:#0284c7; font-weight:700;">${s.no}</td>
+        <td style="font-weight:600;">${s.nama}</td>
+        <td><span style="opacity:0.75;">${kodeG}</span></td>
+        <td>${statusHTML}</td>
+        <td style="font-size:0.86rem; max-width:200px; overflow:hidden; text-overflow:ellipsis;">${ketHTML}</td>
+        <td style="font-size:0.84rem; color:#64748b;">${waktuHTML}</td>
+        <td><button class="btn-action-view" onclick="ubahManualPresensi('${s.nama}', '${tanggalFilter}')">Ubah</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
 
-  document.getElementById("stat-hadir-count").innerText = countHadir;
-  document.getElementById("stat-izin-count").innerText = countIzin;
-  document.getElementById("stat-sakit-count").innerText = countSakit;
-  document.getElementById("stat-alpa-count").innerText = countAlpa;
+    document.getElementById("stat-hadir-count").innerText = countHadir;
+    document.getElementById("stat-izin-count").innerText = countIzin;
+    document.getElementById("stat-sakit-count").innerText = countSakit;
+    document.getElementById("stat-alpa-count").innerText = countAlpa;
+  }
+
+  // Tarik dari Cloud Firestore jika aktif
+  if (isFirebaseActive && db) {
+    db.collection("presensi").where("tanggal", "==", tanggalFilter).get()
+      .then(snapshot => {
+        let cloudList = [];
+        snapshot.forEach(doc => cloudList.push(doc.data()));
+        if (cloudList.length > 0) {
+          renderRows(cloudList);
+          return;
+        }
+        // Fallback ke lokal jika kosong
+        const localList = JSON.parse(localStorage.getItem("lms_presensi_records") || "[]");
+        renderRows(localList);
+      })
+      .catch(() => {
+        const localList = JSON.parse(localStorage.getItem("lms_presensi_records") || "[]");
+        renderRows(localList);
+      });
+  } else {
+    const localList = JSON.parse(localStorage.getItem("lms_presensi_records") || "[]");
+    renderRows(localList);
+  }
 }
 
 function ubahManualPresensi(namaSiswa, tanggal) {
@@ -1423,19 +1528,26 @@ function ubahManualPresensi(namaSiswa, tanggal) {
   listPresensi = listPresensi.filter(p => !(p.siswa === namaSiswa && p.tanggal === tanggal));
 
   if (["Hadir", "Izin", "Sakit"].includes(clean)) {
-    listPresensi.push({
+    const record = {
       siswa: namaSiswa,
       tanggal: tanggal,
       status: clean,
       keterangan: "Diverifikasi Manual oleh Guru",
-      waktu: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    });
+      waktu: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      timestamp: Date.now()
+    };
+    listPresensi.push(record);
+
+    if (isFirebaseActive && db) {
+      const docId = `${tanggal}_${namaSiswa.replace(/\s+/g, '_')}`;
+      db.collection("presensi").doc(docId).set(record);
+    }
   }
   localStorage.setItem("lms_presensi_records", JSON.stringify(listPresensi));
   renderTabelGuruPresensi();
 }
 
-// 2. JURNAL HARIAN GURU
+// 2. JURNAL HARIAN GURU (SYNC FIRESTORE)
 function simpanJurnalGuru(e) {
   e.preventDefault();
   const tanggal = document.getElementById("jurnal-tanggal").value;
@@ -1444,14 +1556,20 @@ function simpanJurnalGuru(e) {
   const aktivitas = document.getElementById("jurnal-aktivitas").value.trim();
   const catatan = document.getElementById("jurnal-catatan").value.trim();
 
-  const listJurnal = JSON.parse(localStorage.getItem("lms_jurnal_guru") || "[]");
   const newJurnal = {
     id: Date.now(), tanggal, jam, tp, aktivitas, catatan,
     waktuInput: new Date().toLocaleString()
   };
 
+  const listJurnal = JSON.parse(localStorage.getItem("lms_jurnal_guru") || "[]");
   listJurnal.unshift(newJurnal);
   localStorage.setItem("lms_jurnal_guru", JSON.stringify(listJurnal));
+
+  if (isFirebaseActive && db) {
+    db.collection("jurnal_guru").doc(newJurnal.id.toString()).set(newJurnal)
+      .then(() => console.log("✓ Jurnal tersinkron ke Cloud Firestore"))
+      .catch(err => console.warn("Gagal simpan cloud:", err));
+  }
 
   alert("✓ Lembar Jurnal Mengajar Berhasil Disimpan!");
   e.target.reset();
@@ -1464,27 +1582,41 @@ function renderTabelGuruJurnal() {
   if (!tbody) return;
   tbody.innerHTML = "";
 
-  const listJurnal = JSON.parse(localStorage.getItem("lms_jurnal_guru") || "[]");
-  if (listJurnal.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; opacity:0.6; padding:20px;">Belum ada rekaman jurnal mengajar. Silakan isi form di atas.</td></tr>`;
-    return;
+  function renderRows(listJurnal) {
+    tbody.innerHTML = "";
+    if (listJurnal.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; opacity:0.6; padding:20px;">Belum ada rekaman jurnal mengajar. Silakan isi form di atas.</td></tr>`;
+      return;
+    }
+    listJurnal.forEach(j => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td style="color:#0284c7; font-weight:700; white-space:nowrap;">${j.tanggal}</td>
+        <td style="white-space:nowrap;">${j.jam}</td>
+        <td><span class="status-badge badge-done">${j.tp}</span></td>
+        <td style="max-width:260px; font-size:0.86rem; line-height:1.5;">${j.aktivitas}</td>
+        <td style="max-width:240px; font-size:0.86rem; color:#b45309;">${j.catatan}</td>
+        <td style="white-space:nowrap;">
+          <button class="btn-action-view" onclick="bukaModalDetailJurnal(${j.id})">Tinjau</button>
+          <button class="btn-action-view" style="border-color:#fca5a5; color:#e11d48; margin-left:4px;" onclick="hapusJurnal(${j.id})">Hapus</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
   }
 
-  listJurnal.forEach(j => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td style="color:#0284c7; font-weight:700; white-space:nowrap;">${j.tanggal}</td>
-      <td style="white-space:nowrap;">${j.jam}</td>
-      <td><span class="status-badge badge-done">${j.tp}</span></td>
-      <td style="max-width:260px; font-size:0.86rem; line-height:1.5;">${j.aktivitas}</td>
-      <td style="max-width:240px; font-size:0.86rem; color:#b45309;">${j.catatan}</td>
-      <td style="white-space:nowrap;">
-        <button class="btn-action-view" onclick="bukaModalDetailJurnal(${j.id})">Tinjau</button>
-        <button class="btn-action-view" style="border-color:#fca5a5; color:#e11d48; margin-left:4px;" onclick="hapusJurnal(${j.id})">Hapus</button>
-      </td>
-    `;
-    tbody.appendChild(tr);
-  });
+  if (isFirebaseActive && db) {
+    db.collection("jurnal_guru").orderBy("id", "desc").get()
+      .then(snapshot => {
+        let cloudList = [];
+        snapshot.forEach(doc => cloudList.push(doc.data()));
+        if (cloudList.length > 0) { renderRows(cloudList); return; }
+        renderRows(JSON.parse(localStorage.getItem("lms_jurnal_guru") || "[]"));
+      })
+      .catch(() => renderRows(JSON.parse(localStorage.getItem("lms_jurnal_guru") || "[]")));
+  } else {
+    renderRows(JSON.parse(localStorage.getItem("lms_jurnal_guru") || "[]"));
+  }
 }
 
 function bukaModalDetailJurnal(id) {
@@ -1514,6 +1646,10 @@ function hapusJurnal(id) {
   let listJurnal = JSON.parse(localStorage.getItem("lms_jurnal_guru") || "[]");
   listJurnal = listJurnal.filter(j => j.id !== id);
   localStorage.setItem("lms_jurnal_guru", JSON.stringify(listJurnal));
+
+  if (isFirebaseActive && db) {
+    db.collection("jurnal_guru").doc(id.toString()).delete();
+  }
   renderTabelGuruJurnal();
 }
 
