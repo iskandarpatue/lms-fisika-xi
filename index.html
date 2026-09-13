@@ -1018,12 +1018,17 @@
               <div>
                 <label style="font-size:0.75rem; font-weight:700; color:var(--blue-deep); display:block; margin-bottom:6px;">FOKUS TUJUAN PEMBELAJARAN (TP):</label>
                 <div class="select-wrapper">
-                  <select id="jurnal-tp" required>
+                  <select id="jurnal-tp" onchange="toggleJurnalTPLainnya(this.value)" required>
                     <option value="TP 1.1">TP 1.1: Gerak dan Gaya</option>
                     <option value="TP 2.1">TP 2.1: Hukum Fluida</option>
                     <option value="TP 3.1">TP 3.1: Kalor & Termodinamika</option>
                     <option value="TP 4.1">TP 4.1: Gejala Gelombang</option>
+                    <option value="Lainnya">Lainnya (Ketik Manual...)</option>
                   </select>
+                </div>
+                <!-- Kotak input otomatis muncul jika memilih 'Lainnya' -->
+                <div id="jurnal-tp-lainnya-box" style="display:none; margin-top:8px;">
+                  <input type="text" id="jurnal-tp-custom" placeholder="Ketik topik / kegiatan / agenda lain..." style="width:100%; background:#fff; border:1.5px solid #cbd5e1; border-radius:6px; padding:9px 12px; color:var(--text-main); font-size:0.86rem; outline:none;">
                 </div>
               </div>
             </div>
