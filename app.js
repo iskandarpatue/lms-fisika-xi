@@ -1,6 +1,6 @@
 // =========================================================
 // LMS FISIKA KELAS XI - KURIKULUM MERDEKA (DEEP LEARNING)
-// BERKAS UTAMA: app.js (VERSI LENGKAP & UTUH)
+// BERKAS UTAMA: app.js (KODE LENGKAP & UTUH)
 // =========================================================
 
 // ---------------------------------------------------------
@@ -95,7 +95,6 @@ const DATABASE_TP = [
       <h4>C. Hukum III Newton (Aksi - Reaksi): F_aksi = -F_reaksi</h4>
       <p>Ketika kamu memberikan dorongan pada suatu benda, benda itu akan memberikan dorongan balik yang sama besar tetapi berlawanan arah. Contoh: saat kamu mendayung perahu, dayung mendorong air ke belakang (Aksi), dan air mendorong perahu melaju ke depan (Reaksi).</p>
     `,
-    // Video Bahasa Indonesia Konsep Kinematika Gerak Lurus SMA
     videoEmbed: "https://www.youtube-nocookie.com/embed/gybugbMsgMw",
     gameType: "misi",
     gameIKTP: [
@@ -181,7 +180,6 @@ const DATABASE_TP = [
       <h3>3. Hukum Archimedes & Asas Bernoulli</h3>
       <p>Benda mendapat gaya apung ke atas sebesar berat zat cair yang dipindahkan. Kapal baja terapung karena memiliki lambung berongga udara yang membuat massa jenis rata-ratanya lebih kecil dari air laut. Pada pesawat terbang, udara mengalir lebih cepat di atas sayap melengkung, menurunkan tekanan di bagian atas sehingga sayap terangkat naik (Asas Bernoulli).</p>
     `,
-    // Video Bahasa Indonesia Fluida Statis Kelas XI SMA Kurikulum Merdeka
     videoEmbed: "https://www.youtube-nocookie.com/embed/Z50f2KBeGnA",
     gameType: "tts",
     gameIKTP: [
@@ -259,7 +257,6 @@ const DATABASE_TP = [
       <h3>2. Hukum Termodinamika & Efek Rumah Kaca</h3>
       <p>Hukum I Termodinamika (<strong>ΔU = Q - W</strong>) membuktikan bahwa energi panas dapat diubah menjadi kerja mekanis gerak. Namun, Hukum II Termodinamika menegaskan bahwa kalor secara alami hanya mengalir dari suhu tinggi ke rendah. Pada fenomena pemanasan global, gas CO₂ dan metana di atmosfer menahan radiasi inframerah dari bumi, memerangkap panas dan menaikkan suhu global.</p>
     `,
-    // Video Bahasa Indonesia Termodinamika SMA Kelas 11
     videoEmbed: "https://www.youtube-nocookie.com/embed/Rwpu81XmijM",
     gameType: "matching",
     gameIKTP: [
@@ -341,7 +338,6 @@ const DATABASE_TP = [
       <h3>2. Rumus Sakti v = λ × f dan Efek Doppler</h3>
       <p>Semua gelombang memenuhi rumus <strong>v = λ × f</strong>. Ketika mobil ambulans melaju mendekat ke arahmu, nadanya terdengar melengking tinggi karena gelombangnya terdesak memadat (Efek Doppler), dan saat menjauh nadanya berubah menjadi lebih berat.</p>
     `,
-    // Video Bahasa Indonesia Gelombang Mekanik SMA Kelas 11
     videoEmbed: "https://www.youtube-nocookie.com/embed/ztJXWeC9-H8",
     gameType: "detektif",
     gameIKTP: [
@@ -407,7 +403,7 @@ const DATABASE_TP = [
 ];
 
 // ---------------------------------------------------------
-// 2. ARSIP MODUL AJAR / RPP
+// 2. ARSIP MODUL AJAR / RPP GURU
 // ---------------------------------------------------------
 const DATABASE_MODUL_AJAR = [
   {
@@ -597,6 +593,7 @@ function simpanDanBukaSesi(role, name) {
   bukaDasbor(role, name);
 }
 
+// Menampilkan Dasbor Sesuai Peran & Membuka Menu 1 (Daftar Hadir) untuk Murid
 function bukaDasbor(role, name) {
   document.getElementById("login-container").style.display = "none";
   document.getElementById("modal-pilih-siswa").style.display = "none";
@@ -620,6 +617,7 @@ function bukaDasbor(role, name) {
     document.getElementById("view-murid").style.display = "block";
     document.getElementById("view-guru").style.display = "none";
 
+    // Inisialisasi seluruh komponen murid
     pilihTP(0);
     pilihTPFormatif(0);
     perbaruiPilihanIKTPPeta(0);
@@ -629,6 +627,9 @@ function bukaDasbor(role, name) {
     renderSumatifCards();
     isiDropdownTemanSebaya(name);
     muatRiwayatPresensiSiswa(name);
+
+    // Langsung buka Menu 1: Daftar Hadir sebagai layar awal murid
+    pindahMenuMurid('presensi');
   }
 }
 
@@ -648,10 +649,11 @@ function togglePasswordVisibility() {
 }
 
 // ---------------------------------------------------------
-// 5. NAVIGASI 8 MENU MURID
+// 5. NAVIGASI 8 MENU MURID (SESUAI URUTAN TERBARU)
 // ---------------------------------------------------------
 function pindahMenuMurid(menu) {
-  const menus = ['materi', 'formatif', 'sumatif', 'peta', 'penilaian', 'presensi', 'remedial', 'ai'];
+  // Urutan menu: 1. Presensi, 2. Materi, 3. Formatif, 4. Peta, 5. Penilaian, 6. Sumatif, 7. Remedial, 8. AI
+  const menus = ['presensi', 'materi', 'formatif', 'peta', 'penilaian', 'sumatif', 'remedial', 'ai'];
   menus.forEach(m => {
     const btn = document.getElementById(`tab-menu-${m}`);
     const panel = document.getElementById(`panel-${m}`);
@@ -660,7 +662,67 @@ function pindahMenuMurid(menu) {
   });
 }
 
-// MENU 1: MATERI & IKTP
+// MENU 1 (MURID): DAFTAR HADIR
+function simpanPresensiMurid(e) {
+  e.preventDefault();
+  const session = JSON.parse(localStorage.getItem("lms_physics_session") || "{}");
+  const siswaNama = session.name || "Siswa";
+  const tanggal = document.getElementById("presensi-tanggal-input").value;
+  const status = document.querySelector('input[name="status_kehadiran"]:checked')?.value || "Hadir";
+  const ket = document.getElementById("presensi-keterangan").value.trim();
+
+  if (!tanggal) { alert("Tentukan tanggal presensi!"); return; }
+
+  let listPresensi = JSON.parse(localStorage.getItem("lms_presensi_records") || "[]");
+  listPresensi = listPresensi.filter(p => !(p.siswa === siswaNama && p.tanggal === tanggal));
+
+  const newRecord = {
+    siswa: siswaNama,
+    tanggal: tanggal,
+    status: status,
+    keterangan: ket || "Hadir tepat waktu",
+    waktu: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  };
+  listPresensi.push(newRecord);
+  localStorage.setItem("lms_presensi_records", JSON.stringify(listPresensi));
+
+  const alertBox = document.getElementById("presensi-alert");
+  alertBox.style.display = "block";
+  setTimeout(() => { alertBox.style.display = "none"; }, 4000);
+
+  muatRiwayatPresensiSiswa(siswaNama);
+}
+
+function muatRiwayatPresensiSiswa(siswaNama) {
+  const tbody = document.getElementById("tabel-presensi-siswa-body");
+  if (!tbody) return;
+  tbody.innerHTML = "";
+
+  const listPresensi = JSON.parse(localStorage.getItem("lms_presensi_records") || "[]");
+  const riwayat = listPresensi.filter(p => p.siswa === siswaNama).reverse();
+
+  if (riwayat.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; opacity:0.6; padding:16px;">Belum ada riwayat kehadiran tercatat.</td></tr>`;
+    return;
+  }
+
+  riwayat.forEach(r => {
+    const tr = document.createElement("tr");
+    let badgeClass = "badge-done";
+    if (r.status === "Izin") badgeClass = "badge-izin";
+    if (r.status === "Sakit") badgeClass = "badge-sakit";
+
+    tr.innerHTML = `
+      <td style="color:#0284c7; font-weight:700;">${r.tanggal}</td>
+      <td><span class="status-badge ${badgeClass}">${r.status}</span></td>
+      <td>${r.keterangan || '-'}</td>
+      <td style="color:#64748b;">${r.waktu}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// MENU 2 (MURID): MATERI & IKTP
 function pilihTP(index) {
   currentTPIndex = index;
   const pills = document.querySelectorAll("#panel-materi .tp-pill");
@@ -686,7 +748,7 @@ function pilihTP(index) {
   document.getElementById("materi-video-frame").src = data.videoEmbed;
 }
 
-// MENU 2: FORMATIF (VARIASI GAME PER TP & PER IKTP)
+// MENU 3 (MURID): FORMATIF (VARIASI GAME PER TP & PER IKTP)
 function pilihTPFormatif(index) {
   currentTPFormatifIndex = index;
   const pills = document.querySelectorAll("#panel-formatif .tp-pill");
@@ -788,7 +850,7 @@ function gantiSubGameIKTP(iktpIdx) {
     });
     html += `</div><div style="display:flex; flex-direction:column; gap:10px;"><strong style="color:var(--blue-deep);">Kartu Pasangan:</strong>`;
     
-    // Acak pasangan kanan
+    // Acak urutan pasangan kanan
     const acak = [...sub.pasangan].sort(() => Math.random() - 0.5);
     acak.forEach((p, idx) => {
       html += `<div class="matching-card" id="match-target-${idx}" onclick="cocokkanKartuTarget(${idx}, '${p.konsep}')">🔸 ${p.cocok}</div>`;
@@ -818,7 +880,7 @@ function gantiSubGameIKTP(iktpIdx) {
   }
 }
 
-// Logika Validasi Game
+// Logika Validasi Game Formatif
 function verifikasiJawabanGameMisi(pilihan) {
   const resBox = document.getElementById("game-result-box");
   resBox.style.display = "block";
@@ -914,37 +976,7 @@ function simpanLKM(e) {
   document.getElementById("lkm-saved-alert").style.display = "block";
 }
 
-// MENU 3: SUMATIF
-function muatLinkSumatif() {
-  const savedLinks = localStorage.getItem("lms_sumatif_links");
-  if (savedLinks) {
-    try {
-      const links = JSON.parse(savedLinks);
-      DATABASE_TP.forEach((tp, idx) => { if (links[idx]) tp.defaultLinkUjian = links[idx]; });
-    } catch (e) {}
-  }
-}
-
-function renderSumatifCards() {
-  const container = document.getElementById("sumatif-cards-container");
-  if (!container) return;
-  container.innerHTML = "";
-  DATABASE_TP.forEach(tp => {
-    const card = document.createElement("div");
-    card.className = "sumatif-card";
-    card.innerHTML = `
-      <div>
-        <span class="module-badge">${tp.kode}</span>
-        <h4>Asesmen Sumatif: ${tp.nama}</h4>
-        <p style="color:#475569; font-size:0.88rem; line-height:1.5;">${tp.cp}</p>
-      </div>
-      <a href="${tp.defaultLinkUjian}" target="_blank" class="link-box-btn">Buka Link Soal Ujian ↗</a>
-    `;
-    container.appendChild(card);
-  });
-}
-
-// MENU 4: PETA KONSEP (DENGAN SELECTOR TP & IKTP)
+// MENU 4 (MURID): PETA KONSEP (DENGAN TP & IKTP)
 function perbaruiPilihanIKTPPeta(tpIndex) {
   const data = DATABASE_TP[tpIndex];
   const selIKTP = document.getElementById("peta-iktp-selector");
@@ -1027,7 +1059,7 @@ function simpanPetaKonsep() {
   setTimeout(() => { statusEl.style.display = "none"; }, 4000);
 }
 
-// MENU 5: PENILAIAN DIRI & TEMAN (DENGAN TP & IKTP)
+// MENU 5 (MURID): PENILAIAN DIRI & TEMAN (DENGAN TP & IKTP)
 function gantiSubPenilaian(sub) {
   document.getElementById("btn-eval-diri").classList.toggle("active", sub === 'diri');
   document.getElementById("btn-eval-teman").classList.toggle("active", sub === 'teman');
@@ -1126,67 +1158,37 @@ function simpanPenilaianTeman(e) {
   setTimeout(() => { alertEl.style.display = "none"; }, 4000);
 }
 
-// MENU 6: PRESENSI
-function simpanPresensiMurid(e) {
-  e.preventDefault();
-  const session = JSON.parse(localStorage.getItem("lms_physics_session") || "{}");
-  const siswaNama = session.name || "Siswa";
-  const tanggal = document.getElementById("presensi-tanggal-input").value;
-  const status = document.querySelector('input[name="status_kehadiran"]:checked')?.value || "Hadir";
-  const ket = document.getElementById("presensi-keterangan").value.trim();
-
-  if (!tanggal) { alert("Tentukan tanggal presensi!"); return; }
-
-  let listPresensi = JSON.parse(localStorage.getItem("lms_presensi_records") || "[]");
-  listPresensi = listPresensi.filter(p => !(p.siswa === siswaNama && p.tanggal === tanggal));
-
-  const newRecord = {
-    siswa: siswaNama,
-    tanggal: tanggal,
-    status: status,
-    keterangan: ket || "Hadir tepat waktu",
-    waktu: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-  };
-  listPresensi.push(newRecord);
-  localStorage.setItem("lms_presensi_records", JSON.stringify(listPresensi));
-
-  const alertBox = document.getElementById("presensi-alert");
-  alertBox.style.display = "block";
-  setTimeout(() => { alertBox.style.display = "none"; }, 4000);
-
-  muatRiwayatPresensiSiswa(siswaNama);
+// MENU 6 (MURID): TES SUMATIF
+function muatLinkSumatif() {
+  const savedLinks = localStorage.getItem("lms_sumatif_links");
+  if (savedLinks) {
+    try {
+      const links = JSON.parse(savedLinks);
+      DATABASE_TP.forEach((tp, idx) => { if (links[idx]) tp.defaultLinkUjian = links[idx]; });
+    } catch (e) {}
+  }
 }
 
-function muatRiwayatPresensiSiswa(siswaNama) {
-  const tbody = document.getElementById("tabel-presensi-siswa-body");
-  if (!tbody) return;
-  tbody.innerHTML = "";
-
-  const listPresensi = JSON.parse(localStorage.getItem("lms_presensi_records") || "[]");
-  const riwayat = listPresensi.filter(p => p.siswa === siswaNama).reverse();
-
-  if (riwayat.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; opacity:0.6; padding:16px;">Belum ada riwayat kehadiran tercatat.</td></tr>`;
-    return;
-  }
-
-  riwayat.forEach(r => {
-    const tr = document.createElement("tr");
-    let badgeClass = "badge-done";
-    if (r.status === "Izin") badgeClass = "badge-izin";
-    if (r.status === "Sakit") badgeClass = "badge-sakit";
-
-    tr.innerHTML = `
-      <td style="color:#0284c7; font-weight:700;">${r.tanggal}</td>
-      <td><span class="status-badge ${badgeClass}">${r.status}</span></td>
-      <td>${r.keterangan || '-'}</td>
-      <td style="color:#64748b;">${r.waktu}</td>
+function renderSumatifCards() {
+  const container = document.getElementById("sumatif-cards-container");
+  if (!container) return;
+  container.innerHTML = "";
+  DATABASE_TP.forEach(tp => {
+    const card = document.createElement("div");
+    card.className = "sumatif-card";
+    card.innerHTML = `
+      <div>
+        <span class="module-badge">${tp.kode}</span>
+        <h4>Asesmen Sumatif: ${tp.nama}</h4>
+        <p style="color:#475569; font-size:0.88rem; line-height:1.5;">${tp.cp}</p>
+      </div>
+      <a href="${tp.defaultLinkUjian}" target="_blank" class="link-box-btn">Buka Link Soal Ujian ↗</a>
     `;
-    tbody.appendChild(tr);
+    container.appendChild(card);
   });
 }
 
-// MENU 7: REMEDIAL & PENGAYAAN (DENGAN TP & IKTP)
+// MENU 7 (MURID): REMEDIAL & PENGAYAAN (DENGAN TP & IKTP)
 function perbaruiIKTPRemedial(tpIdx) {
   const sel = document.getElementById("remedial-iktp-selector");
   sel.innerHTML = "";
@@ -1263,7 +1265,7 @@ function simpanJawabanPengayaan() {
   setTimeout(() => { alertEl.style.display = "none"; }, 4000);
 }
 
-// MENU 8: TUTOR FISIKA AI MURID
+// MENU 8 (MURID): TUTOR FISIKA AI MURID
 function tanyaAIPrompt(teks) {
   document.getElementById("ai-user-input").value = teks;
   handleKirimPesanAI(new Event('submit'));
@@ -1338,7 +1340,7 @@ function hasilkanJawabanAIFisika(pertanyaan) {
     return "Semua gelombang merambatkan energi tanpa memindahkan zat perantaranya dan terikat rumus <strong>v = λ × f</strong>. Efek Doppler terjadi saat sumber bunyi (misal sirine ambulans) melaju mendekatimu sehingga panjang gelombangnya termampatkan dan frekuensinya terdengar melengking tinggi!";
   }
 
-  return "Pertanyaan fisika yang sangat menarik! Dalam pembelajaran mendalam fisika Fase F, coba perhatikan variabel besaran yang terlibat (apa yang berubah dan apa akibatnya). Kamu juga bisa menguji konsep ini secara langsung di simulator PhET pada menu nomor 2!";
+  return "Pertanyaan fisika yang sangat menarik! Dalam pembelajaran mendalam fisika Fase F, coba perhatikan variabel besaran yang terlibat (apa yang berubah dan apa akibatnya). Kamu juga bisa menguji konsep ini secara langsung di simulator PhET pada menu nomor 3!";
 }
 
 // ---------------------------------------------------------
@@ -2029,7 +2031,7 @@ function unduhFileBlob(content, filename) {
 }
 
 // ---------------------------------------------------------
-// 11. DATA SIMULASI UJI COBA CEPAT
+// 11. DATA SIMULASI UJI COBA CEPAT (DUMMY DATA)
 // ---------------------------------------------------------
 function isiContohDataSimulasi() {
   const today = new Date().toISOString().slice(0, 10);
@@ -2050,7 +2052,7 @@ function isiContohDataSimulasi() {
       tanggal: today,
       jam: "Jam ke 1 - 3 (3 x 45 Menit)",
       tp: "TP 1.1",
-      aktivitas: "Eksplorasi konsep jarak vs perpindahan serta Hukum Newton tentang gerak. Murid mencoba simulasi PhET Forces and Motion Basics secara mandiri dan berdiskusi.",
+      aktivitas: "Eksplorasi konsep posisi, jarak vs perpindahan serta Hukum Newton tentang gerak. Murid mencoba simulasi PhET Forces and Motion Basics secara mandiri dan berdiskusi.",
       catatan: "Siswa sangat antusias. Mayoritas murid telah memahami perbedaan jarak dan perpindahan melalui analogi lari di lapangan.",
       waktuInput: new Date().toLocaleString()
     }
