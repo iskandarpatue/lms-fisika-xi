@@ -1,10 +1,10 @@
 // =========================================================
 // LMS FISIKA KELAS XI - KURIKULUM MERDEKA (DEEP LEARNING)
-// BERKAS UTAMA: app.js (TERINTEGRASI FIREBASE CLOUD FIRESTORE)
+// BERKAS UTAMA: app.js (FITUR LENGKAP + KELOLA PRESENSI GURU)
 // =========================================================
 
 // ---------------------------------------------------------
-// 0. KONFIGURASI FIREBASE CLOUD FIRESTORE (GANTI DENGAN KUNCI ASLI KAMU)
+// 0. KONFIGURASI FIREBASE CLOUD FIRESTORE
 // ---------------------------------------------------------
 const firebaseConfig = {
   apiKey: "AIzaSyD9_ASC2WM2be4ujLJ_hz5l0iJyV0Qbe8I",
@@ -19,7 +19,6 @@ const firebaseConfig = {
 let db = null;
 let isFirebaseActive = false;
 
-// Inisialisasi Firebase Otomatis
 try {
   if (typeof firebase !== "undefined" && firebaseConfig.apiKey !== "GANTI_DENGAN_API_KEY_KAMU") {
     firebase.initializeApp(firebaseConfig);
@@ -543,7 +542,6 @@ window.addEventListener("DOMContentLoaded", () => {
   if (gDate) gDate.value = today;
   if (jDate) jDate.value = today;
 
-  // Cek Sesi Tersimpan
   const saved = localStorage.getItem("lms_physics_session");
   if (saved) {
     try {
@@ -627,7 +625,6 @@ function simpanDanBukaSesi(role, name) {
   bukaDasbor(role, name);
 }
 
-// Menampilkan Dasbor & Membuka Menu 1 (Daftar Hadir) untuk Murid
 function bukaDasbor(role, name) {
   document.getElementById("login-container").style.display = "none";
   document.getElementById("modal-pilih-siswa").style.display = "none";
@@ -651,7 +648,6 @@ function bukaDasbor(role, name) {
     document.getElementById("view-murid").style.display = "block";
     document.getElementById("view-guru").style.display = "none";
 
-    // Inisialisasi seluruh modul
     pilihTP(0);
     pilihTPFormatif(0);
     perbaruiPilihanIKTPPeta(0);
@@ -662,7 +658,7 @@ function bukaDasbor(role, name) {
     isiDropdownTemanSebaya(name);
     muatRiwayatPresensiSiswa(name);
 
-    // Buka Menu 1: Daftar Hadir sebagai layar awal murid
+    // Langsung buka Menu 1: Daftar Hadir sebagai layar awal murid
     pindahMenuMurid('presensi');
   }
 }
@@ -683,10 +679,9 @@ function togglePasswordVisibility() {
 }
 
 // ---------------------------------------------------------
-// 6. NAVIGASI 8 MENU MURID (URUTAN TERBARU)
+// 6. NAVIGASI 8 MENU MURID (SESUAI URUTAN BARU)
 // ---------------------------------------------------------
 function pindahMenuMurid(menu) {
-  // Urutan: 1. Presensi, 2. Materi, 3. Formatif, 4. Peta, 5. Penilaian, 6. Sumatif, 7. Remedial, 8. AI
   const menus = ['presensi', 'materi', 'formatif', 'peta', 'penilaian', 'sumatif', 'remedial', 'ai'];
   menus.forEach(m => {
     const btn = document.getElementById(`tab-menu-${m}`);
@@ -716,13 +711,11 @@ function simpanPresensiMurid(e) {
     timestamp: Date.now()
   };
 
-  // 1. Simpan Lokal Cache
   let listPresensi = JSON.parse(localStorage.getItem("lms_presensi_records") || "[]");
   listPresensi = listPresensi.filter(p => !(p.siswa === siswaNama && p.tanggal === tanggal));
   listPresensi.push(newRecord);
   localStorage.setItem("lms_presensi_records", JSON.stringify(listPresensi));
 
-  // 2. Sinkronisasi ke Cloud Firestore
   if (isFirebaseActive && db) {
     const docId = `${tanggal}_${siswaNama.replace(/\s+/g, '_')}`;
     db.collection("presensi").doc(docId).set(newRecord)
@@ -755,6 +748,7 @@ function muatRiwayatPresensiSiswa(siswaNama) {
     let badgeClass = "badge-done";
     if (r.status === "Izin") badgeClass = "badge-izin";
     if (r.status === "Sakit") badgeClass = "badge-sakit";
+    if (r.status === "Alpa") badgeClass = "badge-alpa";
 
     tr.innerHTML = `
       <td style="color:#0284c7; font-weight:700;">${r.tanggal}</td>
@@ -811,7 +805,6 @@ function pilihTPFormatif(index) {
 
   gantiSubGameIKTP(0);
 
-  // Muat LKM PhET
   document.getElementById("lkm-title").innerText = data.lkm.title;
   document.getElementById("lkm-guide").innerText = data.lkm.guide;
   document.getElementById("lkm-phet-frame").src = data.lkm.phetUrl;
@@ -831,7 +824,6 @@ function gantiSubGameIKTP(iktpIdx) {
   const resBox = document.getElementById("game-result-box");
   resBox.style.display = "none";
 
-  // VARIASI 1: MISI SKENARIO (TP 1.1)
   if (data.gameType === "misi") {
     document.getElementById("game-badge-type").innerText = "MISI SKENARIO FISIKA";
     const sub = data.gameIKTP[currentSubGameIKTPIndex] || data.gameIKTP[0];
@@ -849,9 +841,7 @@ function gantiSubGameIKTP(iktpIdx) {
       optBox.appendChild(btn);
     });
     area.appendChild(optBox);
-  }
-  // VARIASI 2: TEKA-TEKI SILANG (TTS) FLUIDA (TP 2.1)
-  else if (data.gameType === "tts") {
+  } else if (data.gameType === "tts") {
     document.getElementById("game-badge-type").innerText = "TEKA-TEKI SILANG (TTS) FLUIDA";
     const sub = data.gameIKTP[currentSubGameIKTPIndex] || data.gameIKTP[0];
     document.getElementById("game-title").innerText = sub.judul;
@@ -872,9 +862,7 @@ function gantiSubGameIKTP(iktpIdx) {
       </div>
       <button class="btn-primary-futuristic" style="width:auto; padding:10px 22px; margin-top:8px;" onclick="verifikasiTTS('${sub.kunciMendatar}', '${sub.kunciMenurun}')">Periksa Jawaban TTS 🧩</button>
     `;
-  }
-  // VARIASI 3: MATCHING GAME TERMAL (TP 3.1)
-  else if (data.gameType === "matching") {
+  } else if (data.gameType === "matching") {
     document.getElementById("game-badge-type").innerText = "GAME MENJODOHKAN KONSEP TERMAL";
     const sub = data.gameIKTP[currentSubGameIKTPIndex] || data.gameIKTP[0];
     document.getElementById("game-title").innerText = sub.judul;
@@ -897,9 +885,7 @@ function gantiSubGameIKTP(iktpIdx) {
     });
     html += `</div></div>`;
     area.innerHTML = html;
-  }
-  // VARIASI 4: DETEKTIF GELOMBANG (TP 4.1)
-  else if (data.gameType === "detektif") {
+  } else if (data.gameType === "detektif") {
     document.getElementById("game-badge-type").innerText = "DETEKTIF GELOMBANG & BUNYI";
     const sub = data.gameIKTP[currentSubGameIKTPIndex] || data.gameIKTP[0];
     document.getElementById("game-title").innerText = sub.judul;
@@ -919,7 +905,6 @@ function gantiSubGameIKTP(iktpIdx) {
   }
 }
 
-// Logika Validasi Game
 function verifikasiJawabanGameMisi(pilihan) {
   const resBox = document.getElementById("game-result-box");
   resBox.style.display = "block";
@@ -940,7 +925,7 @@ function verifikasiTTS(kunciMendatar, kunciMenurun) {
 
   if (inMendatar === kunciMendatar && inMenurun === kunciMenurun) {
     resBox.style.background = "#ecfdf5"; resBox.style.border = "1.5px solid #a7f3d0"; resBox.style.color = "#065f46";
-    resBox.innerHTML = `<strong>LUAR BIASA! JAWABAN TTS SEMPURNA! 🧩🎉</strong><br>Mendatar: <em>${kunciMendatar}</em> | Menurun: <em>${kunciMenurun}</em>. Pemahaman konsep fluidamu sangat hebat!`;
+    resBox.innerHTML = `<strong>LUAR BIASA! JAWABAN TTS SEMPURNA! 🧩🎉</strong><br>Mendatar: <em>${kunciMendatar}</em> | Menurun: <em>${kunciMenurun}</em>.`;
   } else {
     resBox.style.background = "#fff1f2"; resBox.style.border = "1.5px solid #fecdd3"; resBox.style.color = "#9f1239";
     resBox.innerHTML = `<strong>MASIH ADA KATA YANG KELIRU! ⚠️</strong><br>Periksa kembali ejaan huruf dan petunjuk fisikanya ya.`;
@@ -968,7 +953,7 @@ function cocokkanKartuTarget(idx, targetKonsepNama) {
     selectedMatchingKonsep = null;
 
     resBox.style.background = "#ecfdf5"; resBox.style.border = "1.5px solid #a7f3d0"; resBox.style.color = "#065f46";
-    resBox.innerHTML = `<strong>PASANGAN COCOK! 🎯</strong><br>Konsep <em>${targetKonsepNama}</em> berhasil kamu pasangkan dengan tepat!`;
+    resBox.innerHTML = `<strong>PASANGAN COCOK! 🎯</strong><br>Konsep <em>${targetKonsepNama}</em> berhasil dipasangkan dengan tepat!`;
   } else {
     resBox.style.background = "#fff1f2"; resBox.style.border = "1.5px solid #fecdd3"; resBox.style.color = "#9f1239";
     resBox.innerHTML = `<strong>PASANGAN KURANG COCOK! ⚠️</strong><br>Coba telaah kembali definisi konsep tersebut.`;
@@ -980,14 +965,13 @@ function verifikasiDetektif(pilihan) {
   resBox.style.display = "block";
   if (pilihan.benar) {
     resBox.style.background = "#ecfdf5"; resBox.style.border = "1.5px solid #a7f3d0"; resBox.style.color = "#065f46";
-    resBox.innerHTML = `<strong>ANALISIS DETEKTIF TEPAT! 🔍🎉</strong><br>Kamu berhasil memecahkan fenomena fisika gelombang ini dengan nalar kritis!`;
+    resBox.innerHTML = `<strong>ANALISIS DETEKTIF TEPAT! 🔍🎉</strong><br>Kamu berhasil memecahkan fenomena fisika gelombang ini!`;
   } else {
     resBox.style.background = "#fff1f2"; resBox.style.border = "1.5px solid #fecdd3"; resBox.style.color = "#9f1239";
-    resBox.innerHTML = `<strong>PETUNJUK KURANG COCOK! ⚠️</strong><br>Perhatikan kembali jenis arah getar dan perambatan gelombangnya.`;
+    resBox.innerHTML = `<strong>PETUNJUK KURANG COCOK! ⚠️</strong><br>Perhatikan kembali jenis arah getar dan perambatannya.`;
   }
 }
 
-// SIMPAN LKM PHET (SYNC FIRESTORE)
 function simpanLKM(e) {
   e.preventDefault();
   const session = JSON.parse(localStorage.getItem("lms_physics_session") || "{}");
@@ -1016,7 +1000,7 @@ function simpanLKM(e) {
   document.getElementById("lkm-saved-alert").style.display = "block";
 }
 
-// MENU 4: PETA KONSEP (SYNC FIRESTORE)
+// MENU 4: PETA KONSEP (DENGAN SELECTOR TP & IKTP)
 function perbaruiPilihanIKTPPeta(tpIndex) {
   const data = DATABASE_TP[tpIndex];
   const selIKTP = document.getElementById("peta-iktp-selector");
@@ -1107,7 +1091,7 @@ function simpanPetaKonsep() {
   setTimeout(() => { statusEl.style.display = "none"; }, 4000);
 }
 
-// MENU 5: PENILAIAN DIRI & TEMAN (SYNC FIRESTORE)
+// MENU 5: PENILAIAN DIRI & TEMAN
 function gantiSubPenilaian(sub) {
   document.getElementById("btn-eval-diri").classList.toggle("active", sub === 'diri');
   document.getElementById("btn-eval-teman").classList.toggle("active", sub === 'teman');
@@ -1253,7 +1237,7 @@ function renderSumatifCards() {
   });
 }
 
-// MENU 7: REMEDIAL & PENGAYAAN (SYNC FIRESTORE)
+// MENU 7: REMEDIAL & PENGAYAAN
 function perbaruiIKTPRemedial(tpIdx) {
   const sel = document.getElementById("remedial-iktp-selector");
   sel.innerHTML = "";
@@ -1419,11 +1403,11 @@ function hasilkanJawabanAIFisika(pertanyaan) {
     return "Semua gelombang merambatkan energi tanpa memindahkan zat perantaranya dan terikat rumus <strong>v = λ × f</strong>. Efek Doppler terjadi saat sumber bunyi (misal sirine ambulans) melaju mendekatimu sehingga panjang gelombangnya termampatkan dan frekuensinya terdengar melengking tinggi!";
   }
 
-  return "Pertanyaan fisika yang sangat menarik! Dalam pembelajaran mendalam fisika Fase F, coba perhatikan variabel besaran yang terlibat (apa yang berubah dan apa akibatnya). Kamu juga bisa menguji konsep ini secara langsung di simulator PhET pada menu nomor 3!";
+  return "Pertanyaan fisika yang sangat menarik! Dalam pembelajaran mendalam fisika Fase F, coba perhatikan variabel besaran yang terlibat. Kamu juga bisa menguji konsep ini secara langsung di simulator PhET pada menu nomor 3!";
 }
 
 // ---------------------------------------------------------
-// 7. LOGIKA DASBOR GURU (9 SUB-TAB)
+// 7. LOGIKA DASBOR GURU (DENGAN KELOLA PRESENSI LENGKAP)
 // ---------------------------------------------------------
 function pindahTabGuru(tab) {
   const tabs = ['kehadiran', 'jurnal', 'modul', 'remedial', 'ai', 'lkm', 'peta', 'eval', 'links'];
@@ -1446,7 +1430,7 @@ function pindahTabGuru(tab) {
   }
 }
 
-// 1. REKAP PRESENSI TERSINKRON (REAL-TIME CLOUD)
+// 1. REKAP PRESENSI TERSINKRON & STATISTIK 5 KARTU
 function renderTabelGuruPresensi() {
   const tbody = document.getElementById("tabel-guru-presensi-body");
   if (!tbody) return;
@@ -1454,10 +1438,9 @@ function renderTabelGuruPresensi() {
 
   const tanggalFilter = document.getElementById("guru-presensi-tanggal").value || new Date().toISOString().slice(0, 10);
 
-  // Fungsi Pembantu Render Baris
   function renderRows(listPresensi) {
     tbody.innerHTML = "";
-    let countHadir = 0, countIzin = 0, countSakit = 0, countAlpa = 0;
+    let countHadir = 0, countIzin = 0, countSakit = 0, countAlpa = 0, countBelum = 0;
 
     DAFTAR_SISWA.forEach(s => {
       const tr = document.createElement("tr");
@@ -1470,10 +1453,11 @@ function renderTabelGuruPresensi() {
         if (record.status === "Hadir") { countHadir++; statusHTML = `<span class="status-badge badge-done">🟢 Hadir</span>`; }
         else if (record.status === "Izin") { countIzin++; statusHTML = `<span class="status-badge badge-izin">🟡 Izin</span>`; }
         else if (record.status === "Sakit") { countSakit++; statusHTML = `<span class="status-badge badge-sakit">🔴 Sakit</span>`; }
+        else if (record.status === "Alpa") { countAlpa++; statusHTML = `<span class="status-badge badge-alpa">⛔ Alpa</span>`; }
         ketHTML = record.keterangan || "-";
         waktuHTML = record.waktu || "-";
       } else {
-        countAlpa++;
+        countBelum++;
         statusHTML = `<span class="status-badge badge-undone">⚪ Belum Konfirmasi</span>`;
       }
 
@@ -1484,7 +1468,7 @@ function renderTabelGuruPresensi() {
         <td>${statusHTML}</td>
         <td style="font-size:0.86rem; max-width:200px; overflow:hidden; text-overflow:ellipsis;">${ketHTML}</td>
         <td style="font-size:0.84rem; color:#64748b;">${waktuHTML}</td>
-        <td><button class="btn-action-view" onclick="ubahManualPresensi('${s.nama}', '${tanggalFilter}')">Ubah</button></td>
+        <td><button class="btn-action-view" onclick="bukaModalEditPresensi('${s.nama}', '${tanggalFilter}')">Kelola / Ubah</button></td>
       `;
       tbody.appendChild(tr);
     });
@@ -1492,10 +1476,11 @@ function renderTabelGuruPresensi() {
     document.getElementById("stat-hadir-count").innerText = countHadir;
     document.getElementById("stat-izin-count").innerText = countIzin;
     document.getElementById("stat-sakit-count").innerText = countSakit;
-    document.getElementById("stat-alpa-count").innerText = countAlpa;
+    const alpaRealEl = document.getElementById("stat-alpa-real-count");
+    if (alpaRealEl) alpaRealEl.innerText = countAlpa;
+    document.getElementById("stat-alpa-count").innerText = countBelum;
   }
 
-  // Tarik dari Cloud Firestore jika aktif
   if (isFirebaseActive && db) {
     db.collection("presensi").where("tanggal", "==", tanggalFilter).get()
       .then(snapshot => {
@@ -1505,7 +1490,6 @@ function renderTabelGuruPresensi() {
           renderRows(cloudList);
           return;
         }
-        // Fallback ke lokal jika kosong
         const localList = JSON.parse(localStorage.getItem("lms_presensi_records") || "[]");
         renderRows(localList);
       })
@@ -1519,35 +1503,95 @@ function renderTabelGuruPresensi() {
   }
 }
 
-function ubahManualPresensi(namaSiswa, tanggal) {
-  const opsi = prompt(`Pilih status kehadiran untuk ${namaSiswa} pada tanggal ${tanggal}:\nKetik: Hadir / Izin / Sakit / Alpa`, "Hadir");
-  if (!opsi) return;
+// JENDELA MODAL KELOLA & EDIT PRESENSI GURU
+function bukaModalEditPresensi(namaSiswa, tanggal) {
+  const modal = document.getElementById("modal-edit-presensi");
+  if (!modal) return;
 
-  const clean = opsi.trim();
+  document.getElementById("edit-target-nama").value = namaSiswa;
+  document.getElementById("edit-target-tanggal").value = tanggal;
+  document.getElementById("edit-presensi-title").innerText = `Kelola Presensi: ${namaSiswa}`;
+  document.getElementById("edit-presensi-subtitle").innerText = `Tanggal: ${tanggal}`;
+
+  // Cari data kehadiran yang ada saat ini
+  const listPresensi = JSON.parse(localStorage.getItem("lms_presensi_records") || "[]");
+  const record = listPresensi.find(p => p.siswa === namaSiswa && p.tanggal === tanggal);
+
+  // Set default radio
+  document.getElementById("edit-opt-hadir").checked = false;
+  document.getElementById("edit-opt-izin").checked = false;
+  document.getElementById("edit-opt-sakit").checked = false;
+  document.getElementById("edit-opt-alpa").checked = false;
+  document.getElementById("edit-opt-reset").checked = false;
+
+  if (record) {
+    if (record.status === "Hadir") document.getElementById("edit-opt-hadir").checked = true;
+    else if (record.status === "Izin") document.getElementById("edit-opt-izin").checked = true;
+    else if (record.status === "Sakit") document.getElementById("edit-opt-sakit").checked = true;
+    else if (record.status === "Alpa") document.getElementById("edit-opt-alpa").checked = true;
+    document.getElementById("edit-presensi-keterangan").value = record.keterangan || "";
+  } else {
+    document.getElementById("edit-opt-reset").checked = true;
+    document.getElementById("edit-presensi-keterangan").value = "";
+  }
+
+  modal.style.display = "flex";
+}
+
+function tutupModalEditPresensi() {
+  const modal = document.getElementById("modal-edit-presensi");
+  if (modal) modal.style.display = "none";
+}
+
+function simpanEditPresensiGuru(e) {
+  e.preventDefault();
+  const namaSiswa = document.getElementById("edit-target-nama").value;
+  const tanggal = document.getElementById("edit-target-tanggal").value;
+  const statusPilihan = document.querySelector('input[name="edit_status_opsi"]:checked')?.value || "Hadir";
+  const ketGuru = document.getElementById("edit-presensi-keterangan").value.trim();
+
   let listPresensi = JSON.parse(localStorage.getItem("lms_presensi_records") || "[]");
+  // Hapus entri lama
   listPresensi = listPresensi.filter(p => !(p.siswa === namaSiswa && p.tanggal === tanggal));
 
-  if (["Hadir", "Izin", "Sakit"].includes(clean)) {
-    const record = {
+  const docId = `${tanggal}_${namaSiswa.replace(/\s+/g, '_')}`;
+
+  if (statusPilihan === "Reset") {
+    // 1. Opsi Reset: Hapus dari daftar kehadiran lokal & cloud
+    localStorage.setItem("lms_presensi_records", JSON.stringify(listPresensi));
+
+    if (isFirebaseActive && db) {
+      db.collection("presensi").doc(docId).delete()
+        .then(() => console.log("✓ Rekaman presensi berhasil di-reset di Cloud Firestore"))
+        .catch(err => console.warn("Gagal hapus cloud:", err));
+    }
+    alert(`✓ Status kehadiran ${namaSiswa} berhasil di-reset menjadi 'Belum Dikonfirmasi'!`);
+  } else {
+    // 2. Opsi Hadir / Izin / Sakit / Alpa
+    const updatedRecord = {
       siswa: namaSiswa,
       tanggal: tanggal,
-      status: clean,
-      keterangan: "Diverifikasi Manual oleh Guru",
+      status: statusPilihan,
+      keterangan: ketGuru || (statusPilihan === "Alpa" ? "Tanpa Keterangan (Ditetapkan Guru)" : "Diverifikasi Guru"),
       waktu: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       timestamp: Date.now()
     };
-    listPresensi.push(record);
+    listPresensi.push(updatedRecord);
+    localStorage.setItem("lms_presensi_records", JSON.stringify(listPresensi));
 
     if (isFirebaseActive && db) {
-      const docId = `${tanggal}_${namaSiswa.replace(/\s+/g, '_')}`;
-      db.collection("presensi").doc(docId).set(record);
+      db.collection("presensi").doc(docId).set(updatedRecord)
+        .then(() => console.log("✓ Perubahan presensi tersinkron ke Cloud Firestore"))
+        .catch(err => console.warn("Gagal simpan cloud:", err));
     }
+    alert(`✓ Status kehadiran ${namaSiswa} berhasil diubah menjadi '${statusPilihan}'!`);
   }
-  localStorage.setItem("lms_presensi_records", JSON.stringify(listPresensi));
+
+  tutupModalEditPresensi();
   renderTabelGuruPresensi();
 }
 
-// 2. JURNAL HARIAN GURU (SYNC FIRESTORE)
+// 2. JURNAL HARIAN GURU
 function simpanJurnalGuru(e) {
   e.preventDefault();
   const tanggal = document.getElementById("jurnal-tanggal").value;
@@ -2178,7 +2222,7 @@ function isiContohDataSimulasi() {
     { siswa: "Andika Pratama Latoini", tanggal: today, status: "Izin", keterangan: "Dispensasi OSIS", waktu: "07:30" },
     { siswa: "Dimas Saputra R. Antu", tanggal: today, status: "Hadir", keterangan: "Hadir tepat waktu", waktu: "07:10" },
     { siswa: "Dea Ananda Nusi", tanggal: today, status: "Sakit", keterangan: "Demam berobat", waktu: "06:45" },
-    { siswa: "Moh. Riski Ahmad", tanggal: today, status: "Hadir", keterangan: "Siap eksperimen PhET", waktu: "07:18" }
+    { siswa: "Moh. Riski Ahmad", tanggal: today, status: "Alpa", keterangan: "Tidak masuk tanpa keterangan", waktu: "07:00" }
   ];
   localStorage.setItem("lms_presensi_records", JSON.stringify(mockPresensi));
 
